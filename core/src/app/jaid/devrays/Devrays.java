@@ -9,6 +9,7 @@ public class Devrays extends Game {
 	@Override
 	public void create()
 	{
+		Core.init();
 		setScreen(new IngameScreen());
 	}
 
@@ -16,5 +17,6 @@ public class Devrays extends Game {
 	public void render()
 	{
 		Core.tick();
+		super.render();
 	}
 }
