@@ -24,7 +24,7 @@ public class Mob implements Entity {
 
 	public float getVelocityResistance()
 	{
-		return 1f;
+		return 0.5f;
 	}
 
 	public void moveByVelocity()
@@ -36,8 +36,15 @@ public class Mob implements Entity {
 
 	public void push(float angle, float power)
 	{
+		if (speed == 0)
+			this.angle = angle;
+		else
+		{
+			float angleInfluence = power / speed;
+			this.angle = this.angle * (1 - angleInfluence) + angle * angleInfluence; // TODO Getting average of two angles doesn't work yet since angles try to keep in bounds
+		}
+
 		speed = Math.max(speed, power);
-		this.angle = angle;
 	}
 
 	@Override
@@ -53,7 +60,6 @@ public class Mob implements Entity {
 			moveByVelocity();
 
 		sprite.setPosition(position.x, position.y); // TODO Rather update lazier (only when needed)
-		System.out.println(2);
 
 		return true;
 	}

@@ -12,7 +12,7 @@ public class Player extends Mob {
 	@Override
 	public boolean update()
 	{
-		Movement.push(this, 1);
+		Movement.push(this, 2);
 		super.update();
 		return true;
 	}
