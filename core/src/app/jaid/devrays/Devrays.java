@@ -1,8 +1,10 @@
 package app.jaid.devrays;
 
 import app.jaid.devrays.screen.ingame.IngameScreen;
+import app.jaid.jtil.JGeo;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
 public class Devrays extends Game {
 

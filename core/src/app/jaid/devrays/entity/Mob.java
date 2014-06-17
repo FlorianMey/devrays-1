@@ -2,6 +2,7 @@ package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
 import app.jaid.devrays.math.Point;
+import app.jaid.jtil.JGeo;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -36,12 +37,13 @@ public class Mob implements Entity {
 
 	public void push(float angle, float power)
 	{
-		if (speed == 0)
+		if (speed == 0 || JGeo.angleDifference(this.angle, angle) > 140)
 			this.angle = angle;
 		else
 		{
 			float angleInfluence = power / speed;
-			this.angle = this.angle * (1 - angleInfluence) + angle * angleInfluence; // TODO Getting average of two angles doesn't work yet since angles try to keep in bounds
+			// this.angle = this.angle * (1 - angleInfluence) + angle * angleInfluence; // TODO Getting average of two angles doesn't work yet since angles try to keep in bounds
+			this.angle = JGeo.mergeAngles(this.angle, angle, 0.5f);
 		}
 
 		speed = Math.max(speed, power);
