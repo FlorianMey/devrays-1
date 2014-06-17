@@ -36,9 +36,9 @@ public class Point {
 		this.y = y;
 	}
 
-	public float angleTo(Point origin)
+	public Angle angleTo(Point origin)
 	{
-		return (float) Math.toDegrees(Math.atan2(origin.x - x, origin.y - y));
+		return Angle.fromRadians(Math.atan2(origin.x - x, origin.y - y));
 	}
 
 	public Point applyToGrid(float steps)
@@ -47,19 +47,13 @@ public class Point {
 		return new Point(Math.round(x * (int) invert) / invert, Math.round(y * (int) invert) / invert);
 	}
 
-	public int directionTo(Point origin, int steps)
-	{
-		int direction = Math.round(angleTo(origin) / (360 / steps));
-		return steps % 2 == 0 && direction == steps / 2 ? -direction : direction;
-	}
-
 	public float distanceTo(Point origin)
 	{
 		return (float) Math.sqrt(Math.pow(origin.y - y, 2) + Math.pow(origin.x - x, 2));
 	}
 
 	@Override
-	public boolean equals(Object object) // Das Object-equals() gibt bei den zwei gleichen Floats komischerweise trotzdem false zurück, deshalb overridden
+	public boolean equals(Object object)
 	{
 		Point point = (Point) object;
 
@@ -68,10 +62,10 @@ public class Point {
 		return false;
 	}
 
-	public void move(float direction, float distance)
+	public void move(Angle direction, float distance)
 	{
-		x -= Math.sin(Math.toRadians(direction)) * distance;
-		y -= Math.cos(Math.toRadians(direction)) * distance;
+		x -= Math.sin(direction.getRadians()) * distance;
+		y -= Math.cos(direction.getRadians()) * distance;
 	}
 
 	public void moveTo(Point origin, float distance)
@@ -93,7 +87,7 @@ public class Point {
 		set(update.x, update.y);
 	}
 
-	public void setRotation(Point origin, float angle, float distance)
+	public void setRotation(Point origin, Angle angle, float distance)
 	{
 		set(origin);
 		move(angle, distance);
