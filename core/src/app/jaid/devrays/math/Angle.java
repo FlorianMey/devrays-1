@@ -1,5 +1,7 @@
 package app.jaid.devrays.math;
 
+import app.jaid.jtil.JTil;
+
 public class Angle {
 
 	public static final Angle	ANGLE_EAST			= fromDegrees(90);
@@ -44,8 +46,7 @@ public class Angle {
 	private float	radians;
 
 	private Angle(float radians) {
-		this.radians = radians;
-		ensureRadiansInBounds();
+		setRadians(radians);
 	}
 
 	public String debugInfo()
@@ -53,9 +54,13 @@ public class Angle {
 		return this + " (toDirection(8) = " + toDirection(8) + ", toDirectionSigned(8) = " + toDirectionSigned(8) + ", snapToGrid(8) = " + snapToGrid(8) + ")";
 	}
 
+	// Forces radians to become a float between 0 and MAX_RADIANS without changing any behaviour
 	private void ensureRadiansInBounds()
 	{
 		radians = radians % MAX_RADIANS;
+
+		if (radians < 0)
+			radians += MAX_RADIANS;
 	}
 
 	public float getDegrees()
@@ -106,7 +111,7 @@ public class Angle {
 
 	public Angle mixWith(Angle other)
 	{
-		if (getShortestRotateDirection(other) == 1) // If way between angles doesn't intersect 0, use simple math to calculate mid
+		if (getShortestRotateDirection(other) == 1) // If the way between angles does not intersect 0, use simple math to calculate mid
 			return Angle.fromRadians((radians + other.radians) / 2);
 		else
 		{
@@ -116,14 +121,39 @@ public class Angle {
 		}
 	}
 
-	public Angle rotateByDegrees(Angle target, float degrees)
+	public Angle moveTo(Angle target, float change)
 	{
-		return rotateByDegrees(target, degreesToRadians(degrees));
+		boolean clockwise = target.radians > radians;
+
+		/*
+		 * if (radiansRotate > 0) { if (radians < target.radians && radians + radiansRotate > target.radians) return Angle.fromRadians(target.radians); } else if (radians > target.radians && radians + radiansRotate < target.radians) return
+		 * Angle.fromRadians(target.radians);
+		 */
+
+		float radius = JTil.moveTo(radians + MAX_RADIANS, change, target.radians + MAX_RADIANS) - MAX_RADIANS;
+
+		return Angle.fromRadians(radius);
 	}
 
-	public Angle rotateByRadians(Angle target, float radians)
+	public Angle rotateByDegrees(float degreesRotate)
 	{
-		return null;
+		return rotateByDegrees(degreesToRadians(degreesRotate));
+	}
+
+	public Angle rotateByRadians(float radiansRotate)
+	{
+		return Angle.fromRadians(radians + radiansRotate);
+	}
+
+	public void setDegrees(float degrees)
+	{
+		setRadians(degreesToRadians(degrees));
+	}
+
+	public void setRadians(float radians)
+	{
+		this.radians = radians;
+		ensureRadiansInBounds();
 	}
 
 	public Angle snapToGrid(int steps)

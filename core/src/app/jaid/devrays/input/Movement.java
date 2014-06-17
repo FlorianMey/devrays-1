@@ -1,6 +1,7 @@
 package app.jaid.devrays.input;
 
 import app.jaid.devrays.entity.Mob;
+import app.jaid.devrays.math.Angle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -48,7 +49,7 @@ public class Movement {
 		if (moveX == 0 && moveY == 0)
 			return;
 
-		mob.push(directionsToAngle(moveX, moveY) * 45, speed);
+		mob.push(Angle.fromDegrees(directionsToAngle(moveX, moveY) * 45), speed);
 	}
 
 }

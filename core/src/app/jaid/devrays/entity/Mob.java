@@ -16,12 +16,18 @@ public class Mob implements Entity {
 
 	public Mob(Point position) {
 		this.position = position;
+		angle = Angle.fromRadians(0);
 	}
 
 	@Override
 	public Point getPosition()
 	{
 		return position;
+	}
+
+	public float getSteering()
+	{
+		return 0.5f;
 	}
 
 	public float getVelocityResistance()
@@ -36,12 +42,12 @@ public class Mob implements Entity {
 		speed = JTil.normalize(speed, 5 * getVelocityResistance() * Core.delta);
 	}
 
-	public void push(float angle, float power)
+	public void push(Angle direction, float power)
 	{
-		/*
-		 * if (speed == 0 || JGeo.angleDifference(this.angle, angle) > 140) this.angle = angle; else { float angleInfluence = power / speed; // this.angle = this.angle * (1 - angleInfluence) + angle * angleInfluence; // TODO Getting average
-		 * of two angles doesn't work yet since angles try to keep in bounds this.angle = JGeo.mergeAngles(this.angle, angle, 0.5f); }
-		 */
+		if (speed == 0 || angle.getDifferenceTo(direction) > 130)
+			angle.setRadians(direction.getRadians());
+		else
+			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * getSteering());
 
 		speed = Math.max(speed, power);
 	}
