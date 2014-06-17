@@ -25,12 +25,17 @@ public class Mob implements Entity {
 		return position;
 	}
 
+	public float getSpeed()
+	{
+		return 0.5f * 5;
+	}
+
 	public float getSteering()
 	{
 		return 0.5f;
 	}
 
-	public float getVelocityResistance()
+	public float getBraking()
 	{
 		return 0.5f;
 	}
@@ -39,7 +44,7 @@ public class Mob implements Entity {
 	{
 		// float movement = speed * Core.delta;
 		position.move(angle, speed);
-		speed = JTil.normalize(speed, 5 * getVelocityResistance() * Core.delta);
+		speed = JTil.normalize(speed, 5 * getBraking() * Core.delta);
 	}
 
 	public void push(Angle direction, float power)
@@ -61,7 +66,7 @@ public class Mob implements Entity {
 	@Override
 	public boolean update()
 	{
-		if (getVelocityResistance() != 1)
+		if (getBraking() != 1)
 			moveByVelocity();
 
 		sprite.setPosition(position.x, position.y); // TODO Rather update lazier (only when needed)
