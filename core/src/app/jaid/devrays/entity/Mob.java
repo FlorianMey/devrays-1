@@ -29,7 +29,7 @@ public class Mob implements Entity {
 
 	public void moveByVelocity()
 	{
-		float movement = speed * Core.delta;
+		// float movement = speed * Core.delta;
 		position.move(angle, speed);
 		speed = JTil.normalize(speed, 5 * getVelocityResistance() * Core.delta);
 	}
@@ -52,7 +52,7 @@ public class Mob implements Entity {
 		if (getVelocityResistance() != 1)
 			moveByVelocity();
 
-		sprite.setPosition(position.x, position.y); // TODO Rather update lazier
+		sprite.setPosition(position.x, position.y); // TODO Rather update lazier (only when needed)
 		System.out.println(2);
 
 		return true;

@@ -13,7 +13,12 @@ public class Core {
 	public static float			delta;
 	public static int			screenWidth, screenHeight;
 	public static float			speed;
-	public static long			time;
+	public static long			startTime, now;
+
+	public static int getRuntimeMs()
+	{
+		return (int) (now - startTime);
+	}
 
 	public static Texture getSprite(String filename)
 	{
@@ -31,15 +36,23 @@ public class Core {
 
 	static void init()
 	{
+		startTime = TimeUtils.millis();
+
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
 		speed = 1;
 	}
 
+	public static void resize(int width, int height)
+	{
+		screenWidth = width;
+		screenHeight = height;
+	}
+
 	public static void tick()
 	{
 		delta = Gdx.graphics.getDeltaTime() * speed;
-		time = TimeUtils.millis();
+		now = TimeUtils.millis();
 	}
 
 }

@@ -43,6 +43,7 @@ public class IngameScreen implements Screen {
 	@Override
 	public void resize(int width, int height)
 	{
+		Core.resize(width, height);
 	}
 
 	@Override
