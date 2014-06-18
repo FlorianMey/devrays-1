@@ -19,6 +19,11 @@ public class Mob implements Entity {
 		angle = Angle.fromRadians(0);
 	}
 
+	public float getBraking()
+	{
+		return 0.15f;
+	}
+
 	@Override
 	public Point getPosition()
 	{
@@ -35,24 +40,18 @@ public class Mob implements Entity {
 		return 0.5f;
 	}
 
-	public float getBraking()
-	{
-		return 0.5f;
-	}
-
 	public void moveByVelocity()
 	{
-		// float movement = speed * Core.delta;
 		position.move(angle, speed);
 		speed = JTil.normalize(speed, 5 * getBraking() * Core.delta);
 	}
 
 	public void push(Angle direction, float power)
 	{
-		if (speed == 0 || angle.getDifferenceTo(direction) > 130)
+		if (speed == 0)
 			angle.setRadians(direction.getRadians());
 		else
-			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * getSteering());
+			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * getSteering() * power * Core.delta * 10);
 
 		speed = Math.max(speed, power);
 	}

@@ -123,15 +123,7 @@ public class Angle {
 
 	public Angle moveTo(Angle target, float change)
 	{
-		boolean clockwise = target.radians > radians;
-
-		/*
-		 * if (radiansRotate > 0) { if (radians < target.radians && radians + radiansRotate > target.radians) return Angle.fromRadians(target.radians); } else if (radians > target.radians && radians + radiansRotate < target.radians) return
-		 * Angle.fromRadians(target.radians);
-		 */
-
 		float radius = JTil.moveTo(radians + MAX_RADIANS, change, target.radians + MAX_RADIANS) - MAX_RADIANS;
-
 		return Angle.fromRadians(radius);
 	}
 
