@@ -41,24 +41,19 @@ public class Point {
 		return Angle.fromRadians(Math.atan2(origin.x - x, origin.y - y));
 	}
 
-	public Point applyToGrid(float steps)
-	{
-		float invert = 1f / steps;
-		return new Point(Math.round(x * (int) invert) / invert, Math.round(y * (int) invert) / invert);
-	}
-
 	public float distanceTo(Point origin)
 	{
 		return (float) Math.sqrt(Math.pow(origin.y - y, 2) + Math.pow(origin.x - x, 2));
 	}
 
 	@Override
-	public boolean equals(Object object)
+	public boolean equals(Object object) // Overridden, Object.equals() seemed to not work properly here
 	{
 		Point point = (Point) object;
 
 		if (x == point.x && y == point.y)
 			return true;
+
 		return false;
 	}
 
@@ -91,6 +86,12 @@ public class Point {
 	{
 		set(origin);
 		move(angle, distance);
+	}
+
+	public Point snapToGrid(float steps)
+	{
+		float invert = 1f / steps;
+		return new Point(Math.round(x * (int) invert) / invert, Math.round(y * (int) invert) / invert);
 	}
 
 	@Override

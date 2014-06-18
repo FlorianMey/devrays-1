@@ -7,11 +7,14 @@ import app.jaid.devrays.math.Point;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class IngameScreen implements Screen {
 
-	Player	player;
+	public static final float	cameraHeight	= 240;
+	public float				cameraWidth;
+	Player						player;
 
 	@Override
 	public void dispose()
@@ -44,6 +47,11 @@ public class IngameScreen implements Screen {
 	public void resize(int width, int height)
 	{
 		Core.resize(width, height);
+
+		cameraWidth = cameraHeight * width / height;
+		Core.camera.viewportWidth = cameraWidth;
+		Core.camera.update();
+		Core.batch.setProjectionMatrix(Core.camera.combined);
 	}
 
 	@Override
@@ -54,6 +62,9 @@ public class IngameScreen implements Screen {
 	@Override
 	public void show()
 	{
+		Core.camera = new OrthographicCamera();
+		Core.camera.viewportHeight = cameraHeight;
+
 		player = new Player(new Point());
 		player.sprite = new Sprite(Core.getSprite("ship"));
 	}

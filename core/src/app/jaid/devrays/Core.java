@@ -2,6 +2,7 @@ package app.jaid.devrays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class Core {
 	public static AssetManager	assetManager;
 	public static SpriteBatch	batch;
+	public static Camera		camera;
 	public static boolean		debug;
 	public static float			delta;
 	public static int			screenWidth, screenHeight;
