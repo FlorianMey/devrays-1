@@ -21,7 +21,7 @@ public class Mob implements Entity {
 
 	public float getBraking()
 	{
-		return 0.15f;
+		return 0.5f * 15;
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class Mob implements Entity {
 
 	public float getSpeed()
 	{
-		return 0.5f * 5;
+		return 0.5f * 20;
 	}
 
 	public float getSteering()
@@ -42,16 +42,16 @@ public class Mob implements Entity {
 
 	public void moveByVelocity()
 	{
-		position.move(angle, speed);
+		position.move(angle, speed * Core.delta);
 		speed = JTil.normalize(speed, 5 * getBraking() * Core.delta);
 	}
 
 	public void push(Angle direction, float power)
 	{
-		if (speed == 0)
+		if (speed == 0 || getSteering() == 1)
 			angle.setRadians(direction.getRadians());
 		else
-			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * getSteering() * power * Core.delta * 10);
+			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * getSteering() * power * Core.delta * 5);
 
 		speed = Math.max(speed, power);
 	}
@@ -59,7 +59,7 @@ public class Mob implements Entity {
 	@Override
 	public void render()
 	{
-		sprite.draw(Core.batch);
+		Core.getBatch().draw(sprite.getTexture(), position.x, position.y, 2, 1);
 	}
 
 	@Override

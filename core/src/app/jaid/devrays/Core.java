@@ -4,18 +4,28 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class Core {
 	public static AssetManager	assetManager;
-	public static SpriteBatch	batch;
-	public static Camera		camera;
 	public static boolean		debug;
 	public static float			delta;
 	public static int			screenWidth, screenHeight;
 	public static float			speed;
+	private static Stage		stage;
 	public static long			startTime, now;
+
+	public static Batch getBatch()
+	{
+		return stage.getBatch();
+	}
+
+	public static Camera getCamera()
+	{
+		return stage.getCamera();
+	}
 
 	public static int getRuntimeMs()
 	{
@@ -40,7 +50,7 @@ public class Core {
 	{
 		startTime = TimeUtils.millis();
 
-		batch = new SpriteBatch();
+		stage = new Stage();
 		assetManager = new AssetManager();
 		speed = 1;
 	}
@@ -56,5 +66,4 @@ public class Core {
 		delta = Gdx.graphics.getDeltaTime() * speed;
 		now = TimeUtils.millis();
 	}
-
 }
