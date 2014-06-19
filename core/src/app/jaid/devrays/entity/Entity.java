@@ -6,7 +6,7 @@ public interface Entity {
 
 	public abstract Point getPosition();
 
-	public Team getTeam();
+	public abstract Team getTeam();
 
 	public abstract void render();
 

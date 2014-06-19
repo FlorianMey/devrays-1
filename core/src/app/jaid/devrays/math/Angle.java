@@ -147,6 +147,11 @@ public class Angle {
 		return Angle.fromRadians(radians + radiansRotate);
 	}
 
+	public void setTo(Angle other)
+	{
+		radians = other.radians;
+	}
+
 	public void setDegrees(float degrees)
 	{
 		setRadians(degreesToRadians(degrees));

@@ -36,6 +36,11 @@ public class Point {
 		this.y = y;
 	}
 
+	public Point(Point base) {
+		x = base.x;
+		y = base.y;
+	}
+
 	public Angle angleTo(Point origin)
 	{
 		return Angle.fromRadians(Math.atan2(origin.x - x, origin.y - y));

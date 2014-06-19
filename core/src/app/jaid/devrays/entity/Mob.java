@@ -65,7 +65,7 @@ public class Mob implements Entity {
 
 	}
 
-	public void moveByVelocity()
+	private void moveByVelocity()
 	{
 		position.move(angle, speed * Core.delta);
 		speed = JTil.normalize(speed, 5 * getBraking() * Core.delta);
@@ -74,7 +74,7 @@ public class Mob implements Entity {
 	public void push(Angle direction, float power)
 	{
 		if (speed == 0 || getSteering() == 1)
-			angle.setRadians(direction.getRadians());
+			angle.setTo(direction);
 		else
 			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * getSteering() * power * Core.delta * 5);
 
@@ -84,7 +84,7 @@ public class Mob implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getBatch().draw(sprite.getTexture(), position.x, position.y, 2, 1);
+		Core.getBatch().draw(sprite.getTexture(), position.x, position.y, sprite.getRegionWidth() / 16, sprite.getRegionHeight() / 16);
 	}
 
 	@Override

@@ -12,9 +12,22 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class IngameScreen implements DevraysScreen {
 
+	private static IngameScreen	instance;
+
+	public static Environment getEnvironment()
+	{
+		return getInstance().environment;
+	}
+
+	public static IngameScreen getInstance()
+	{
+		return instance;
+	}
+
 	OrthographicCamera	camera;
 	public float		cameraHeight	= 12;
 	public float		cameraWidth;
+	private Environment	environment;
 	Player				player;
 
 	@Override
@@ -25,6 +38,7 @@ public class IngameScreen implements DevraysScreen {
 	@Override
 	public void hide()
 	{
+		instance = null;
 	}
 
 	@Override
@@ -37,6 +51,7 @@ public class IngameScreen implements DevraysScreen {
 	{
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		player.render();
+		environment.render();
 	}
 
 	@Override
@@ -53,6 +68,8 @@ public class IngameScreen implements DevraysScreen {
 	@Override
 	public void show()
 	{
+		instance = this;
+		environment = new Environment();
 		camera = new OrthographicCamera();
 		updateCamera(16);
 
@@ -64,9 +81,10 @@ public class IngameScreen implements DevraysScreen {
 	public void update()
 	{
 		player.update();
+		environment.update();
 	}
 
-	public void updateCamera(float cameraHeight)
+	private void updateCamera(float cameraHeight)
 	{
 		this.cameraHeight = cameraHeight;
 		cameraWidth = cameraHeight * Core.screenWidth / Core.screenHeight;
