@@ -9,19 +9,33 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Mob implements Entity {
 
-	private Angle	angle;
+	private Angle	angle	= Angle.create();
 	private Point	position;
 	private float	speed;
 	public Sprite	sprite;
 
 	public Mob(Point position) {
 		this.position = position;
-		angle = Angle.fromRadians(0);
+	}
+
+	public void damage(int damage)
+	{
+
 	}
 
 	public float getBraking()
 	{
 		return 0.5f * 15;
+	}
+
+	public int getHP()
+	{
+		return 0;
+	}
+
+	public int getMaxHP()
+	{
+		return 0;
 	}
 
 	@Override
@@ -37,7 +51,18 @@ public class Mob implements Entity {
 
 	public float getSteering()
 	{
-		return 0.5f;
+		return 1f;
+	}
+
+	@Override
+	public Team getTeam()
+	{
+		return null;
+	}
+
+	public void heal(int amount)
+	{
+
 	}
 
 	public void moveByVelocity()

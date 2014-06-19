@@ -13,6 +13,11 @@ public class Angle {
 	public static final float	MAX_RADIANS			= (float) (Math.PI * 2);
 	public static final float	PI					= (float) Math.PI;
 
+	public static Angle create()
+	{
+		return new Angle(0);
+	}
+
 	public static float degreesToRadians(float degrees)
 	{
 		return (float) Math.toRadians(degrees);
@@ -68,7 +73,17 @@ public class Angle {
 		return radiansToDegrees(radians);
 	}
 
-	public float getDifferenceTo(Angle other)
+	public float getDegreesDifferenceTo(Angle other)
+	{
+		return radiansToDegrees(getRadiansDifferenceTo(other));
+	}
+
+	public float getRadians()
+	{
+		return radians;
+	}
+
+	public float getRadiansDifferenceTo(Angle other)
 	{
 		if (radians == other.radians)
 			return 0;
@@ -80,11 +95,6 @@ public class Angle {
 		float negativeDifference = MAX_RADIANS - max + min;
 
 		return Math.min(positiveDifference, negativeDifference);
-	}
-
-	public float getRadians()
-	{
-		return radians;
 	}
 
 	public int getShortestRotateDirection(Angle other)
