@@ -13,9 +13,15 @@ public class Mob implements Entity {
 	private Point	position;
 	private float	speed;
 	public Sprite	sprite;
+	private Team	team;
 
 	public Mob(Point position) {
 		this.position = position;
+	}
+
+	public Mob(Point position, Team team) {
+		this(position);
+		this.team = team;
 	}
 
 	public void damage(int damage)
@@ -57,7 +63,7 @@ public class Mob implements Entity {
 	@Override
 	public Team getTeam()
 	{
-		return null;
+		return team != null ? team : Team.OTHER;
 	}
 
 	public void heal(int amount)

@@ -12,7 +12,7 @@ public class Player extends Ship {
 	private float	shootLoad;
 
 	public Player(Point position) {
-		super(position);
+		super(position, Team.PLAYERS);
 	}
 
 	public boolean isShooting()

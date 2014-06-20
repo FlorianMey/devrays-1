@@ -29,13 +29,13 @@ public class Bullet implements Entity {
 	@Override
 	public Point getPosition()
 	{
-		return null;
+		return position;
 	}
 
 	@Override
 	public Team getTeam()
 	{
-		return null;
+		return fromMob.getTeam();
 	}
 
 	@Override
