@@ -9,7 +9,7 @@ import com.badlogic.gdx.Input.Keys;
 
 public class Player extends Ship {
 
-	private float	shootFrequency	= 0.2f, shootLoad;
+	private float	shootLoad;
 
 	public Player(Point position) {
 		super(position);
@@ -25,9 +25,9 @@ public class Player extends Ship {
 	{
 		shootLoad += Core.delta;
 
-		if (isShooting() && shootLoad >= shootFrequency)
+		if (isShooting() && shootLoad >= getCurrentWeapon().getShootFrequency())
 		{
-			Bullet.add(this);
+			Bullet.add(this, getCurrentWeapon());
 			shootLoad = 0;
 		}
 
