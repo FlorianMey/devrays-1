@@ -8,6 +8,7 @@ public class Ship extends Mob {
 
 	private Inventory	inventory		= new Inventory();
 	private int			selectedWeapon	= 0;
+	protected float		shootLoad;
 
 	public Ship(Point position) {
 		super(position);

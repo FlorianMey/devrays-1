@@ -5,8 +5,7 @@ import app.jaid.devrays.entity.Player;
 import app.jaid.devrays.math.Point;
 import app.jaid.devrays.screen.DevraysScreen;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -49,9 +48,15 @@ public class IngameScreen implements DevraysScreen {
 	@Override
 	public void render(float delta)
 	{
-		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		player.render();
 		environment.render();
+	}
+
+	@Override
+	public void renderText()
+	{
+		Core.testfont.setMarkupEnabled(true);
+		Core.testfont.draw(Core.getUiBatch(), "[WHITE]D[RED]evrays [WHITE]F[RED]ont[WHITE]test.", 200, 200);
 	}
 
 	@Override

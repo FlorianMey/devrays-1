@@ -4,6 +4,8 @@ import com.badlogic.gdx.Screen;
 
 public interface DevraysScreen extends Screen {
 
+	public abstract void renderText();
+
 	public abstract void update();
 
 }

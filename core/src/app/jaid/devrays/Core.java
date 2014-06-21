@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -16,6 +16,8 @@ public class Core {
 	public static float			speed;
 	private static Stage		stage;
 	public static long			startTime, now;
+	public static BitmapFont	testfont;
+	private static SpriteBatch	uiSpriteBatch;
 
 	public static Batch getBatch()
 	{
@@ -34,6 +36,9 @@ public class Core {
 
 	public static Texture getSprite(String filename)
 	{
+		if (!filename.startsWith("images/"))
+			filename = "images/" + filename;
+
 		if (!filename.endsWith(".png"))
 			filename += ".png";
 
@@ -46,12 +51,22 @@ public class Core {
 		return assetManager.get(filename);
 	}
 
+	public static Batch getUiBatch()
+	{
+		return uiSpriteBatch;
+	}
+
 	static void init()
 	{
 		startTime = TimeUtils.millis();
 
 		stage = new Stage();
+		uiSpriteBatch = new SpriteBatch();
+
 		assetManager = new AssetManager();
+		assetManager.load("fonts/testfont.fnt", BitmapFont.class);
+		assetManager.finishLoading();
+		testfont = assetManager.get("fonts/testfont.fnt", BitmapFont.class);
 		speed = 1;
 	}
 

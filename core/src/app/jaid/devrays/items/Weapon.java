@@ -8,9 +8,9 @@ public class Weapon {
 	{
 		return Math.round(60 / shootFrequency);
 	}
-	float						bulletSpeed;
 
-	float						shootFrequency;
+	float	bulletSpeed;
+	float	shootFrequency;
 
 	public Weapon(float bulletSpeed, float shootFrequency) {
 		this.bulletSpeed = bulletSpeed;

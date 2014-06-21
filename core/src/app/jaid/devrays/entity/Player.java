@@ -9,8 +9,6 @@ import com.badlogic.gdx.Input.Keys;
 
 public class Player extends Ship {
 
-	private float	shootLoad;
-
 	public Player(Point position) {
 		super(position, Team.PLAYERS);
 	}
