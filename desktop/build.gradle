@@ -1,6 +1,6 @@
 apply plugin: "java"
 
-sourceCompatibility = 1.6
+sourceCompatibility = 1.7
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 project.ext.mainClassName = "app.jaid.devrays.desktop.DesktopLauncher"
@@ -43,4 +43,13 @@ task afterEclipseImport(description: "Post processing after project generation",
     printer.setPreserveWhitespace(true)
     printer.print(classpath)
   }
+}
+
+// Additional Devrays related tasks
+
+task pack(dependsOn: classes, type: JavaExec) {
+    main = "app.jaid.devrays.tools.SpritePacker"
+    classpath = sourceSets.main.runtimeClasspath
+    workingDir = project.assetsDir
+    ignoreExitValue = true
 }

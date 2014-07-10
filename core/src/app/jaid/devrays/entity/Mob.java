@@ -5,15 +5,15 @@ import app.jaid.devrays.math.Angle;
 import app.jaid.devrays.math.Point;
 import app.jaid.jtil.JTil;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Mob implements Entity {
 
-	private Angle	angle	= Angle.create();
-	private Point	position;
-	private float	speed;
-	public Sprite	sprite;
-	private Team	team;
+	private Angle			angle	= Angle.create();
+	private Point			position;
+	private float			speed;
+	public TextureRegion	texture;
+	private Team			team;
 
 	public Mob(Point position) {
 		this.position = position;
@@ -90,7 +90,7 @@ public class Mob implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getBatch().draw(sprite.getTexture(), position.x, position.y, sprite.getRegionWidth() / 16, sprite.getRegionHeight() / 16);
+		Core.getBatch().draw(texture, position.x, position.y, texture.getRegionWidth() / 16, texture.getRegionHeight() / 16);
 	}
 
 	@Override
@@ -98,8 +98,6 @@ public class Mob implements Entity {
 	{
 		if (getBraking() != 1)
 			moveByVelocity();
-
-		sprite.setPosition(position.x, position.y); // TODO Rather update lazier (only when needed)
 
 		return true;
 	}

@@ -1,15 +1,12 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.io.Media;
 import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.math.Point;
 import app.jaid.devrays.screen.ingame.Environment;
 
-import com.badlogic.gdx.graphics.Texture;
-
 public class Bullet implements Entity {
-
-	public static final Texture	texture	= Core.getSprite("bullet");
 
 	public static void add(Mob mob, Weapon weapon)
 	{
@@ -41,7 +38,7 @@ public class Bullet implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getBatch().draw(texture, position.x, position.y, 1, 1);
+		Core.getBatch().draw(Media.getSprite("bullet"), position.x, position.y, 1, 1);
 	}
 
 	@Override

@@ -16,8 +16,12 @@ public class JFiles {
 
 	public static String getExtension(File file)
 	{
-		String name = file.getName();
-		return name.substring(name.lastIndexOf('.') + 1, name.length());
+		return getExtension(file.getName());
+	}
+
+	public static String getExtension(String fileName)
+	{
+		return fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
 	}
 
 	public static File getFolder(String... path)
@@ -97,7 +101,8 @@ public class JFiles {
 			writer.print(content);
 			writer.close();
 		} catch (FileNotFoundException e)
-		{}
+		{
+		}
 	}
 
 	public static void writeLine(File file, String line)

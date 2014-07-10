@@ -1,0 +1,15 @@
+{
+    "platform": "windows",
+    "jdk": "https://bitbucket.org/alexkasko/openjdk-unofficial-builds/downloads/openjdk-1.7.0-u60-unofficial-windows-i586-image.zip",
+    "executable": "devrays",
+    "appjar": "desktop/build/libs/desktop-1.0.jar",
+    "mainclass": "app/jaid/devrays/desktop/DesktopApplication",
+    "vmargs": [
+       "-Xmx1G"
+    ],
+    "resources": [
+        
+    ],
+    "minimizejre": "soft",
+    "outdir": "out/release-windows"
+}

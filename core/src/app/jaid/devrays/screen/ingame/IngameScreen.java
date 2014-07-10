@@ -2,10 +2,10 @@ package app.jaid.devrays.screen.ingame;
 
 import app.jaid.devrays.Core;
 import app.jaid.devrays.entity.Player;
+import app.jaid.devrays.io.Media;
 import app.jaid.devrays.math.Point;
 import app.jaid.devrays.screen.DevraysScreen;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -55,8 +55,7 @@ public class IngameScreen implements DevraysScreen {
 	@Override
 	public void renderText()
 	{
-		Core.testfont.setMarkupEnabled(true);
-		Core.testfont.draw(Core.getUiBatch(), "[WHITE]D[RED]evrays [WHITE]F[RED]ont[WHITE]test.", 200, 200);
+		Media.testfont.draw(Core.getUiBatch(), "[WHITE]D[RED]evrays [WHITE]F[RED]ont[WHITE]test.", 200, 200);
 	}
 
 	@Override
@@ -79,7 +78,7 @@ public class IngameScreen implements DevraysScreen {
 		updateCamera(16);
 
 		player = new Player(new Point());
-		player.sprite = new Sprite(Core.getSprite("ship"));
+		player.texture = new Sprite(Media.getSprite("ship"));
 	}
 
 	@Override
