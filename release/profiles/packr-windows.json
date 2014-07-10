@@ -11,5 +11,5 @@
         
     ],
     "minimizejre": "soft",
-    "outdir": "out/release-windows"
+    "outdir": "out/windows"
 }

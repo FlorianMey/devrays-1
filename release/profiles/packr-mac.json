@@ -11,5 +11,5 @@
         
     ],
     "minimizejre": "soft",
-    "outdir": "out/release-mac"
+    "outdir": "out/mac"
 }

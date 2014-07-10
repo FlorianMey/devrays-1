@@ -11,5 +11,5 @@
         
     ],
     "minimizejre": "soft",
-    "outdir": "out/release-linux64"
+    "outdir": "out/linux64"
 }

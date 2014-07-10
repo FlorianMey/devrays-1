@@ -11,6 +11,6 @@
         
     ],
     "minimizejre": "soft",
-    "outdir": "out/release-linux32"
+    "outdir": "out/linux32"
 }
 
