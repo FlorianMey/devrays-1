@@ -61,6 +61,7 @@ nb-configuration.xml
 
 .gradle
 build/
+/.settings #Ignore since only Gradle uses .settings in /
 
 ## OS Specific
 .DS_Store

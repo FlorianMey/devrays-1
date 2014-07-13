@@ -1,13 +1,9 @@
 package app.jaid.devrays.screen.ingame;
 
-import app.jaid.devrays.Core;
-import app.jaid.devrays.entity.Player;
-import app.jaid.devrays.io.Media;
-import app.jaid.devrays.math.Point;
+import app.jaid.devrays.geo.Point;
+import app.jaid.devrays.mobs.Player;
 import app.jaid.devrays.screen.DevraysScreen;
-
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import app.jaid.devrays.screen.WorldCamera;
 
 public class IngameScreen implements DevraysScreen {
 
@@ -15,7 +11,7 @@ public class IngameScreen implements DevraysScreen {
 
 	public static Environment getEnvironment()
 	{
-		return getInstance().environment;
+		return instance.environment;
 	}
 
 	public static IngameScreen getInstance()
@@ -23,11 +19,8 @@ public class IngameScreen implements DevraysScreen {
 		return instance;
 	}
 
-	OrthographicCamera	camera;
-	public float		cameraHeight	= 12;
-	public float		cameraWidth;
+	WorldCamera			camera;
 	private Environment	environment;
-	Player				player;
 
 	@Override
 	public void dispose()
@@ -48,20 +41,24 @@ public class IngameScreen implements DevraysScreen {
 	@Override
 	public void render(float delta)
 	{
-		player.render();
 		environment.render();
+	}
+
+	@Override
+	public void renderShapes()
+	{
+		environment.renderShapes();
 	}
 
 	@Override
 	public void renderText()
 	{
-		Media.testfont.draw(Core.getUiBatch(), "[WHITE]D[RED]evrays [WHITE]F[RED]ont[WHITE]test.", 200, 200);
+		environment.renderText();
 	}
 
 	@Override
 	public void resize(int width, int height)
 	{
-		updateCamera(cameraHeight);
 	}
 
 	@Override
@@ -74,27 +71,15 @@ public class IngameScreen implements DevraysScreen {
 	{
 		instance = this;
 		environment = new Environment();
-		camera = new OrthographicCamera();
-		updateCamera(16);
+		camera = new WorldCamera();
 
-		player = new Player(new Point());
-		player.texture = new Sprite(Media.getSprite("ship"));
+		environment.player = new Player(new Point());
+		environment.mobs.add(environment.player);
 	}
 
 	@Override
 	public void update()
 	{
-		player.update();
 		environment.update();
-	}
-
-	private void updateCamera(float cameraHeight)
-	{
-		this.cameraHeight = cameraHeight;
-		cameraWidth = cameraHeight * Core.screenWidth / Core.screenHeight;
-		camera.viewportWidth = cameraWidth;
-		camera.viewportHeight = cameraHeight;
-		camera.update();
-		Core.getBatch().setProjectionMatrix(camera.combined);
 	}
 }

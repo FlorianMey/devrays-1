@@ -1,6 +1,6 @@
 
 world.png
-size: 34,28
+size: 41,28
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -9,6 +9,20 @@ bullet
   xy: 1, 1
   size: 8, 8
   orig: 8, 8
+  offset: 0, 0
+  index: -1
+pixel
+  rotate: false
+  xy: 11, 8
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+point
+  rotate: false
+  xy: 35, 22
+  size: 5, 5
+  orig: 5, 5
   offset: 0, 0
   index: -1
 ship

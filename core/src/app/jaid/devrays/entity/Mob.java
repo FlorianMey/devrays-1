@@ -1,10 +1,13 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
-import app.jaid.devrays.math.Angle;
-import app.jaid.devrays.math.Point;
+import app.jaid.devrays.geo.Angle;
+import app.jaid.devrays.geo.Point;
+import app.jaid.devrays.graphics.Drawer;
+import app.jaid.devrays.physics.Colliding;
 import app.jaid.jtil.JTil;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Mob implements Entity {
@@ -12,8 +15,8 @@ public class Mob implements Entity {
 	private Angle			angle	= Angle.create();
 	private Point			position;
 	private float			speed;
-	public TextureRegion	texture;
 	private Team			team;
+	public TextureRegion	texture;
 
 	public Mob(Point position) {
 		this.position = position;
@@ -34,6 +37,24 @@ public class Mob implements Entity {
 		return 0.5f * 15;
 	}
 
+	@Override
+	public Point getCenter()
+	{
+		return position.add(getWidth() / 2, getHeight() / 2);
+	}
+
+	@Override
+	public float getHeight()
+	{
+		return texture.getRegionHeight() / 16;
+	}
+
+	@Override
+	public Colliding getHitbox()
+	{
+		return getPosition();
+	}
+
 	public int getHP()
 	{
 		return 0;
@@ -42,6 +63,12 @@ public class Mob implements Entity {
 	public int getMaxHP()
 	{
 		return 0;
+	}
+
+	@Override
+	public String getName()
+	{
+		return "Mob from Team " + getTeam();
 	}
 
 	@Override
@@ -64,6 +91,12 @@ public class Mob implements Entity {
 	public Team getTeam()
 	{
 		return team != null ? team : Team.OTHER;
+	}
+
+	@Override
+	public float getWidth()
+	{
+		return texture.getRegionWidth() / 16;
 	}
 
 	public void heal(int amount)
@@ -90,7 +123,29 @@ public class Mob implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getBatch().draw(texture, position.x, position.y, texture.getRegionWidth() / 16, texture.getRegionHeight() / 16);
+		Core.getWorldBatch().draw(texture, position.x, position.y, getWidth(), getHeight());
+	}
+
+	@Override
+	public void renderShapes()
+	{
+		Drawer.drawRect(4, 4, 4, 4, Color.RED);
+	}
+
+	@Override
+	public void renderText()
+	{
+		Drawer.drawTextOnWorld("[WHITE]D[RED]evrays [WHITE]F[RED]ont[WHITE]test.", position);
+	}
+
+	public void teleport(Point newPosition)
+	{
+		position.set(newPosition);
+	}
+
+	public void teleportCenter(Point newPosition)
+	{
+		position.set(newPosition.subtract(getWidth() / 2, getHeight() / 2));
 	}
 
 	@Override

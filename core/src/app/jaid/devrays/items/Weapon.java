@@ -2,7 +2,7 @@ package app.jaid.devrays.items;
 
 public class Weapon {
 
-	public static final Weapon	DEFAULT	= new Weapon(10f, 0.2f);
+	public static final Weapon	DEFAULT	= new Weapon(12f, 0.2f);
 
 	public static int frequencyToShootsPerMinute(float shootFrequency)
 	{

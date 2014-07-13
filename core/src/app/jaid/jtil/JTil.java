@@ -163,6 +163,16 @@ public class JTil {
 		return !Character.isISOControl(c) && block != null && block != Character.UnicodeBlock.SPECIALS;
 	}
 
+	public static float keepBetween(float min, float value, float max)
+	{
+		return Math.min(Math.max(min, value), max);
+	}
+
+	public static int keepBetween(int min, int value, int max)
+	{
+		return Math.min(Math.max(min, value), max);
+	}
+
 	public static float moveTo(float value, float change, float target)
 	{
 		return value > target ? value - change < target ? target : value - change : value + change > target ? target : value + change;

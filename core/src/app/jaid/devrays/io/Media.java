@@ -17,8 +17,7 @@ public class Media {
 	private static final AssetManager				assetManager	= new AssetManager();
 	private static final HashMap<String, Class<?>>	extensions;
 	private static HashMap<String, TextureRegion>	index			= new HashMap<String, TextureRegion>();
-
-	public static BitmapFont						testfont;
+	public static BitmapFont						play;
 
 	static
 	{
@@ -42,7 +41,7 @@ public class Media {
 	{
 		if (!assetManager.isLoaded(fileName))
 		{
-			Log.log(fileName + " loaded.");
+			Log.info("Resource atlas/" + fileName + " loaded.");
 			load(fileName);
 			assetManager.finishLoading();
 		}

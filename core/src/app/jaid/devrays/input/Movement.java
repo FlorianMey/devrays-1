@@ -1,7 +1,7 @@
 package app.jaid.devrays.input;
 
 import app.jaid.devrays.entity.Mob;
-import app.jaid.devrays.math.Angle;
+import app.jaid.devrays.geo.Angle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

@@ -1,8 +1,10 @@
-package app.jaid.devrays.entity;
+package app.jaid.devrays.mobs;
 
+import app.jaid.devrays.entity.Mob;
+import app.jaid.devrays.entity.Team;
+import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.items.Inventory;
 import app.jaid.devrays.items.Weapon;
-import app.jaid.devrays.math.Point;
 
 public class Ship extends Mob {
 

@@ -1,9 +1,10 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.io.Media;
 import app.jaid.devrays.items.Weapon;
-import app.jaid.devrays.math.Point;
+import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.Environment;
 
 public class Bullet implements Entity {
@@ -13,14 +14,38 @@ public class Bullet implements Entity {
 		Environment.addBullet(new Bullet(mob, weapon));
 	}
 
-	private Mob		fromMob;
+	private Entity	from;
 	private Point	position;
 	private Weapon	usedWeapon;
 
 	public Bullet(Mob mob, Weapon weapon) {
 		position = new Point(mob.getPosition());
-		fromMob = mob;
+		from = mob;
 		usedWeapon = weapon;
+	}
+
+	@Override
+	public Point getCenter()
+	{
+		return null;
+	}
+
+	@Override
+	public float getHeight()
+	{
+		return 0.5f;
+	}
+
+	@Override
+	public Colliding getHitbox()
+	{
+		return getPosition();
+	}
+
+	@Override
+	public String getName()
+	{
+		return null;
 	}
 
 	@Override
@@ -32,13 +57,29 @@ public class Bullet implements Entity {
 	@Override
 	public Team getTeam()
 	{
-		return fromMob.getTeam();
+		return from.getTeam();
+	}
+
+	@Override
+	public float getWidth()
+	{
+		return 0.5f;
 	}
 
 	@Override
 	public void render()
 	{
-		Core.getBatch().draw(Media.getSprite("bullet"), position.x, position.y, 1, 1);
+		Core.getWorldBatch().draw(Media.getSprite("bullet"), position.x, position.y, getWidth(), getHeight());
+	}
+
+	@Override
+	public void renderShapes()
+	{
+	}
+
+	@Override
+	public void renderText()
+	{
 	}
 
 	@Override

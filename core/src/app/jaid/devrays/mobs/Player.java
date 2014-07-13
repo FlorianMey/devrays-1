@@ -1,16 +1,22 @@
-package app.jaid.devrays.entity;
+package app.jaid.devrays.mobs;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.entity.Bullet;
+import app.jaid.devrays.entity.Team;
+import app.jaid.devrays.geo.Point;
+import app.jaid.devrays.input.InputCore;
 import app.jaid.devrays.input.Movement;
-import app.jaid.devrays.math.Point;
+import app.jaid.devrays.io.Media;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Player extends Ship {
 
 	public Player(Point position) {
 		super(position, Team.PLAYERS);
+		texture = new Sprite(Media.getSprite("ship"));
 	}
 
 	public boolean isShooting()
@@ -31,6 +37,9 @@ public class Player extends Ship {
 
 		Movement.push(this, getSpeed());
 		super.update();
+
+		teleportCenter(InputCore.getWorldCursor());
+
 		return true;
 	}
 }

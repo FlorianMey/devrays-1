@@ -1,4 +1,4 @@
-package app.jaid.devrays.math;
+package app.jaid.devrays.geo;
 
 import app.jaid.jtil.JTil;
 
