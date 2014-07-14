@@ -10,6 +10,7 @@ public class Hud extends Table {
 
 	private static final Console console = new Console();
 	public static final Skin gdxSkin = (Skin) Media.get("skins/gdx.json");
+	public static final Skin oldSkin = (Skin) Media.get("skins/old/jaidskin.json");
 
 	public static Console getConsole()
 	{

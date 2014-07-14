@@ -53,9 +53,11 @@ public class Console extends Table implements Printing {
 
 	public void init()
 	{
-		textField = new TextField("", Hud.gdxSkin) {
+		textField = new TextField("", Hud.oldSkin) {
 			{
-				setWidth(600);
+				setSize(600, 30);
+				setStyle(Hud.gdxSkin.get(TextFieldStyle.class));
+
 				addListener(new InputListener() {
 
 					@Override
@@ -120,24 +122,25 @@ public class Console extends Table implements Printing {
 			}
 		};
 
-		lines = new Label("- Chat Log -", Hud.gdxSkin) {
+		lines = new Label("- Chat Log -", Hud.oldSkin) {
 			{
 				setAlignment(Align.top, Align.left);
 				align(Align.top);
 				setWrap(true);
-				setStyle(new LabelStyle(Media.play, Color.WHITE));
+				setStyle(new LabelStyle(Hud.oldSkin.getFont("mono16"), Color.WHITE));
+				getStyle().font.setMarkupEnabled(true);
 			}
 		};
 
-		linesWrapper = new ScrollPane(lines, Hud.gdxSkin) {
+		linesWrapper = new ScrollPane(lines, Hud.oldSkin) {
 			{
-				setBounds(0, 30, 600, 200);
+				setBounds(0, textField.getHeight(), 600, 200);
 			}
 		};
 
 		debug();
 		addActor(linesWrapper);
-		row(); // TODO Fix the overlapping of both rows (current fix: setY(30))
+		row(); // TODO Fix the overlapping of both rows (current fix: setY(textfield height))
 		addActor(textField);
 		row();
 		hide();
