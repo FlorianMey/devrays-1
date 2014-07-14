@@ -1,5 +1,6 @@
 package app.jaid.devrays;
 
+import app.jaid.devrays.debug.Shell;
 import app.jaid.devrays.debug.Stats;
 import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.screen.DevraysScreen;
@@ -10,14 +11,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class DevraysGame extends Game {
+
+	private static DevraysScreen	currentScreen;
+
+	public static DevraysScreen getDevraysScreen()
+	{
+		return currentScreen;
+	}
 
 	@Override
 	public void create()
 	{
 		Core.init();
-		setScreen(new IngameScreen());
+		setDevraysScreen(new IngameScreen());
 		GLProfiler.enable();
 	}
 
@@ -25,27 +34,27 @@ public class DevraysGame extends Game {
 	public void render()
 	{
 		Core.tick();
+		currentScreen.update();
+		Shell.readInput();
 
-		DevraysScreen currentDevraysScreen = (DevraysScreen) getScreen();
-		currentDevraysScreen.update();
-
-		Core.getWorldBatch().setProjectionMatrix(Core.getCamera().combined);
-
-		Core.getWorldBatch().begin();
+		Core.getBatch().setProjectionMatrix(Core.getCamera().combined);
+		Core.getBatch().begin();
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		super.render();
-		Core.getWorldBatch().end();
+		Core.getBatch().end();
 
 		Drawer.getShapeRenderer().begin(ShapeType.Line);
-		currentDevraysScreen.renderShapes();
+		currentScreen.renderShapes();
 		Drawer.getShapeRenderer().end();
 
-		Core.getWorldBatch().setProjectionMatrix(Core.getHudCamera().combined);
+		Core.getHudStage().act();
+		Core.getHudStage().draw();
+		Table.drawDebug(Core.getHudStage());
 
-		Core.getWorldBatch().begin();
-		currentDevraysScreen.renderText();
+		Core.getBatch().begin();
 		Stats.render();
-		Core.getWorldBatch().end();
+		currentScreen.renderText();
+		Core.getBatch().end();
 
 		Stats.trackCommons();
 		GLProfiler.reset();
@@ -56,5 +65,11 @@ public class DevraysGame extends Game {
 	{
 		Core.resize(width, height);
 		super.resize(width, height);
+	}
+
+	public void setDevraysScreen(DevraysScreen screen)
+	{
+		setScreen(screen);
+		currentScreen = screen;
 	}
 }

@@ -55,6 +55,11 @@ public class JTil {
 		return ret.toString();
 	}
 
+	public static String explode(Object[] array, String seperator, String lastSeperator)
+	{
+		return explode(Arrays.asList(array), seperator, lastSeperator);
+	}
+
 	public static String fillString(int length, char content)
 	{
 		char[] array = new char[length];

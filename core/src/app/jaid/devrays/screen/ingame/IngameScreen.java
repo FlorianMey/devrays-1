@@ -1,9 +1,11 @@
 package app.jaid.devrays.screen.ingame;
 
+import app.jaid.devrays.Core;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.mobs.Player;
 import app.jaid.devrays.screen.DevraysScreen;
 import app.jaid.devrays.screen.WorldCamera;
+import app.jaid.devrays.ui.Hud;
 
 public class IngameScreen implements DevraysScreen {
 
@@ -20,7 +22,19 @@ public class IngameScreen implements DevraysScreen {
 	}
 
 	WorldCamera			camera;
+
 	private Environment	environment;
+
+	public IngameScreen() {
+		instance = this;
+		environment = new Environment();
+		camera = new WorldCamera();
+
+		environment.player = new Player(new Point());
+		environment.getMobs().add(environment.player);
+
+		Core.getHudStage().addActor(new Hud());
+	}
 
 	@Override
 	public void dispose()
@@ -69,12 +83,6 @@ public class IngameScreen implements DevraysScreen {
 	@Override
 	public void show()
 	{
-		instance = this;
-		environment = new Environment();
-		camera = new WorldCamera();
-
-		environment.player = new Player(new Point());
-		environment.mobs.add(environment.player);
 	}
 
 	@Override

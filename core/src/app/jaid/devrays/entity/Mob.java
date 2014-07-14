@@ -123,7 +123,7 @@ public class Mob implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getWorldBatch().draw(texture, position.x, position.y, getWidth(), getHeight());
+		Core.getBatch().draw(texture, position.x, position.y, getWidth(), getHeight());
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class Mob implements Entity {
 	@Override
 	public void renderText()
 	{
-		Drawer.drawTextOnWorld("[WHITE]D[RED]evrays [WHITE]F[RED]ont[WHITE]test.", position);
+		Drawer.drawTextOnWorld(getName(), position);
 	}
 
 	public void teleport(Point newPosition)

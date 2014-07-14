@@ -2,7 +2,7 @@ package app.jaid.devrays.io;
 
 import java.util.HashMap;
 
-import app.jaid.devrays.Log;
+import app.jaid.devrays.debug.Log;
 import app.jaid.jtil.JFiles;
 
 import com.badlogic.gdx.assets.AssetManager;
@@ -41,7 +41,7 @@ public class Media {
 	{
 		if (!assetManager.isLoaded(fileName))
 		{
-			Log.info("Resource atlas/" + fileName + " loaded.");
+			Log.debug("Resource atlas/" + fileName + " loaded.");
 			load(fileName);
 			assetManager.finishLoading();
 		}

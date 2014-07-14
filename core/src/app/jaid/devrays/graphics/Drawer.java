@@ -25,13 +25,13 @@ public class Drawer {
 
 	public static void drawTextOnScreen(String text, int x, int y)
 	{
-		Media.play.draw(Core.getWorldBatch(), text, x, y);
+		Media.play.draw(Core.getBatch(), text, x, y);
 	}
 
 	public static void drawTextOnWorld(String text, float x, float y)
 	{
 		Point screenPoint = Point.worldPointToScreenPoint(x, y);
-		Media.play.draw(Core.getWorldBatch(), text, screenPoint.x, screenPoint.y);
+		Media.play.draw(Core.getBatch(), text, screenPoint.x, screenPoint.y);
 	}
 
 	public static void drawTextOnWorld(String text, Point position)

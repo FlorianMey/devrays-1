@@ -5,13 +5,14 @@ import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.io.Media;
 import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
-import app.jaid.devrays.screen.ingame.Environment;
+import app.jaid.devrays.screen.ingame.IngameScreen;
 
 public class Bullet implements Entity {
 
 	public static void add(Mob mob, Weapon weapon)
 	{
-		Environment.addBullet(new Bullet(mob, weapon));
+		Bullet bullet = new Bullet(mob, weapon);
+		IngameScreen.getEnvironment().getBullets().add(bullet);
 	}
 
 	private Entity	from;
@@ -69,7 +70,7 @@ public class Bullet implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getWorldBatch().draw(Media.getSprite("bullet"), position.x, position.y, getWidth(), getHeight());
+		Core.getBatch().draw(Media.getSprite("bullet"), position.x, position.y, getWidth(), getHeight());
 	}
 
 	@Override

@@ -16,14 +16,19 @@ public class Environment {
 	private static final int	INITIAL_CAPACITY_BULLETS	= 255;
 	private static final int	INITIAL_CAPACITY_MOBS		= 255;
 
-	public static void addBullet(Bullet bullet)
+	private Array<Bullet>		bullets						= new Array<Bullet>(false, INITIAL_CAPACITY_BULLETS);
+	private Array<Mob>			mobs						= new Array<Mob>(false, INITIAL_CAPACITY_MOBS);
+	Player						player;
+
+	public Array<Bullet> getBullets()
 	{
-		IngameScreen.getEnvironment().bullets.add(bullet);
+		return bullets;
 	}
 
-	Array<Bullet>	bullets	= new Array<Bullet>(false, INITIAL_CAPACITY_BULLETS);
-	Array<Mob>		mobs	= new Array<Mob>(false, INITIAL_CAPACITY_MOBS);
-	Player			player;
+	public Array<Mob> getMobs()
+	{
+		return mobs;
+	}
 
 	@SuppressWarnings("unchecked")
 	public void render()
@@ -35,14 +40,14 @@ public class Environment {
 				for (int y = -100; y != 100; y++)
 				{
 					Color color = new Color(x == 0 || y == 0 ? Color.BLUE : Color.DARK_GRAY);
-					color.a = DebugFlags.showCoordsAlpha;
 
 					if (x % 10 == 0 && y % 10 == 0)
-						color.lerp(Color.WHITE, 0.3f);
+						color.lerp(Color.WHITE, 0.5f);
 
-					Core.getWorldBatch().setColor(color);
-					Core.getWorldBatch().draw(Media.getSprite("pixel"), x - 0.1f, y - 0.1f, 0.2f, 0.2f);
-					Core.getWorldBatch().setColor(Color.WHITE);
+					color.a = DebugFlags.showCoordsAlpha;
+					Core.getBatch().setColor(color);
+					Core.getBatch().draw(Media.getSprite("pixel"), x - 0.1f, y - 0.1f, 0.2f, 0.2f);
+					Core.getBatch().setColor(Color.WHITE);
 				}
 
 	}

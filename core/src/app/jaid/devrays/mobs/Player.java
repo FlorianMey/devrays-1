@@ -4,7 +4,6 @@ import app.jaid.devrays.Core;
 import app.jaid.devrays.entity.Bullet;
 import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
-import app.jaid.devrays.input.InputCore;
 import app.jaid.devrays.input.Movement;
 import app.jaid.devrays.io.Media;
 
@@ -37,8 +36,6 @@ public class Player extends Ship {
 
 		Movement.push(this, getSpeed());
 		super.update();
-
-		teleportCenter(InputCore.getWorldCursor());
 
 		return true;
 	}
