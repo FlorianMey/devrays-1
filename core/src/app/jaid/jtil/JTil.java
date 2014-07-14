@@ -7,8 +7,8 @@ import java.util.Map.Entry;
 
 public class JTil {
 
-	private static DecimalFormat	decimalFormat	= new DecimalFormat("#.#", new DecimalFormatSymbols(new Locale("en")));
-	private static final String		nullFallback	= "(null)";
+	private static DecimalFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(new Locale("en")));
+	private static final String nullFallback = "(null)";
 
 	public static boolean arrayContainsReference(Object[] array, Object value)
 	{

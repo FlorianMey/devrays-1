@@ -2,10 +2,10 @@ package app.jaid.devrays.debug;
 
 public class CommandDescriptor {
 
-	private String[]				aliases;
-	private ArgumentDescriptor[]	arguments;
-	private FlagDescriptor[]		flags;
-	private String					name, description;
+	private String[] aliases;
+	private ArgumentDescriptor[] arguments;
+	private FlagDescriptor[] flags;
+	private String name, description;
 
 	public String[] getAliases()
 	{

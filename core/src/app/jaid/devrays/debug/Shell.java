@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.Array;
 
 public class Shell {
 
-	private static CommandDescriptor[]	commandDescriptors;
-	private static BufferedReader		inputReader	= new BufferedReader(new InputStreamReader(System.in));
+	private static CommandDescriptor[] commandDescriptors;
+	private static BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public static CommandDescriptor getCommandDescriptorByAlias(String alias)
 	{

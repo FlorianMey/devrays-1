@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Camera;
 
 public class Point implements Colliding {
 
-	public static final Point	neutral	= new Point(0, 0);
+	public static final Point neutral = new Point(0, 0);
 
 	public static Point midOf(float x, float y, float width, float height)
 	{
@@ -41,7 +41,7 @@ public class Point implements Colliding {
 		return worldPointToScreenPoint(worldPoint.x, worldPoint.y);
 	}
 
-	public float	x, y;
+	public float x, y;
 
 	public Point() {
 	}

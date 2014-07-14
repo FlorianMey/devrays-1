@@ -5,7 +5,7 @@ import java.util.*;
 
 public class JRand {
 
-	public static Random	random	= new Random();
+	public static Random random = new Random();
 
 	public static double get()
 	{

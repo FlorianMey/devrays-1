@@ -4,14 +4,14 @@ import app.jaid.jtil.JTil;
 
 public class Angle {
 
-	public static final Angle	ANGLE_EAST			= fromDegrees(90);
-	public static final Angle	ANGLE_NORTH			= fromDegrees(0);
-	public static final Angle	ANGLE_SOUTH			= fromDegrees(180);
-	public static final Angle	ANGLE_WEST			= fromDegrees(270);
-	public static final float	MAX_DEGREES			= 360;
-	public static final float	MAX_DEGREES_SIGNED	= 180;
-	public static final float	MAX_RADIANS			= (float) (Math.PI * 2);
-	public static final float	PI					= (float) Math.PI;
+	public static final Angle ANGLE_EAST = fromDegrees(90);
+	public static final Angle ANGLE_NORTH = fromDegrees(0);
+	public static final Angle ANGLE_SOUTH = fromDegrees(180);
+	public static final Angle ANGLE_WEST = fromDegrees(270);
+	public static final float MAX_DEGREES = 360;
+	public static final float MAX_DEGREES_SIGNED = 180;
+	public static final float MAX_RADIANS = (float) (Math.PI * 2);
+	public static final float PI = (float) Math.PI;
 
 	public static Angle create()
 	{
@@ -48,7 +48,7 @@ public class Angle {
 		return (float) Math.toDegrees(radians);
 	}
 
-	private float	radians;
+	private float radians;
 
 	private Angle(float radians) {
 		setRadians(radians);

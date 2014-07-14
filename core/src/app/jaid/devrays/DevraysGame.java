@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class DevraysGame extends Game {
 
-	private static DevraysScreen	currentScreen;
+	private static DevraysScreen currentScreen;
 
 	public static DevraysScreen getDevraysScreen()
 	{

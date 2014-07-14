@@ -6,8 +6,8 @@ import com.badlogic.gdx.utils.Array;
 
 public class CommandLib {
 
-	private static final String	OFF	= "off";
-	private static final String	ON	= "on";
+	private static final String OFF = "off";
+	private static final String ON = "on";
 
 	public static int coords(String[] args, String[] flags)
 	{

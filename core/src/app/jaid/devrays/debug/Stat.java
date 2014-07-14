@@ -4,8 +4,8 @@ import app.jaid.devrays.graphics.Drawer;
 
 public class Stat {
 
-	private String	name;
-	private Object	value;
+	private String name;
+	private Object value;
 
 	Stat(String name, Object value) {
 		this.name = name;

@@ -14,10 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Media {
 
-	private static final AssetManager				assetManager	= new AssetManager();
-	private static final HashMap<String, Class<?>>	extensions;
-	private static HashMap<String, TextureRegion>	index			= new HashMap<String, TextureRegion>();
-	public static BitmapFont						play;
+	private static final AssetManager assetManager = new AssetManager();
+	private static final HashMap<String, Class<?>> extensions;
+	private static HashMap<String, TextureRegion> index = new HashMap<String, TextureRegion>();
+	public static BitmapFont play;
 
 	static
 	{

@@ -9,7 +9,7 @@ import app.jaid.devrays.ui.Hud;
 
 public class IngameScreen implements DevraysScreen {
 
-	private static IngameScreen	instance;
+	private static IngameScreen instance;
 
 	public static Environment getEnvironment()
 	{
@@ -21,9 +21,9 @@ public class IngameScreen implements DevraysScreen {
 		return instance;
 	}
 
-	WorldCamera			camera;
+	WorldCamera camera;
 
-	private Environment	environment;
+	private Environment environment;
 
 	public IngameScreen() {
 		instance = this;

@@ -5,8 +5,8 @@ import app.jaid.devrays.geo.Point;
 
 public class InputCore {
 
-	private static int		cursorX, cursorY;
-	private static Point	worldCursor	= new Point();
+	private static int cursorX, cursorY;
+	private static Point worldCursor = new Point();
 
 	public static int getCursorX()
 	{

@@ -17,15 +17,15 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class Core {
-	public static boolean				debug;
-	public static float					delta, deltaPeak;
-	private static OrthographicCamera	hudCamera;
-	private static Json					json		= new Json();
-	public static int					screenWidth, screenHeight;
-	public static float					speed		= 1;
-	public static long					startTime, now;
-	private static SystemOut			systemOut	= new SystemOut();
-	private static Stage				worldStage, hudStage;
+	public static boolean debug;
+	public static float delta, deltaPeak;
+	private static OrthographicCamera hudCamera;
+	private static Json json = new Json();
+	public static int screenWidth, screenHeight;
+	public static float speed = 1;
+	public static long startTime, now;
+	private static SystemOut systemOut = new SystemOut();
+	private static Stage worldStage, hudStage;
 
 	public static Batch getBatch()
 	{

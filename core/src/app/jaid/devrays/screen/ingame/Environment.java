@@ -13,12 +13,12 @@ import com.badlogic.gdx.utils.Array;
 
 public class Environment {
 
-	private static final int	INITIAL_CAPACITY_BULLETS	= 255;
-	private static final int	INITIAL_CAPACITY_MOBS		= 255;
+	private static final int INITIAL_CAPACITY_BULLETS = 255;
+	private static final int INITIAL_CAPACITY_MOBS = 255;
 
-	private Array<Bullet>		bullets						= new Array<Bullet>(false, INITIAL_CAPACITY_BULLETS);
-	private Array<Mob>			mobs						= new Array<Mob>(false, INITIAL_CAPACITY_MOBS);
-	Player						player;
+	private Array<Bullet> bullets = new Array<Bullet>(false, INITIAL_CAPACITY_BULLETS);
+	private Array<Mob> mobs = new Array<Mob>(false, INITIAL_CAPACITY_MOBS);
+	Player player;
 
 	public Array<Bullet> getBullets()
 	{

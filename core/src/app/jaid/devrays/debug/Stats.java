@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.OrderedMap;
 
 public class Stats {
 
-	private static final OrderedMap<String, Stat>	stats	= new OrderedMap<String, Stat>(20);
+	private static final OrderedMap<String, Stat> stats = new OrderedMap<String, Stat>(20);
 
 	public static void render()
 	{

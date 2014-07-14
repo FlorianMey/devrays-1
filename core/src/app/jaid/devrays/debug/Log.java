@@ -10,8 +10,8 @@ import com.badlogic.gdx.utils.Array;
 
 public class Log {
 
-	private static final SimpleDateFormat	dateFormat	= new SimpleDateFormat("[HH:mm:ss.SSS] ");
-	private static final Array<Printing>	printers	= new Array<Printing>(8);
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("[HH:mm:ss.SSS] ");
+	private static final Array<Printing> printers = new Array<Printing>(8);
 
 	public static void chat(String message)
 	{

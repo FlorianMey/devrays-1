@@ -2,8 +2,8 @@ package app.jaid.jtil;
 
 public class JTime {
 
-	public static final String[]	unitTags;
-	private static final long[]		unitLengths;
+	public static final String[] unitTags;
+	private static final long[] unitLengths;
 	static
 	{
 		long LENGTH_SECOND = 1000;
@@ -13,8 +13,8 @@ public class JTime {
 		long LENGTH_MONTH = (int) (LENGTH_DAY * (365.25f / 12f));
 		long LENGTH_YEAR = LENGTH_MONTH * 12;
 
-		unitLengths = new long[] {1, LENGTH_SECOND, LENGTH_MINUTE, LENGTH_HOUR, LENGTH_DAY, LENGTH_MONTH, LENGTH_YEAR};
-		unitTags = new String[] {"{ms}", "{s}", "{m}", "{h}", "{d}", "{mo}", "{y}"};
+		unitLengths = new long[] { 1, LENGTH_SECOND, LENGTH_MINUTE, LENGTH_HOUR, LENGTH_DAY, LENGTH_MONTH, LENGTH_YEAR };
+		unitTags = new String[] { "{ms}", "{s}", "{m}", "{h}", "{d}", "{mo}", "{y}" };
 	}
 
 	public static String formatUnits(String formatting, long ms)
@@ -37,17 +37,16 @@ public class JTime {
 		return System.currentTimeMillis() - timestamp >= ms;
 	}
 
-	public String	isFutureFormat	= "in *";
-	public String	isHistoryFormat	= "* ago";
-	public String	nowFormat		= "exactly now";
-	public String[]	unitNames, unitNamesPlural;
+	public String isFutureFormat = "in *";
+	public String isHistoryFormat = "* ago";
+	public String nowFormat = "exactly now";
+	public String[] unitNames, unitNamesPlural;
 
-	private long	timer;
+	private long timer;
 
-	public JTime()
-	{
-		unitNames = new String[] {"millisecond", "second", "minute", "hour", "day", "month", "year"};
-		unitNamesPlural = new String[] {"milliseconds", "seconds", "minutes", "hours", "days", "months", "years"};
+	public JTime() {
+		unitNames = new String[] { "millisecond", "second", "minute", "hour", "day", "month", "year" };
+		unitNamesPlural = new String[] { "milliseconds", "seconds", "minutes", "hours", "days", "months", "years" };
 	}
 
 	public String formatDifference(final long timestamp)

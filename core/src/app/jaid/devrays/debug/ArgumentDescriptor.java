@@ -2,8 +2,8 @@ package app.jaid.devrays.debug;
 
 public class ArgumentDescriptor {
 
-	private boolean	essential;
-	private String	name, type, description;
+	private boolean essential;
+	private String name, type, description;
 
 	public String getDescription()
 	{

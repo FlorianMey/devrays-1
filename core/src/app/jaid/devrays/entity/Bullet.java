@@ -15,9 +15,9 @@ public class Bullet implements Entity {
 		IngameScreen.getEnvironment().getBullets().add(bullet);
 	}
 
-	private Entity	from;
-	private Point	position;
-	private Weapon	usedWeapon;
+	private Entity from;
+	private Point position;
+	private Weapon usedWeapon;
 
 	public Bullet(Mob mob, Weapon weapon) {
 		position = new Point(mob.getPosition());

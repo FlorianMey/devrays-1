@@ -4,13 +4,13 @@ import java.lang.reflect.Method;
 
 public class CommandExecutor {
 
-	public static final int	EXEC_RESULT_BROKEN_LIB			= 5;
-	public static final int	EXEC_RESULT_COMMAND_NOT_FOUND	= 4;
-	public static final int	EXEC_RESULT_EXCEPTION			= 6;
-	public static final int	EXEC_RESULT_NO_PERMISSION		= 3;
-	public static final int	EXEC_RESULT_NOT_NOW				= 2;
-	public static final int	EXEC_RESULT_SUCCESS				= 0;
-	public static final int	EXEC_RESULT_TOO_FEW_ARGUMENTS	= 1;
+	public static final int EXEC_RESULT_BROKEN_LIB = 5;
+	public static final int EXEC_RESULT_COMMAND_NOT_FOUND = 4;
+	public static final int EXEC_RESULT_EXCEPTION = 6;
+	public static final int EXEC_RESULT_NO_PERMISSION = 3;
+	public static final int EXEC_RESULT_NOT_NOW = 2;
+	public static final int EXEC_RESULT_SUCCESS = 0;
+	public static final int EXEC_RESULT_TOO_FEW_ARGUMENTS = 1;
 
 	public static int run(Command command)
 	{

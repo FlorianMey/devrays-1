@@ -4,8 +4,8 @@ import app.jaid.jtil.JTil;
 
 public class Command {
 
-	private String[]	args, flags;
-	private String		command;
+	private String[] args, flags;
+	private String command;
 
 	public Command(String command, String[] args, String[] flags) {
 		this.command = command;

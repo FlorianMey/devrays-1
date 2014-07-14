@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class SystemOut implements Printing {
 
-	Array<LogContext>	contexts	= new Array<LogContext>();
+	Array<LogContext> contexts = new Array<LogContext>();
 
 	public SystemOut() {
 		contexts.addAll(LogContext.INFO, LogContext.DEBUG, LogContext.WARNING, LogContext.ERROR);

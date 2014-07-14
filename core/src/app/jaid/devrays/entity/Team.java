@@ -4,13 +4,13 @@ import app.jaid.jtil.JTil;
 
 public class Team {
 
-	public static final Team	ALLIES				= new Team("Allies", false);
-	public static final Team	ENEMIES_BONUS		= new Team("Bonus Enemies", true);
-	public static final Team	ENEMIES_MAIN		= new Team("Enemies", true);
-	public static final Team	NEUTRALS_AGGRESSIVE	= new Team("Neutral (aggressive)", true);
-	public static final Team	NEUTRALS_FORGIVING	= new Team("Neutral", false);
-	public static final Team	OTHER				= new Team("Other", false);
-	public static final Team	PLAYERS				= new Team("Players", false);
+	public static final Team ALLIES = new Team("Allies", false);
+	public static final Team ENEMIES_BONUS = new Team("Bonus Enemies", true);
+	public static final Team ENEMIES_MAIN = new Team("Enemies", true);
+	public static final Team NEUTRALS_AGGRESSIVE = new Team("Neutral (aggressive)", true);
+	public static final Team NEUTRALS_FORGIVING = new Team("Neutral", false);
+	public static final Team OTHER = new Team("Other", false);
+	public static final Team PLAYERS = new Team("Players", false);
 
 	static
 	{
@@ -22,9 +22,9 @@ public class Team {
 		ENEMIES_BONUS.setHates(NEUTRALS_AGGRESSIVE, NEUTRALS_FORGIVING);
 	}
 
-	private Team[]				hates, loves;
-	private boolean				isAggressive;
-	private String				name;
+	private Team[] hates, loves;
+	private boolean isAggressive;
+	private String name;
 
 	private Team(String name, boolean aggressive) {
 		this.name = name;

@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Drawer {
 
-	public static final ShapeRenderer	shapeRenderer	= new ShapeRenderer();
+	public static final ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 	public static void drawRect(float x, float y, float width, float height, Color color)
 	{

@@ -13,10 +13,10 @@ import com.badlogic.gdx.utils.Array;
 
 public class Console extends Table implements Printing {
 
-	private Array<LogContext>	contexts	= new Array<LogContext>();
-	private Label				lines;
-	private ScrollPane			linesWrapper;
-	private TextField			textField;
+	private Array<LogContext> contexts = new Array<LogContext>();
+	private Label lines;
+	private ScrollPane linesWrapper;
+	private TextField textField;
 
 	public Console() {
 		contexts.addAll(LogContext.INFO, LogContext.CHAT, LogContext.WARNING, LogContext.GUILD, LogContext.TEAM, LogContext.ERROR);

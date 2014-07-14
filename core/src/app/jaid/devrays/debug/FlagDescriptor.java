@@ -2,7 +2,7 @@ package app.jaid.devrays.debug;
 
 public class FlagDescriptor {
 
-	private String	name, description;
+	private String name, description;
 
 	@Override
 	public String toString()

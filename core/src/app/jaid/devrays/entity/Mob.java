@@ -12,11 +12,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Mob implements Entity {
 
-	private Angle			angle	= Angle.create();
-	private Point			position;
-	private float			speed;
-	private Team			team;
-	public TextureRegion	texture;
+	private Angle angle = Angle.create();
+	private Point position;
+	private float speed;
+	private Team team;
+	public TextureRegion texture;
 
 	public Mob(Point position) {
 		this.position = position;
