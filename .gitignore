@@ -1,6 +1,6 @@
 ## Devrays
 
-release/release-*/
+
 
 ## Java
 
@@ -8,6 +8,7 @@ release/release-*/
 *.war
 *.ear
 hs_err_pid*
+doc/
 
 ## GWT
 war/

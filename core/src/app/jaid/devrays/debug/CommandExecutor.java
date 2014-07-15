@@ -34,7 +34,7 @@ public class CommandExecutor {
 
 			if (!method.getReturnType().equals(Integer.TYPE))
 			{
-				Log.error("The method does not return a primitive integer and cannot be executed.");
+				Log.error("The method does not return a status code and cannot be executed.");
 				return EXEC_RESULT_BROKEN_LIB;
 			}
 
