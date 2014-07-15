@@ -1,11 +1,6 @@
 [
     {
         name:"help",
-        aliases:[
-            "man",
-            "manual",
-            "doc"
-        ],
         description:"Shows manual for specified command or lists all available commands if no argument is given.",
         arguments:[
             {
@@ -15,14 +10,11 @@
         ]
     },
     {
-        name:"coords",
-        arguments:[
-            {
-                name:"1",
-                essential:true,
-                type:"String",
-                description:"akk"
-            }
-        ]
+        name:"exit",
+        description:"Closes game."
+    },
+    {
+        name:"fullscreen",
+        description:"Toggles fullscreen mode."
     }
 ]

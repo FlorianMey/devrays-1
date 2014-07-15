@@ -10,11 +10,33 @@ public class JTil {
 	private static DecimalFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(new Locale("en")));
 	private static final String nullFallback = "(null)";
 
+	public static boolean arrayContainsEquivalent(Object[] array, Object value)
+	{
+		for (Object entry : array)
+			if (entry.equals(value))
+				return true;
+
+		return false;
+	}
+
+	public static boolean arrayContainsIgnoreCase(String[] array, String needle)
+	{
+		if (array == null)
+			return false;
+
+		for (String entry : array)
+			if (entry.equalsIgnoreCase(needle))
+				return true;
+
+		return false;
+	}
+
 	public static boolean arrayContainsReference(Object[] array, Object value)
 	{
 		for (Object element : array)
 			if (element == value)
 				return true;
+
 		return false;
 	}
 

@@ -67,6 +67,7 @@ public class Core {
 		startTime = TimeUtils.millis();
 		Log.registerPrinter(systemOut);
 		Shell.setCommandLib(Gdx.files.internal("meta/commands.json"));
+		Shell.setShortcuts(Gdx.files.internal("meta/shortcuts.json"));
 
 		Media.addAtlas((TextureAtlas) Media.get("textures/world.atlas"));
 		Media.play = (BitmapFont) Media.get("fonts/play.fnt");

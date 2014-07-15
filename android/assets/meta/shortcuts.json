@@ -1,0 +1,10 @@
+[
+    {
+        from:"/man",
+        to:"/help"
+    },
+    {
+        from:"/hh",
+        to:"/help help"
+    }
+]

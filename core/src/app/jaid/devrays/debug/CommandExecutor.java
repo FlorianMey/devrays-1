@@ -20,7 +20,7 @@ public class CommandExecutor {
 		String[] flags = command.getFlags();
 		int status;
 
-		CommandDescriptor descriptor = Shell.getCommandDescriptorByName(cmd);
+		CommandDescriptor descriptor = Shell.getCommandDescriptor(cmd);
 
 		if (descriptor == null)
 		{

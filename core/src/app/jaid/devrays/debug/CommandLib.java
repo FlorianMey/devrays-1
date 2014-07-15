@@ -1,7 +1,10 @@
 package app.jaid.devrays.debug;
 
+import app.jaid.devrays.Core;
+import app.jaid.devrays.graphics.DisplayUtils;
 import app.jaid.jtil.JTil;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
 public class CommandLib {
@@ -26,6 +29,28 @@ public class CommandLib {
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 
+	public static int exit(String[] args, String[] flags)
+	{
+		Gdx.app.exit();
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
+	}
+
+	public static int fullscreen(String[] args, String[] flags)
+	{
+		if (args.length > 0)
+		{
+			if (JTil.arrayContainsIgnoreCase(flags, "keepres"))
+				Gdx.graphics.setDisplayMode(Core.screenWidth, Core.screenHeight, !Gdx.graphics.isFullscreen());
+		}
+		else if (Gdx.graphics.isFullscreen())
+			Gdx.graphics.setDisplayMode(640, 320, false);
+		else
+			Gdx.graphics.setDisplayMode(DisplayUtils.getBiggestDisplayMode());
+
+		Log.info("Display Mode is now " + "TODO" + ".");
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
+	}
+
 	public static int help(String[] args, String flags[])
 	{
 		if (args.length == 0)
@@ -39,7 +64,7 @@ public class CommandLib {
 			return CommandExecutor.EXEC_RESULT_SUCCESS;
 		}
 
-		CommandDescriptor descriptor = Shell.getCommandDescriptorByName(args[0]);
+		CommandDescriptor descriptor = Shell.getCommandDescriptor(args[0]);
 
 		if (descriptor == null)
 		{
@@ -47,7 +72,7 @@ public class CommandLib {
 			return CommandExecutor.EXEC_RESULT_EXCEPTION;
 		}
 
-		Log.info("--- " + descriptor.getName() + (descriptor.getAliases() != null && descriptor.getAliases().length > 0 ? " (or " + JTil.explode(descriptor.getAliases(), " / ") + ")" : "") + " ---");
+		Log.info("--- Command " + descriptor.getName() + " ---");
 
 		if (descriptor.getDescription() != null)
 			Log.info(descriptor.getDescription());

@@ -1,11 +1,6 @@
 [
     {
         name:"(TESTCOMMAND/movementexample",
-        aliases:[
-            "me",
-            "test",
-            "move"
-        ],
         description:"Moves the player either up or down.",
         arguments:[
             {

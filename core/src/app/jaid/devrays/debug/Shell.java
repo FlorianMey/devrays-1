@@ -10,29 +10,30 @@ import com.badlogic.gdx.utils.Array;
 public class Shell {
 
 	private static CommandDescriptor[] commandDescriptors;
+	private static ConsoleShortcut[] consoleShortcuts;
 	private static BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 
-	public static CommandDescriptor getCommandDescriptorByAlias(String alias)
-	{
-		for (CommandDescriptor descriptor : Shell.getCommandDescriptors())
-			if (descriptor.getAliases() != null)
-				for (String descriptorAlias : descriptor.getAliases())
-					if (descriptorAlias.equalsIgnoreCase(alias))
-						return descriptor;
-		return null;
-	}
-
-	public static CommandDescriptor getCommandDescriptorByName(String name)
+	public static CommandDescriptor getCommandDescriptor(String name)
 	{
 		for (CommandDescriptor descriptor : Shell.getCommandDescriptors())
 			if (descriptor.getName().equalsIgnoreCase(name))
 				return descriptor;
+
 		return null;
 	}
 
 	public static CommandDescriptor[] getCommandDescriptors()
 	{
 		return commandDescriptors;
+	}
+
+	public static ConsoleShortcut getShortcut(String from)
+	{
+		for (ConsoleShortcut shortcut : consoleShortcuts)
+			if (shortcut.getFrom().equalsIgnoreCase(from))
+				return shortcut;
+
+		return null;
 	}
 
 	public static void readInput()
@@ -46,7 +47,7 @@ public class Shell {
 			}
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			Log.error("Could not read from native shell", e);
 		}
 	}
 
@@ -59,5 +60,16 @@ public class Shell {
 
 		commandDescriptors = descriptors.toArray(CommandDescriptor.class);
 		Log.debug("Created command library with " + commandDescriptors.length + " entries.");
+	}
+
+	public static void setShortcuts(FileHandle... files)
+	{
+		Array<ConsoleShortcut> shortcuts = new Array<ConsoleShortcut>(64);
+
+		for (FileHandle file : files)
+			shortcuts.addAll(Core.getJson().fromJson(ConsoleShortcut[].class, file));
+
+		consoleShortcuts = shortcuts.toArray(ConsoleShortcut.class);
+		Log.debug("Registered " + consoleShortcuts.length + " console shortcuts.");
 	}
 }

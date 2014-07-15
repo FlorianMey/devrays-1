@@ -1,7 +1,6 @@
 package app.jaid.devrays.ui;
 
 import app.jaid.devrays.debug.*;
-import app.jaid.devrays.io.Media;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
@@ -21,7 +20,7 @@ public class Console extends Table implements Printing {
 	public Console() {
 		contexts.addAll(LogContext.INFO, LogContext.CHAT, LogContext.WARNING, LogContext.GUILD, LogContext.TEAM, LogContext.ERROR);
 
-		if (DebugFlags.on)
+		if (DebugFlags.debugMode)
 			contexts.addAll(LogContext.DEBUG);
 	}
 
@@ -90,10 +89,10 @@ public class Console extends Table implements Printing {
 						{
 							if (getText().startsWith("/"))
 							{
-								CommandDescriptor resolvedCommand = Shell.getCommandDescriptorByAlias(getText().trim().substring(1));
-								if (resolvedCommand != null)
+								ConsoleShortcut shortcut = Shell.getShortcut(getText().trim());
+								if (shortcut != null)
 								{
-									setText("/" + resolvedCommand.getName() + " ");
+									setText(shortcut.getTo() + " ");
 									setCursorPosition(getText().length());
 								}
 							}

@@ -46,7 +46,7 @@ public class Environment {
 
 					color.a = DebugFlags.showCoordsAlpha;
 					Core.getBatch().setColor(color);
-					Core.getBatch().draw(Media.getSprite("pixel"), x - 0.1f, y - 0.1f, 0.2f, 0.2f);
+					Core.getBatch().draw(Media.getSprite("pixel"), x - 0.05f, y - 0.05f, 0.1f, 0.1f);
 					Core.getBatch().setColor(Color.WHITE);
 				}
 
