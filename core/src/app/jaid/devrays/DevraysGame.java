@@ -34,8 +34,8 @@ public class DevraysGame extends Game {
 	public void render()
 	{
 		Core.tick();
-		currentScreen.update();
 		Shell.readInput();
+		currentScreen.update();
 
 		Core.getBatch().setProjectionMatrix(Core.getCamera().combined);
 		Core.getBatch().begin();
@@ -56,7 +56,6 @@ public class DevraysGame extends Game {
 		currentScreen.renderText();
 		Core.getBatch().end();
 
-		Stats.trackCommons();
 		GLProfiler.reset();
 	}
 

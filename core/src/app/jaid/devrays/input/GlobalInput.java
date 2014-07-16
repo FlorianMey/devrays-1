@@ -1,6 +1,5 @@
 package app.jaid.devrays.input;
 
-import app.jaid.devrays.Core;
 import app.jaid.devrays.ui.Hud;
 
 import com.badlogic.gdx.Input.Keys;
@@ -25,8 +24,7 @@ public class GlobalInput implements InputProcessor {
 	{
 		if (keycode == Keys.ENTER && !Hud.getConsole().isVisible())
 		{
-			Hud.getConsole().setVisible(true);
-			Core.getHudStage().setKeyboardFocus(Hud.getConsole().getTextField());
+			Hud.getConsole().focus(InputCore.isCtrlPressed() ? "/" : "");
 			return true;
 		}
 

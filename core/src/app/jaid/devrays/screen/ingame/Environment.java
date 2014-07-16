@@ -18,7 +18,13 @@ public class Environment {
 
 	private Array<Bullet> bullets = new Array<Bullet>(false, INITIAL_CAPACITY_BULLETS);
 	private Array<Mob> mobs = new Array<Mob>(false, INITIAL_CAPACITY_MOBS);
-	Player player;
+	private Player player;
+
+	// is add and not set, because player will be an array in the future
+	void addPlayer(Player player)
+	{
+		this.player = player;
+	}
 
 	public Array<Bullet> getBullets()
 	{
@@ -28,6 +34,11 @@ public class Environment {
 	public Array<Mob> getMobs()
 	{
 		return mobs;
+	}
+
+	public Player getPlayer()
+	{
+		return player;
 	}
 
 	@SuppressWarnings("unchecked")

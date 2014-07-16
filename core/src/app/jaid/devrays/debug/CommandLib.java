@@ -14,11 +14,6 @@ public class CommandLib {
 
 	public static int coords(String[] args, String[] flags)
 	{
-		Log.debug("akk");
-
-		if (args.length == 0)
-			return CommandExecutor.EXEC_RESULT_TOO_FEW_ARGUMENTS;
-
 		if (args[0].equalsIgnoreCase(ON))
 			DebugFlags.drawCoords = true;
 		if (args[0].equalsIgnoreCase(OFF))
@@ -37,7 +32,7 @@ public class CommandLib {
 
 	public static int fullscreen(String[] args, String[] flags)
 	{
-		if (args.length > 0)
+		if (flags.length > 0)
 		{
 			if (JTil.arrayContainsIgnoreCase(flags, "keepres"))
 				Gdx.graphics.setDisplayMode(Core.screenWidth, Core.screenHeight, !Gdx.graphics.isFullscreen());
@@ -47,8 +42,29 @@ public class CommandLib {
 		else
 			Gdx.graphics.setDisplayMode(DisplayUtils.getBiggestDisplayMode());
 
-		Log.info("Display Mode is now " + "TODO" + ".");
+		Log.info("Display Mode is now <" + Gdx.graphics.getWidth() + ", " + Gdx.graphics.getHeight() + ", " + (Gdx.graphics.isFullscreen() ? "fullscreen" : "windowed") + ">.");
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
+	}
+
+	public static int get(String[] args, String flags[])
+	{
+		if (args.length == 0)
+		{
+			Log.info("Available stats: " + JTil.explode(CoreStat.values(), ", "));
+			return CommandExecutor.EXEC_RESULT_SUCCESS;
+		}
+
+		if (!CoreStat.contains(args[0]))
+		{
+			Log.error("Stat " + args[0] + " not found");
+			return CommandExecutor.EXEC_RESULT_WRONG_USAGE;
+		}
+
+		CoreStat stat = CoreStat.getByName(args[0]);
+
+		Log.info(stat.getName() + ": " + stat.getValue());
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
+
 	}
 
 	public static int help(String[] args, String flags[])
@@ -68,7 +84,7 @@ public class CommandLib {
 
 		if (descriptor == null)
 		{
-			Log.error("Cannot display documentation for unknown command " + args[0] + ".");
+			Log.exception("Cannot display documentation for unknown command " + args[0] + ".");
 			return CommandExecutor.EXEC_RESULT_EXCEPTION;
 		}
 
@@ -92,5 +108,27 @@ public class CommandLib {
 		}
 
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
+	}
+
+	public static int track(String[] args, String flags[])
+	{
+		if (args[0].equalsIgnoreCase("*"))
+		{
+			for (CoreStat stat : CoreStat.values())
+				Stats.track(stat.getName(), stat);
+			return CommandExecutor.EXEC_RESULT_SUCCESS;
+		}
+
+		if (!CoreStat.contains(args[0]))
+		{
+			Log.error("Stat " + args[0] + " not found");
+			return CommandExecutor.EXEC_RESULT_WRONG_USAGE;
+		}
+
+		CoreStat stat = CoreStat.getByName(args[0]);
+
+		Stats.track(stat.getName(), stat);
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
+
 	}
 }

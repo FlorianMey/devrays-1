@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.OrderedMap;
 
 public class Stats {
 
-	private static final OrderedMap<String, Stat> stats = new OrderedMap<String, Stat>(20);
+	private static final OrderedMap<String, Stat> stats = new OrderedMap<String, Stat>();
 
 	public static void render()
 	{
@@ -27,28 +27,12 @@ public class Stats {
 
 	public static void track(String name, Object value)
 	{
-		stats.put(name, new Stat(name, value));
-	}
-
-	public static void trackCommons()
-	{
-		track("RAM Usage", JTil.formatBytes(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
-		track("Surface", "<" + Core.screenWidth + ", " + Core.screenHeight + "> (" + (float) Core.screenWidth / Core.screenHeight + ":1)");
-		track("Cursor", "<" + InputCore.getCursorX() + ", " + InputCore.getCursorY() + ">");
-		track("FPS", Gdx.graphics.getFramesPerSecond());
-		track("Delta Peak", (int) (Core.getDeltaPeak() * 1000) + " ms");
-		track("Bindings/Calls", GLProfiler.textureBindings + ", " + GLProfiler.drawCalls);
-		track("Vertices", (int) GLProfiler.vertexCount.value);
-		track("HUD Viewport", "<" + Core.getHudCamera().viewportWidth + ", " + Core.getHudCamera().viewportHeight + ">");
-		track("HUD Camera", "<" + Core.getHudCamera().position.x + ", " + Core.getHudCamera().position.y + ">");
-		track("Runtime", JTime.formatUnits("{m}:{s}", Core.getRuntime()));
-
-		if (DevraysGame.getDevraysScreen() instanceof IngameScreen)
+		if (stats.containsKey(name))
 		{
-			track("World Cursor", InputCore.getWorldCursor().toString(2));
-			track("World Viewport", "<" + Core.getCamera().viewportWidth + ", " + Core.getCamera().viewportHeight + "> (" + Core.getCamera().viewportWidth / Core.getCamera().viewportHeight + ":1)");
-			track("World Camera", "<" + Core.getCamera().position.x + ", " + Core.getCamera().position.y + ">");
-			track("Entities", IngameScreen.getEnvironment().getMobs().size + "M, " + IngameScreen.getEnvironment().getBullets().size + "B");
+			Log.warn("Can't add stat " + name + " twice.");
+			return;
 		}
+
+		stats.put(name, new Stat(name, value));
 	}
 }

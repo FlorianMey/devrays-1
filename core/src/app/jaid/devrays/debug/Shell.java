@@ -47,7 +47,7 @@ public class Shell {
 			}
 		} catch (IOException e)
 		{
-			Log.error("Could not read from native shell", e);
+			Log.exception("Could not read from native shell", e);
 		}
 	}
 

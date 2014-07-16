@@ -30,8 +30,8 @@ public class IngameScreen implements DevraysScreen {
 		environment = new Environment();
 		camera = new WorldCamera();
 
-		environment.player = new Player(new Point());
-		environment.getMobs().add(environment.player);
+		environment.addPlayer(new Player(new Point()));
+		environment.getMobs().add(environment.getPlayer());
 
 		Core.getHudStage().addActor(new Hud());
 	}

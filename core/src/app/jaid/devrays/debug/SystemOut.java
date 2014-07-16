@@ -7,7 +7,7 @@ public class SystemOut implements Printing {
 	Array<LogContext> contexts = new Array<LogContext>();
 
 	public SystemOut() {
-		contexts.addAll(LogContext.INFO, LogContext.DEBUG, LogContext.WARNING, LogContext.ERROR);
+		contexts.addAll(LogContext.INFO, LogContext.DEBUG, LogContext.WARNING, LogContext.EXCEPTION);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class SystemOut implements Printing {
 	@Override
 	public void print(String message, LogContext context)
 	{
-		(context == LogContext.ERROR ? System.err : System.out).println(message);
+		(context == LogContext.EXCEPTION ? System.err : System.out).println(message);
 	}
 
 }

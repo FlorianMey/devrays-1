@@ -4,17 +4,19 @@ import com.badlogic.gdx.graphics.Color;
 
 public enum LogContext {
 
-	BROADCAST, CHAT, DEBUG, ERROR, GUILD, INFO, SUCCESS, TEAM, WARNING;
+	BROADCAST, CHAT, DEBUG, EXCEPTION, GUILD, HUMAN_ERROR, INFO, SUCCESS, TEAM, WARNING;
 
-	public static Color getColor(LogContext context)
+	public Color getColor()
 	{
-		switch (context)
+		switch (this)
 		{
 			case BROADCAST:
 				return Color.PINK;
 			case DEBUG:
 				return Color.GRAY;
-			case ERROR:
+			case EXCEPTION:
+				return Color.RED;
+			case HUMAN_ERROR:
 				return Color.RED;
 			case GUILD:
 				return Color.PURPLE;

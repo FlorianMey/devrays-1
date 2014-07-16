@@ -1,5 +1,6 @@
 package app.jaid.devrays.ui;
 
+import app.jaid.devrays.Core;
 import app.jaid.devrays.debug.*;
 
 import com.badlogic.gdx.Input.Keys;
@@ -18,15 +19,27 @@ public class Console extends Table implements Printing {
 	private TextField textField;
 
 	public Console() {
-		contexts.addAll(LogContext.INFO, LogContext.CHAT, LogContext.WARNING, LogContext.GUILD, LogContext.TEAM, LogContext.ERROR);
+		contexts.addAll(LogContext.INFO, LogContext.HUMAN_ERROR, LogContext.CHAT, LogContext.GUILD, LogContext.TEAM);
 
 		if (DebugFlags.debugMode)
-			contexts.addAll(LogContext.DEBUG);
+			contexts.addAll(LogContext.DEBUG, LogContext.WARNING, LogContext.EXCEPTION);
 	}
 
 	public void focus()
 	{
+		focus(null);
+	}
 
+	public void focus(String text)
+	{
+		if (text != null)
+			textField.setText(text);
+
+		setVisible(true);
+		textField.setVisible(true);
+		Core.getHudStage().setKeyboardFocus(textField);
+		setCursorToEnd();
+		updateInputColor();
 	}
 
 	@Override
@@ -93,7 +106,7 @@ public class Console extends Table implements Printing {
 								if (shortcut != null)
 								{
 									setText(shortcut.getTo() + " ");
-									setCursorPosition(getText().length());
+									setCursorToEnd();
 								}
 							}
 
@@ -108,13 +121,7 @@ public class Console extends Table implements Printing {
 					@Override
 					public void keyTyped(TextField textField, char c)
 					{
-						String trimmedText = getText().trim();
-						Color fontColor = Color.WHITE;
-
-						if (trimmedText.startsWith("/"))
-							fontColor = Color.GREEN;
-
-						getStyle().fontColor = fontColor;
+						updateInputColor();
 					}
 
 				});
@@ -155,10 +162,26 @@ public class Console extends Table implements Printing {
 	@Override
 	public void print(String message, LogContext context)
 	{
-		lines.setText(lines.getText() + "\n[#" + LogContext.getColor(context) + "]" + message);
+		lines.setText(lines.getText() + "\n[#" + context.getColor() + "]" + message);
 		lines.layout();
 		lines.layout();
 		linesWrapper.layout();
 		linesWrapper.setScrollPercentY(100);
+	}
+
+	private void setCursorToEnd()
+	{
+		textField.setCursorPosition(textField.getText().length());
+	}
+
+	private void updateInputColor()
+	{
+		String trimmedText = textField.getText().trim();
+		Color fontColor = Color.WHITE;
+
+		if (trimmedText.startsWith("/"))
+			fontColor = Color.GREEN;
+
+		textField.getStyle().fontColor = fontColor;
 	}
 }

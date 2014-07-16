@@ -25,12 +25,17 @@ public class Log {
 
 	public static void error(String message)
 	{
-		log(message, LogContext.ERROR);
+		log(message, LogContext.HUMAN_ERROR);
 	}
 
-	public static void error(String message, Exception exception)
+	public static void exception(String message)
 	{
-		log(message + ": " + JDebug.formatException(exception), LogContext.ERROR);
+		log(message, LogContext.EXCEPTION);
+	}
+
+	public static void exception(String message, Exception exception)
+	{
+		log(message + ": " + JDebug.formatException(exception), LogContext.EXCEPTION);
 	}
 
 	public static void info(String message)
@@ -49,6 +54,11 @@ public class Log {
 	{
 		printers.add(printing);
 		log("Registered printer " + printing.getClass().getSimpleName() + " printing " + JTil.explode(printing.getContexts().toArray(LogContext.class), ", ", " and ") + ".", LogContext.DEBUG);
+	}
+
+	public static void warn(String message)
+	{
+		log(message, LogContext.WARNING);
 	}
 
 }

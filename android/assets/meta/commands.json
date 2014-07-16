@@ -16,5 +16,26 @@
     {
         name:"fullscreen",
         description:"Toggles fullscreen mode."
+    },
+    {
+        name:"get",
+        description:"Displays core stat value or all available core stats if no arguments are given.",
+        arguments:[
+            {
+                name:"core_stat_name",
+                type:"String"
+            }
+        ]
+    },
+    {
+        name:"track",
+        description:"Permanently displays core stat in windows corner.",
+        arguments:[
+            {
+                name:"core_stat_name",
+                type:"String",
+                essential:true
+            }
+        ]
     }
 ]

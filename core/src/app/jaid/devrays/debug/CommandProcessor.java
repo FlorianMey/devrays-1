@@ -4,6 +4,11 @@ import com.badlogic.gdx.utils.Array;
 
 public class CommandProcessor {
 
+	public static String[] autocomplete(String line)
+	{
+		return null;
+	}
+
 	public static Command process(String line)
 	{
 		line = line.trim();

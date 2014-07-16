@@ -21,6 +21,16 @@ public class CommandDescriptor {
 		return flags;
 	}
 
+	public int getMinimumArguments()
+	{
+		int count = 0;
+		for (ArgumentDescriptor argument : arguments)
+			if (argument.isEssential())
+				count++;
+
+		return count;
+	}
+
 	public String getName()
 	{
 		return name;

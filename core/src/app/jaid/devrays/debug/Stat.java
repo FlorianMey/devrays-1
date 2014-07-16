@@ -12,9 +12,17 @@ public class Stat {
 		this.value = value;
 	}
 
+	private String getOutput()
+	{
+		if (value instanceof CoreStat)
+			return ((CoreStat) value).getValue();
+
+		return String.valueOf(value);
+	}
+
 	void render(int x, int y)
 	{
-		Drawer.drawTextOnScreen("[GRAY]" + name + ": [WHITE]" + String.valueOf(value), x, y);
+		Drawer.drawTextOnScreen("[GRAY]" + name + ": [WHITE]" + getOutput(), x, y);
 	}
 
 }

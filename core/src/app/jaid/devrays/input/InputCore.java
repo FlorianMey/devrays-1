@@ -3,6 +3,9 @@ package app.jaid.devrays.input;
 import app.jaid.devrays.Core;
 import app.jaid.devrays.geo.Point;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+
 public class InputCore {
 
 	private static int cursorX, cursorY;
@@ -26,6 +29,11 @@ public class InputCore {
 	public static Point getWorldCursor()
 	{
 		return worldCursor;
+	}
+
+	public static boolean isCtrlPressed()
+	{
+		return Gdx.input.isKeyPressed(Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT);
 	}
 
 	public static void updateCursor(int x, int y)
