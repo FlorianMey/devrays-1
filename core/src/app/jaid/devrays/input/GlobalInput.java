@@ -1,5 +1,6 @@
 package app.jaid.devrays.input;
 
+import app.jaid.devrays.debug.CommandExecutor;
 import app.jaid.devrays.ui.Hud;
 
 import com.badlogic.gdx.Input.Keys;
@@ -27,6 +28,9 @@ public class GlobalInput implements InputProcessor {
 			Hud.getConsole().focus(InputCore.isCtrlPressed() ? "/" : "");
 			return true;
 		}
+
+		if (keycode == Keys.F11)
+			CommandExecutor.run("fullscreen");
 
 		return false;
 	}

@@ -84,7 +84,19 @@ public class Console extends Table implements Printing {
 							}
 
 							if (getText().startsWith("/"))
-								CommandExecutor.run(CommandProcessor.process(getText()));
+							{
+								print(">> " + getText(), LogContext.INFO);
+
+								String error = CommandProcessor.checkCommand(getText());
+
+								if (error != null)
+								{
+									Log.error(error);
+									return true;
+								}
+
+								CommandExecutor.run(getText());
+							}
 							else
 								Log.chat("You said: " + getText().trim());
 
@@ -180,7 +192,7 @@ public class Console extends Table implements Printing {
 		Color fontColor = Color.WHITE;
 
 		if (trimmedText.startsWith("/"))
-			fontColor = Color.GREEN;
+			fontColor = CommandProcessor.checkCommand(textField.getText()) == null ? Color.GREEN : Color.RED;
 
 		textField.getStyle().fontColor = fontColor;
 	}

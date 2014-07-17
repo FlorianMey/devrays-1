@@ -23,6 +23,9 @@ public class CommandDescriptor {
 
 	public int getMinimumArguments()
 	{
+		if (arguments == null)
+			return 0;
+
 		int count = 0;
 		for (ArgumentDescriptor argument : arguments)
 			if (argument.isEssential())
@@ -36,4 +39,12 @@ public class CommandDescriptor {
 		return name;
 	}
 
+	public boolean hasFlag(String flag)
+	{
+		for (FlagDescriptor flagDescriptor : getFlags())
+			if (flagDescriptor.getName().equalsIgnoreCase(flag))
+				return true;
+
+		return false;
+	}
 }

@@ -7,6 +7,10 @@
                 name:"direction",
                 essential:true,
                 type:"String",
+                values:[
+                    "top",
+                    "down"
+                ],
                 description:"Must be up or down."
             },
             {

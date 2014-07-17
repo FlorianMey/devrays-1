@@ -35,7 +35,7 @@ public class CommandLib {
 		if (flags.length > 0)
 		{
 			if (JTil.arrayContainsIgnoreCase(flags, "keepres"))
-				Gdx.graphics.setDisplayMode(Core.screenWidth, Core.screenHeight, !Gdx.graphics.isFullscreen());
+				Gdx.graphics.setDisplayMode(Core.screenWidth, Core.screenHeight, true);
 		}
 		else if (Gdx.graphics.isFullscreen())
 			Gdx.graphics.setDisplayMode(640, 320, false);
@@ -116,12 +116,13 @@ public class CommandLib {
 		{
 			for (CoreStat stat : CoreStat.values())
 				Stats.track(stat.getName(), stat);
+
 			return CommandExecutor.EXEC_RESULT_SUCCESS;
 		}
 
 		if (!CoreStat.contains(args[0]))
 		{
-			Log.error("Stat " + args[0] + " not found");
+			Log.error("Stat " + args[0] + " not found.");
 			return CommandExecutor.EXEC_RESULT_WRONG_USAGE;
 		}
 

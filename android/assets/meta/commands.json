@@ -15,7 +15,13 @@
     },
     {
         name:"fullscreen",
-        description:"Toggles fullscreen mode."
+        description:"Toggles fullscreen mode.",
+        flags:[
+            {
+                name:"keepres",
+                description:"Does not resize the window and scales instead."
+            }
+        ]
     },
     {
         name:"get",

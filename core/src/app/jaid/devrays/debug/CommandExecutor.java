@@ -15,8 +15,6 @@ public class CommandExecutor {
 
 	public static int run(Command command)
 	{
-		Log.info(">> " + command);
-
 		long start = System.currentTimeMillis();
 		String cmd = command.getCommand();
 		String[] args = command.getArguments();
@@ -61,5 +59,10 @@ public class CommandExecutor {
 		Log.debug("Ran command " + command + " in " + (System.currentTimeMillis() - start) + " ms.");
 
 		return status;
+	}
+
+	public static int run(String line)
+	{
+		return run(CommandProcessor.process(line));
 	}
 }

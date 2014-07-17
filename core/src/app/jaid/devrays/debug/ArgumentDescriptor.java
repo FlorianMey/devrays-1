@@ -4,6 +4,12 @@ public class ArgumentDescriptor {
 
 	private boolean essential;
 	private String name, type, description;
+	private String[] values;
+
+	public String[] getAllowedValues()
+	{
+		return values;
+	}
 
 	public String getDescription()
 	{

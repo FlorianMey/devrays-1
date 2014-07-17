@@ -20,7 +20,7 @@ public enum CoreStat {
 	public static boolean contains(String name)
 	{
 		for (CoreStat stat : values())
-			if (stat.name.equals(name.toUpperCase()))
+			if (stat.name().equals(name.toUpperCase()))
 				return true;
 
 		return false;
