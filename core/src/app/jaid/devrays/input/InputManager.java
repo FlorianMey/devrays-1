@@ -12,7 +12,8 @@ import com.badlogic.gdx.InputMultiplexer;
  */
 public class InputManager extends InputMultiplexer {
 
-	public InputManager() {
+	public InputManager()
+	{
 		addProcessor(new GlobalInput());
 		addProcessor(new HudInput());
 		addProcessor(Core.getHudStage());

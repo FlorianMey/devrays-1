@@ -50,11 +50,13 @@ public class Angle {
 
 	private float radians;
 
-	public Angle() {
+	public Angle()
+	{
 
 	}
 
-	private Angle(float radians) {
+	private Angle(float radians)
+	{
 		setRadians(radians);
 	}
 

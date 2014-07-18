@@ -25,7 +25,8 @@ public class Bullet implements Entity {
 	private Point position;
 	private Weapon usedWeapon;
 
-	public Bullet(Mob mob, Weapon weapon) {
+	public Bullet(Mob mob, Weapon weapon)
+	{
 		position = new Point(mob.getPosition());
 		from = mob;
 		usedWeapon = weapon;

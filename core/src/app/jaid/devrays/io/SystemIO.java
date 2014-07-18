@@ -34,7 +34,8 @@ public class SystemIO implements Printing {
 
 	Array<LogContext> contexts = new Array<LogContext>();
 
-	public SystemIO() {
+	public SystemIO()
+	{
 		contexts.addAll(LogContext.INFO, LogContext.DEBUG, LogContext.WARNING, LogContext.EXCEPTION);
 	}
 

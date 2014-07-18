@@ -24,7 +24,8 @@ public class JTime {
 			{
 				long parts = ms / unitLengths[i];
 				formatting = formatting.replace(unitTags[i], String.valueOf(parts));
-				// System.out.println("Tag: " + unitTags[i] + " | UnitLengths[" + i + "]: " + unitLengths[i] + " | Ms: " + ms + " | Parts: " + parts);
+				// System.out.println("Tag: " + unitTags[i] + " | UnitLengths[" + i + "]: " + unitLengths[i] + " | Ms: "
+				// + ms + " | Parts: " + parts);
 				ms -= parts * unitLengths[i];
 			}
 
@@ -33,7 +34,8 @@ public class JTime {
 
 	public static boolean isOlderThan(long timestamp, long ms)
 	{
-		// System.out.println("isOlder = " + (System.currentTimeMillis() - timestamp) + " (" + (System.currentTimeMillis() - timestamp) / 1000 / 60 + " minutes)  >= " + ms);
+		// System.out.println("isOlder = " + (System.currentTimeMillis() - timestamp) + " (" +
+		// (System.currentTimeMillis() - timestamp) / 1000 / 60 + " minutes)  >= " + ms);
 		return System.currentTimeMillis() - timestamp >= ms;
 	}
 
@@ -44,7 +46,8 @@ public class JTime {
 
 	private long timer;
 
-	public JTime() {
+	public JTime()
+	{
 		unitNames = new String[] { "millisecond", "second", "minute", "hour", "day", "month", "year" };
 		unitNamesPlural = new String[] { "milliseconds", "seconds", "minutes", "hours", "days", "months", "years" };
 	}

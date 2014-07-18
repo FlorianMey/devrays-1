@@ -24,7 +24,8 @@ public class Console extends Table implements Printing {
 	private ScrollPane linesWrapper;
 	private TextField textField;
 
-	public Console() {
+	public Console()
+	{
 		contexts.addAll(LogContext.INFO, LogContext.HUMAN_ERROR, LogContext.CHAT, LogContext.GUILD, LogContext.TEAM);
 
 		if (DebugFlags.debugMode)

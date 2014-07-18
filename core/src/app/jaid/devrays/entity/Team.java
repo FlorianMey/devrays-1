@@ -33,7 +33,8 @@ public class Team {
 	private boolean isAggressive;
 	private String name;
 
-	private Team(String name, boolean aggressive) {
+	private Team(String name, boolean aggressive)
+	{
 		this.name = name;
 	}
 

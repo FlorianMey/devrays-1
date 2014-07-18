@@ -49,15 +49,18 @@ public class Point implements Colliding {
 
 	public float x, y;
 
-	public Point() {
+	public Point()
+	{
 	}
 
-	public Point(float x, float y) {
+	public Point(float x, float y)
+	{
 		this.x = x;
 		this.y = y;
 	}
 
-	public Point(Point base) {
+	public Point(Point base)
+	{
 		x = base.x;
 		y = base.y;
 	}

@@ -24,7 +24,8 @@ public class Hud extends Table {
 		return console;
 	}
 
-	public Hud() {
+	public Hud()
+	{
 		super(gdxSkin);
 		gdxSkin.add("default", new BitmapFont(), BitmapFont.class);
 		setFillParent(true);

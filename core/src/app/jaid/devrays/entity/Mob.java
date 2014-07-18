@@ -3,11 +3,9 @@ package app.jaid.devrays.entity;
 import app.jaid.devrays.Core;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
-import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.jtil.JTil;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -15,32 +13,34 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  *
  * @author jaid
  */
-public class Mob implements Entity {
+public abstract class Mob implements Entity {
 
-	private Angle angle = new Angle();
-	private Point position;
-	private float speed;
-	private Team team;
-	public TextureRegion texture;
+	protected Angle angle = new Angle();
+	protected int healthPoints, maxHealthPoints;
+	protected Point position;
+	protected float speed;
+	protected Team team;
+	protected TextureRegion texture;
 
-	public Mob(Point position) {
+	public Mob(Point position)
+	{
 		this.position = position;
 	}
 
-	public Mob(Point position, Team team) {
+	public Mob(Point position, Team team)
+	{
 		this(position);
 		this.team = team;
 	}
 
 	public void damage(int damage)
 	{
+		healthPoints -= damage;
+	};
 
-	}
+	public abstract void die();
 
-	public float getBraking()
-	{
-		return 0.5f * 15;
-	}
+	public abstract float getBraking();
 
 	@Override
 	public Point getCenter()
@@ -55,26 +55,20 @@ public class Mob implements Entity {
 	}
 
 	@Override
-	public Colliding getHitbox()
-	{
-		return getPosition();
-	}
+	public abstract Colliding getHitbox();
 
 	public int getHP()
 	{
-		return 0;
-	}
+		return healthPoints;
+	};
 
 	public int getMaxHP()
 	{
-		return 0;
-	}
+		return maxHealthPoints;
+	};
 
 	@Override
-	public String getName()
-	{
-		return "Mob from Team " + getTeam();
-	}
+	public abstract String getName();
 
 	@Override
 	public Point getPosition()
@@ -82,15 +76,7 @@ public class Mob implements Entity {
 		return position;
 	}
 
-	public float getSpeed()
-	{
-		return 0.5f * 20;
-	}
-
-	public float getSteering()
-	{
-		return 1f;
-	}
+	public abstract float getSpeed();
 
 	@Override
 	public Team getTeam()
@@ -106,8 +92,8 @@ public class Mob implements Entity {
 
 	public void heal(int amount)
 	{
-
-	}
+		healthPoints = Math.min(maxHealthPoints, healthPoints + amount);
+	};
 
 	private void moveByVelocity()
 	{
@@ -117,10 +103,10 @@ public class Mob implements Entity {
 
 	public void push(Angle direction, float power)
 	{
-		if (speed == 0 || getSteering() == 1)
+		if (speed == 0)
 			angle.setTo(direction);
 		else
-			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * getSteering() * power * Core.delta * 5);
+			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * power * Core.delta * 5);
 
 		speed = Math.max(speed, power);
 	}
@@ -132,16 +118,10 @@ public class Mob implements Entity {
 	}
 
 	@Override
-	public void renderShapes()
-	{
-		Drawer.drawRect(4, 4, 4, 4, Color.RED);
-	}
+	public abstract void renderShapes();
 
 	@Override
-	public void renderText()
-	{
-		Drawer.drawTextOnWorld(getName(), position);
-	}
+	public abstract void renderText();
 
 	public void teleport(Point newPosition)
 	{
@@ -156,6 +136,12 @@ public class Mob implements Entity {
 	@Override
 	public boolean update()
 	{
+		if (healthPoints <= 0)
+		{
+			die();
+			return false;
+		}
+
 		if (getBraking() != 1)
 			moveByVelocity();
 

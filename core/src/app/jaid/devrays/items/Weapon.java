@@ -20,7 +20,8 @@ public class Weapon {
 	float bulletSpeed;
 	float shootFrequency;
 
-	public Weapon(float bulletSpeed, float shootFrequency) {
+	public Weapon(float bulletSpeed, float shootFrequency)
+	{
 		this.bulletSpeed = bulletSpeed;
 		this.shootFrequency = shootFrequency;
 	}

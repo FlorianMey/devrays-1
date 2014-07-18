@@ -13,7 +13,8 @@ public class Stat {
 	private String name;
 	private Object value;
 
-	Stat(String name, Object value) {
+	Stat(String name, Object value)
+	{
 		this.name = name;
 		this.value = value;
 	}

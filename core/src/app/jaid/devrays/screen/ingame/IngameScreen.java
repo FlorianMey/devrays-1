@@ -27,7 +27,8 @@ public class IngameScreen implements DevraysScreen {
 
 	private Environment environment;
 
-	public IngameScreen() {
+	public IngameScreen()
+	{
 		instance = this;
 		environment = new Environment();
 		environment.addPlayer(new Player(new Point()));

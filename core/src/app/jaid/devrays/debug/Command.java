@@ -13,7 +13,8 @@ public class Command {
 	private String[] args, flags;
 	private String command;
 
-	public Command(String command, String[] args, String[] flags) {
+	public Command(String command, String[] args, String[] flags)
+	{
 		this.command = command;
 		this.args = args;
 		this.flags = flags;

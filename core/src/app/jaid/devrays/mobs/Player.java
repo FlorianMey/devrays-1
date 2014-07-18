@@ -20,7 +20,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class Player extends Ship {
 
-	public Player(Point position) {
+	public Player(Point position)
+	{
 		super(position, Team.PLAYERS);
 		texture = new Sprite(Media.getSprite("ship"));
 	}

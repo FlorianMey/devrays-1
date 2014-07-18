@@ -9,7 +9,8 @@ public class Equipment {
 
 	public Weapon[] weapons;
 
-	public Equipment() {
+	public Equipment()
+	{
 		weapons = new Weapon[] { Weapon.DEFAULT };
 	}
 }
