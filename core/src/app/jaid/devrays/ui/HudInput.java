@@ -1,7 +1,14 @@
 package app.jaid.devrays.ui;
 
+import app.jaid.devrays.input.InputManager;
+
 import com.badlogic.gdx.InputProcessor;
 
+/**
+ * Input listener layer of {@link InputManager} that is related to shortcuts for ingame HUD.
+ * 
+ * @author jaid
+ */
 public class HudInput implements InputProcessor {
 
 	@Override

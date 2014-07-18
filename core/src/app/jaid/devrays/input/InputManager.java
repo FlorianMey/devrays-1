@@ -5,6 +5,11 @@ import app.jaid.devrays.ui.HudInput;
 
 import com.badlogic.gdx.InputMultiplexer;
 
+/**
+ * Holds a set of InputProcessors and defines input priorities.
+ *
+ * @author jaid
+ */
 public class InputManager extends InputMultiplexer {
 
 	public InputManager() {

@@ -1,8 +1,8 @@
 package app.jaid.devrays;
 
-import app.jaid.devrays.debug.Shell;
 import app.jaid.devrays.debug.Stats;
 import app.jaid.devrays.graphics.Drawer;
+import app.jaid.devrays.io.SystemIO;
 import app.jaid.devrays.screen.DevraysScreen;
 import app.jaid.devrays.screen.ingame.IngameScreen;
 
@@ -13,6 +13,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
+/**
+ * Gets instantiated by the platform specific launcher. Invokes inits in {@link #create}, provides main loop
+ * {@link #render} and manages screens ({@link DevraysScreen}).
+ * 
+ * @author jaid
+ */
 public class DevraysGame extends Game {
 
 	private static DevraysScreen currentScreen;
@@ -34,7 +40,7 @@ public class DevraysGame extends Game {
 	public void render()
 	{
 		Core.tick();
-		Shell.readInput();
+		SystemIO.readInput();
 		currentScreen.update();
 
 		Core.getBatch().setProjectionMatrix(Core.getCamera().combined);

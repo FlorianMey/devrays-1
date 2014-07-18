@@ -7,6 +7,12 @@ import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.IngameScreen;
 
+/**
+ * Bullets that get shot by attacking {@link Mob} instances. May hit other mobs (depends on relation between its team
+ * and the hit mob's team) or walls. The bullet's behaviour mostly depends on the {@link Weapon} it got shot from.
+ *
+ * @author jaid
+ */
 public class Bullet implements Entity {
 
 	public static void add(Mob mob, Weapon weapon)

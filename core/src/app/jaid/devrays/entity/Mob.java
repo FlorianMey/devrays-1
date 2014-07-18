@@ -10,9 +10,14 @@ import app.jaid.jtil.JTil;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Main living {@link Entity}. Has a weapon to shot {@link Bullet} objects and can be hit by bullets.
+ *
+ * @author jaid
+ */
 public class Mob implements Entity {
 
-	private Angle angle = Angle.create();
+	private Angle angle = new Angle();
 	private Point position;
 	private float speed;
 	private Team team;

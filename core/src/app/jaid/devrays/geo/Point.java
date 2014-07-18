@@ -6,6 +6,12 @@ import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.graphics.Camera;
 
+/**
+ * X/Y coordinate in world. Gets assigned to every entity. Provides projection methods for cameras and transform
+ * utilities.
+ *
+ * @author jaid
+ */
 public class Point implements Colliding {
 
 	public static final Point neutral = new Point(0, 0);

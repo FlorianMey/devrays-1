@@ -6,6 +6,11 @@ import app.jaid.devrays.ui.Hud;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
+/**
+ * Input listeners with highest priority that are available everywhere and not only in certain screens.
+ * 
+ * @author jaid
+ */
 public class GlobalInput implements InputProcessor {
 
 	@Override

@@ -2,6 +2,12 @@ package app.jaid.devrays.debug;
 
 import java.lang.reflect.Method;
 
+/**
+ * Executes a {@link Command} instance parsed with {@link CommandProcessor#process}, uses Java Reflection to run a
+ * method from {@link CommandLib} that has the same name as the command itself and returns either 0 or an error code.
+ *
+ * @author jaid
+ */
 public class CommandExecutor {
 
 	public static final int EXEC_RESULT_BROKEN_LIB = 5;

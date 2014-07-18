@@ -4,9 +4,13 @@ import app.jaid.devrays.Core;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.mobs.Player;
 import app.jaid.devrays.screen.DevraysScreen;
-import app.jaid.devrays.screen.WorldCamera;
 import app.jaid.devrays.ui.Hud;
 
+/**
+ * Most important Screen of the game, contains an {@link Environment} and will simulate / render the game world.
+ * 
+ * @author jaid
+ */
 public class IngameScreen implements DevraysScreen {
 
 	private static IngameScreen instance;
@@ -21,15 +25,11 @@ public class IngameScreen implements DevraysScreen {
 		return instance;
 	}
 
-	WorldCamera camera;
-
 	private Environment environment;
 
 	public IngameScreen() {
 		instance = this;
 		environment = new Environment();
-		camera = new WorldCamera();
-
 		environment.addPlayer(new Player(new Point()));
 		environment.getMobs().add(environment.getPlayer());
 

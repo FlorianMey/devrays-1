@@ -8,6 +8,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Static methods for drawing objects. Should be rather called than using own implementations.
+ *
+ * @author jaid
+ */
 public class Drawer {
 
 	public static final ShapeRenderer shapeRenderer = new ShapeRenderer();

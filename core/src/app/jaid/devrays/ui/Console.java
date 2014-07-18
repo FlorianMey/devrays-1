@@ -11,6 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * HUD element that is always accessible for the user by pressing ENTER, not depending on current screen.
+ * Contains a TextField for running a {@link Command} and a multi line Label that listens to user relevant LogContexts.
+ *
+ * @author jaid
+ */
 public class Console extends Table implements Printing {
 
 	private Array<LogContext> contexts = new Array<LogContext>();

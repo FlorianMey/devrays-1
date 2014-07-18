@@ -11,6 +11,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Set of stats that can be either displayed once with command /get or tracked permanently with command /track. Each
+ * Enum item returns a String in {@link #getValue}. This method polls states and values from other static method
+ * providers, such as Runtime.getRuntime() for memory stats and GLProfiler for OpenGL counters.
+ *
+ * @author jaid
+ */
 public enum CoreStat {
 
 	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR("Cursor Position"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("Frames per second"), POSITION(

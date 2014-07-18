@@ -3,6 +3,11 @@ package app.jaid.devrays.graphics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 
+/**
+ * Util methods for display- and resolution calculations.
+ *
+ * @author jaid
+ */
 public class DisplayUtils {
 
 	public static DisplayMode getBiggestDisplayMode()

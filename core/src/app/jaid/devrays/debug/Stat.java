@@ -2,6 +2,12 @@ package app.jaid.devrays.debug;
 
 import app.jaid.devrays.graphics.Drawer;
 
+/**
+ * Stat object that has a stat reference that gets polled every frame and rendered in a screen corner (FPS for
+ * example).
+ *
+ * @author jaid
+ */
 public class Stat {
 
 	private String name;

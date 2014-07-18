@@ -1,18 +1,14 @@
 package app.jaid.devrays.debug;
 
 import app.jaid.devrays.Core;
-import app.jaid.devrays.DevraysGame;
-import app.jaid.devrays.input.InputCore;
-import app.jaid.devrays.screen.ingame.IngameScreen;
-import app.jaid.jtil.JTil;
-import app.jaid.jtil.JTime;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.utils.OrderedMap;
 
 public class Stats {
 
+	/**
+	 * Set of {@link Stat} instances that gets rendered every frame in a screen corner.
+	 */
 	private static final OrderedMap<String, Stat> stats = new OrderedMap<String, Stat>();
 
 	public static void render()

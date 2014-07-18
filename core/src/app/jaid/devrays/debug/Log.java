@@ -3,11 +3,21 @@ package app.jaid.devrays.debug;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import app.jaid.devrays.io.SystemIO;
+import app.jaid.devrays.ui.Console;
 import app.jaid.jtil.JDebug;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Provides static methods to broadcast log lines, supposed to be used everywhere in the code. Contains a set of
+ * printers (see {@link Printing}, by default a {@link Console} printer and a {@link SystemIO} printer) that all get
+ * called when a log line gets broadcasted. Every log entry is assigned to a {@link LogContext} and printers tell Log
+ * what LogContexts they want to listen to with {@link Printing#getContexts}.
+ *
+ * @author jaid
+ */
 public class Log {
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("[HH:mm:ss.SSS] ");

@@ -3,6 +3,11 @@ package app.jaid.devrays.entity;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.physics.Colliding;
 
+/**
+ * Interface for living and non living entities, gets implemented by all interacting objects in the world.
+ * 
+ * @author jaid
+ */
 public interface Entity {
 
 	public abstract Point getCenter();

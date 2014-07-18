@@ -11,6 +11,11 @@ import app.jaid.devrays.mobs.Player;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Singleton that contains interactive objects ({@link Bullet}s, {@link Mob}s...) and the map.
+ * 
+ * @author jaid
+ */
 public class Environment {
 
 	private static final int INITIAL_CAPACITY_BULLETS = 255;

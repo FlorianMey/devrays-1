@@ -1,9 +1,11 @@
 package app.jaid.devrays;
 
-import app.jaid.devrays.debug.*;
+import app.jaid.devrays.debug.Log;
+import app.jaid.devrays.debug.Shell;
 import app.jaid.devrays.input.InputCore;
 import app.jaid.devrays.input.InputManager;
 import app.jaid.devrays.io.Media;
+import app.jaid.devrays.io.SystemIO;
 import app.jaid.devrays.ui.Hud;
 
 import com.badlogic.gdx.Gdx;
@@ -16,6 +18,12 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * Contains static fields and methods that get accessed from many classes, such as util methods, profiling results and
+ * camera controlling.
+ *
+ * @author jaid
+ */
 public class Core {
 	public static boolean debug;
 	public static float delta, deltaPeak;
@@ -24,7 +32,7 @@ public class Core {
 	public static int screenWidth, screenHeight;
 	public static float speed = 1;
 	public static long startTime, now;
-	private static SystemOut systemOut = new SystemOut();
+	private static SystemIO systemIo = new SystemIO();
 	private static Stage worldStage, hudStage;
 
 	public static Batch getBatch()
@@ -65,7 +73,7 @@ public class Core {
 	static void init()
 	{
 		startTime = TimeUtils.millis();
-		Log.registerPrinter(systemOut);
+		Log.registerPrinter(systemIo);
 		Shell.setCommandLib(Gdx.files.internal("meta/commands.json"));
 		Shell.setShortcuts(Gdx.files.internal("meta/shortcuts.json"));
 
@@ -97,7 +105,7 @@ public class Core {
 			deltaPeak = Gdx.graphics.getRawDeltaTime();
 
 		now = TimeUtils.millis();
-		InputCore.updateCursor(Gdx.input.getX(), Gdx.input.getY());
+		InputCore.update();
 	}
 
 	public static void zoom(float change)

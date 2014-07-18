@@ -2,6 +2,12 @@ package app.jaid.devrays.debug;
 
 import app.jaid.jtil.JTil;
 
+/**
+ * Runnable command instance that has been converted from String (see {@link CommandProcessor#process}) into a main
+ * command, a String[] arguments and a String[] flags. Can be passed to {@link CommandExecutor#run} to be executed.
+ * 
+ * @author jaid
+ */
 public class Command {
 
 	private String[] args, flags;

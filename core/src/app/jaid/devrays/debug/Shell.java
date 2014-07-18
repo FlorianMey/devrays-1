@@ -1,17 +1,20 @@
 package app.jaid.devrays.debug;
 
-import java.io.*;
-
 import app.jaid.devrays.Core;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Core/utils class for command system. Fetches meta information about the command library from JSON files and stores
+ * that as static fields here.
+ * 
+ * @author jaid
+ */
 public class Shell {
 
 	private static CommandDescriptor[] commandDescriptors;
 	private static ConsoleShortcut[] consoleShortcuts;
-	private static BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public static CommandDescriptor getCommandDescriptor(String name)
 	{
@@ -34,21 +37,6 @@ public class Shell {
 				return shortcut;
 
 		return null;
-	}
-
-	public static void readInput()
-	{
-		try
-		{
-			if (inputReader.ready())
-			{
-				String line = inputReader.readLine();
-				CommandExecutor.run(CommandProcessor.process(line));
-			}
-		} catch (IOException e)
-		{
-			Log.exception("Could not read from native shell", e);
-		}
 	}
 
 	public static void setCommandLib(FileHandle... files)

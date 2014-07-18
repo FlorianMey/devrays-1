@@ -12,6 +12,11 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+/**
+ * Wrapper for GDX AssetManager that loads resources and provides access to them in static methods.
+ * 
+ * @author jaid
+ */
 public class Media {
 
 	private static final AssetManager assetManager = new AssetManager();

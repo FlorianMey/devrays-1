@@ -7,6 +7,13 @@ import app.jaid.jtil.JTil;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Provides static methods that get called by {@link CommandExecutor} through Java Reflection. Every command listed in
+ * commands.json has a method here, every method has params String[] args and String[] flags and returns an int
+ * representing a status code as specified in {@link CommandExecutor}.
+ * 
+ * @author jaid
+ */
 public class CommandLib {
 
 	private static final String OFF = "off";

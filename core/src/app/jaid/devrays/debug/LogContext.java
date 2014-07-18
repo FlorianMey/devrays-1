@@ -2,6 +2,12 @@ package app.jaid.devrays.debug;
 
 import com.badlogic.gdx.graphics.Color;
 
+/**
+ * Enum of available log contexts. Each log entry is assigned to such a context. Every {@link Printing} tells
+ * {@link Log} which contexts they want to listen to.
+ *
+ * @author jaid
+ */
 public enum LogContext {
 
 	BROADCAST, CHAT, DEBUG, EXCEPTION, GUILD, HUMAN_ERROR, INFO, SUCCESS, TEAM, WARNING;
@@ -28,8 +34,9 @@ public enum LogContext {
 				return Color.GREEN;
 			case WARNING:
 				return Color.ORANGE;
+			default:
+				return Color.WHITE;
 		}
 
-		return Color.WHITE;
 	}
 }

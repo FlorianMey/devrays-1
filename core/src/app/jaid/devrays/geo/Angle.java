@@ -2,6 +2,11 @@ package app.jaid.devrays.geo;
 
 import app.jaid.jtil.JTil;
 
+/**
+ * Wrapper for a float angle value that contains sweet util functions and unit system conversions.
+ *
+ * @author jaid
+ */
 public class Angle {
 
 	public static final Angle ANGLE_EAST = fromDegrees(90);
@@ -12,11 +17,6 @@ public class Angle {
 	public static final float MAX_DEGREES_SIGNED = 180;
 	public static final float MAX_RADIANS = (float) (Math.PI * 2);
 	public static final float PI = (float) Math.PI;
-
-	public static Angle create()
-	{
-		return new Angle(0);
-	}
 
 	public static float degreesToRadians(float degrees)
 	{
@@ -50,6 +50,10 @@ public class Angle {
 
 	private float radians;
 
+	public Angle() {
+
+	}
+
 	private Angle(float radians) {
 		setRadians(radians);
 	}
@@ -59,7 +63,10 @@ public class Angle {
 		return this + " (toDirection(8) = " + toDirection(8) + ", toDirectionSigned(8) = " + toDirectionSigned(8) + ", snapToGrid(8) = " + snapToGrid(8) + ")";
 	}
 
-	// Forces radians to become a float between 0 and MAX_RADIANS without changing any behaviour
+	/**
+	 * Forces radians to become a float between 0 and MAX_RADIANS. The direction itself is not affected, just what
+	 * number it is represented as.
+	 */
 	private void ensureRadiansInBounds()
 	{
 		radians = radians % MAX_RADIANS;
@@ -121,11 +128,13 @@ public class Angle {
 
 	public Angle mixWith(Angle other)
 	{
-		if (getShortestRotateDirection(other) == 1) // If the way between angles does not intersect 0, use simple math to calculate mid
+		if (getShortestRotateDirection(other) == 1) // If the way between angles does not intersect 0, use simple math
+			// to calculate mid
 			return Angle.fromRadians((radians + other.radians) / 2);
 		else
 		{
-			float radiansIncreased = radians + MAX_RADIANS; // Else temporarily increase before getting mid to get rid of seamlessness between 0 and PI*2
+			float radiansIncreased = radians + MAX_RADIANS; // Else temporarily increase before getting mid to get rid
+			// of seamlessness between 0 and PI*2
 			float otherRadiansIncreased = other.radians + MAX_RADIANS;
 			return Angle.fromRadians((radiansIncreased + otherRadiansIncreased) / 2 - PI);
 		}
@@ -147,11 +156,6 @@ public class Angle {
 		return Angle.fromRadians(radians + radiansRotate);
 	}
 
-	public void setTo(Angle other)
-	{
-		radians = other.radians;
-	}
-
 	public void setDegrees(float degrees)
 	{
 		setRadians(degreesToRadians(degrees));
@@ -161,6 +165,11 @@ public class Angle {
 	{
 		this.radians = radians;
 		ensureRadiansInBounds();
+	}
+
+	public void setTo(Angle other)
+	{
+		radians = other.radians;
 	}
 
 	public Angle snapToGrid(int steps)

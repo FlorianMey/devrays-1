@@ -2,6 +2,13 @@ package app.jaid.devrays.entity;
 
 import app.jaid.jtil.JTil;
 
+/**
+ * Each {@link Entity} must be assigned to a team. An entity's team specifies here which other teams they are able to
+ * attack. The assigned team of an enemy or NPC also affects its behaviour, it tells them which teams to help, which
+ * teams to ignore and which teams to attack.
+ * 
+ * @author jaid
+ */
 public class Team {
 
 	public static final Team ALLIES = new Team("Allies", false);

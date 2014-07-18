@@ -4,6 +4,13 @@ import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Provides static methods for converting a command line into a {@link Command} object
+ * that can be run by {@link CommandExecutor}, for auto completion and validation by comparing with
+ * {@link CommandDescriptor}.
+ *
+ * @author jaid
+ */
 public class CommandProcessor {
 
 	public static String checkCommand(Command command, CommandDescriptor descriptor)
@@ -49,15 +56,15 @@ public class CommandProcessor {
 		return checkCommand(command, descriptor);
 	}
 
-	public static PreprocessedCommand preprocess(String line)
-	{
-		Command command = process(line);
-		CommandDescriptor descriptor = Shell.getCommandDescriptor(command.getCommand());
-
-		String error = checkCommand(command, descriptor);
-
-		return new PreprocessedCommand(descriptor, new String[0], null);
-	}
+	/*
+	 * public static PreprocessedCommand preprocess(String line)
+	 * {
+	 * Command command = process(line);
+	 * CommandDescriptor descriptor = Shell.getCommandDescriptor(command.getCommand());
+	 * String error = checkCommand(command, descriptor);
+	 * return new PreprocessedCommand(descriptor, new String[0], null);
+	 * }
+	 */
 
 	public static Command process(String line)
 	{

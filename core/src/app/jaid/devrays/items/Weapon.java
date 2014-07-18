@@ -1,5 +1,13 @@
 package app.jaid.devrays.items;
 
+import app.jaid.devrays.mobs.Ship;
+
+/**
+ * Describes a weapon based on a static based weapon and player related customizations. Available weapons for a
+ * {@link Ship} are listed in its {@link Equipment}.
+ *
+ * @author jaid
+ */
 public class Weapon {
 
 	public static final Weapon DEFAULT = new Weapon(12f, 0.2f);

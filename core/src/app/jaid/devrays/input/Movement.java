@@ -2,10 +2,16 @@ package app.jaid.devrays.input;
 
 import app.jaid.devrays.entity.Mob;
 import app.jaid.devrays.geo.Angle;
+import app.jaid.devrays.mobs.Player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
+/**
+ * Collection of static methods that help to translate keypresses into entity (mainly {@link Player}) movements.
+ *
+ * @author jaid
+ */
 public class Movement {
 
 	private static int directionsToAngle(int moveX, int moveY)

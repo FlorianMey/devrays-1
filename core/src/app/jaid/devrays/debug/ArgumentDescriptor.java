@@ -1,5 +1,11 @@
 package app.jaid.devrays.debug;
 
+/**
+ * Information about an argument that is member of {@link CommandDescriptor}. Gets fetched from commands.json in
+ * {@link Shell#setCommandLib}.
+ *
+ * @author jaid
+ */
 public class ArgumentDescriptor {
 
 	private boolean essential;
