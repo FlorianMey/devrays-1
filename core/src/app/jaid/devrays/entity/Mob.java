@@ -1,6 +1,7 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.physics.Colliding;
@@ -15,10 +16,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public abstract class Mob implements Entity {
 
+	protected static final float BRAKING_FACTOR = 15;
 	protected Angle angle = new Angle();
+	protected float currentSpeed;
 	protected int healthPoints, maxHealthPoints;
 	protected Point position;
-	protected float speed;
 	protected Team team;
 	protected TextureRegion texture;
 
@@ -65,6 +67,11 @@ public abstract class Mob implements Entity {
 	public int getMaxHP()
 	{
 		return maxHealthPoints;
+	}
+
+	public Angle getMovementAngle()
+	{
+		return angle;
 	};
 
 	@Override
@@ -97,18 +104,18 @@ public abstract class Mob implements Entity {
 
 	private void moveByVelocity()
 	{
-		position.move(angle, speed * Core.delta);
-		speed = JTil.normalize(speed, 5 * getBraking() * Core.delta);
+		position.move(angle, currentSpeed * Core.delta);
+		currentSpeed = JTil.normalize(currentSpeed, 5 * getBraking() * Core.delta);
 	}
 
 	public void push(Angle direction, float power)
 	{
-		if (speed == 0)
+		if (currentSpeed == 0)
 			angle.setTo(direction);
 		else
 			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * power * Core.delta * 5);
 
-		speed = Math.max(speed, power);
+		currentSpeed = Math.max(currentSpeed, power);
 	}
 
 	@Override

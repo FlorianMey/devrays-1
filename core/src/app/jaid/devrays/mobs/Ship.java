@@ -41,7 +41,7 @@ public class Ship extends Mob {
 	@Override
 	public float getBraking()
 	{
-		return 0.5f * 15;
+		return 0.5f * BRAKING_FACTOR;
 	}
 
 	public Weapon getCurrentWeapon()
@@ -64,7 +64,7 @@ public class Ship extends Mob {
 	@Override
 	public float getSpeed()
 	{
-		return 0.5f * 20;
+		return 10f;
 	}
 
 	@Override

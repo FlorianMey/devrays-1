@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Array;
  * Provides static methods that get called by {@link CommandExecutor} through Java Reflection. Every command listed in
  * commands.json has a method here, every method has params String[] args and String[] flags and returns an int
  * representing a status code as specified in {@link CommandExecutor}.
- * 
+ *
  * @author jaid
  */
 public class CommandLib {
@@ -63,7 +63,7 @@ public class CommandLib {
 
 		if (!CoreStat.contains(args[0]))
 		{
-			Log.error("Stat " + args[0] + " not found");
+			Log.error("Stat " + args[0] + " not found.");
 			return CommandExecutor.EXEC_RESULT_WRONG_USAGE;
 		}
 

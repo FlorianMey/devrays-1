@@ -180,6 +180,11 @@ public class Angle {
 		return Angle.fromRadians(Math.round(radians / gridSpace) * gridSpace);
 	}
 
+	public String toAdvancedString()
+	{
+		return "(" + getDegrees() + "°, " + getSignedDegrees() + "° signed, " + getRadians() + " rad)";
+	}
+
 	// not in use
 	public int toDirection(int steps)
 	{
@@ -196,7 +201,7 @@ public class Angle {
 	@Override
 	public String toString()
 	{
-		return "(" + getDegrees() + "°, " + getSignedDegrees() + "° signed, " + getRadians() + " rad)";
+		return JTil.formatDouble(getDegrees(), 2) + "°";
 	}
 
 }

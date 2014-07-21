@@ -24,6 +24,7 @@ public class Player extends Ship {
 	{
 		super(position, Team.PLAYERS);
 		texture = new Sprite(Media.getSprite("ship"));
+		healthPoints = 100;
 	}
 
 	public boolean isShooting()

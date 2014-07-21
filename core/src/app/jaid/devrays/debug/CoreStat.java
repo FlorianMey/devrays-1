@@ -2,6 +2,7 @@ package app.jaid.devrays.debug;
 
 import app.jaid.devrays.Core;
 import app.jaid.devrays.input.InputCore;
+import app.jaid.devrays.mobs.Player;
 import app.jaid.devrays.screen.ingame.IngameScreen;
 import app.jaid.jtil.JTil;
 import app.jaid.jtil.JTime;
@@ -20,9 +21,9 @@ import com.badlogic.gdx.utils.Array;
  */
 public enum CoreStat {
 
-	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR("Cursor Position"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("Frames per second"), POSITION(
-			"Player Position"), RAM("Available RAM"), RAM_USAGE("Used RAM"), RAW_DELTA("Delta"), RUNTIME("Runtime"), SIZE("Window Size"), SPEED("Speed Factor"), VERTICES("Drawn Vertices"), VIEWPORT("World Viewport"), WORLD_CURSOR(
-			"World Cursor");
+	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR("Cursor Position"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("Frames per second"), MOVEMENT(
+			"Player Movement"), POSITION("Player Position"), RAM("Available RAM"), RAM_USAGE("Used RAM"), RAW_DELTA("Delta"), RUNTIME("Runtime"), SIZE("Window Size"), SPEED("Speed Factor"), VERTICES("Drawn Vertices"), VIEWPORT(
+			"World Viewport"), WORLD_CURSOR("World Cursor");
 
 	public static boolean contains(String name)
 	{
@@ -89,6 +90,10 @@ public enum CoreStat {
 
 				case FPS:
 					return String.valueOf(Gdx.graphics.getFramesPerSecond());
+
+				case MOVEMENT:
+					Player player = IngameScreen.getEnvironment().getPlayer();
+					return "<" + player.getSpeed() + ", " + player.getMovementAngle() + ">";
 
 				case POSITION:
 					return IngameScreen.getEnvironment().getPlayer().getPosition().toString(4);
