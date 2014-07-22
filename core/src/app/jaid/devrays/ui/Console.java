@@ -68,6 +68,7 @@ public class Console extends Table implements Printing {
 	public void hide()
 	{
 		setVisible(false);
+		Core.getHudStage().setKeyboardFocus(null);
 	}
 
 	public void init()
@@ -82,58 +83,55 @@ public class Console extends Table implements Printing {
 					@Override
 					public boolean keyUp(InputEvent event, int keycode)
 					{
-						if (keycode == Keys.ENTER)
+						switch (keycode)
 						{
-							if (getText().isEmpty())
-							{
-								hide();
-								return true;
-							}
-
-							if (getText().startsWith("/"))
-							{
-								print(">> " + getText(), LogContext.INFO);
-
-								String error = CommandProcessor.checkCommand(getText());
-
-								if (error != null)
+							case Keys.ENTER:
+								if (getText().isEmpty())
 								{
-									Log.error(error);
+									hide();
 									return true;
 								}
 
-								CommandExecutor.run(getText());
-							}
-							else
-								Log.chat("You said: " + getText().trim());
-
-							setText("");
-							return true;
-						}
-
-						if (keycode == Keys.ESCAPE)
-						{
-							hide();
-							return true;
-						}
-
-						if (keycode == Keys.SPACE)
-						{
-							if (getText().startsWith("/"))
-							{
-								ConsoleShortcut shortcut = Shell.getShortcut(getText().trim());
-								if (shortcut != null)
+								if (getText().startsWith("/"))
 								{
-									setText(shortcut.getTo() + " ");
-									setCursorToEnd();
-								}
-							}
+									print(">> " + getText(), LogContext.INFO);
 
-							return true;
+									String error = CommandProcessor.checkCommand(getText());
+
+									if (error != null)
+									{
+										Log.error(error);
+										return true;
+									}
+
+									CommandExecutor.run(getText());
+								}
+								else
+									Log.chat("You said: " + getText().trim());
+
+								setText("");
+								return true;
+
+							case Keys.ESCAPE:
+								hide();
+								return true;
+
+							case Keys.SPACE:
+								if (getText().startsWith("/"))
+								{
+									ConsoleShortcut shortcut = Shell.getShortcut(getText().trim());
+									if (shortcut != null)
+									{
+										setText(shortcut.getTo() + " ");
+										setCursorToEnd();
+									}
+								}
+
+								return true;
 						}
 
 						return false;
-					};
+					}
 				});
 				setTextFieldListener(new TextFieldListener() {
 
@@ -168,7 +166,6 @@ public class Console extends Table implements Printing {
 		row(); // TODO Fix the overlapping of both rows (current fix: setY(textfield height))
 		addActor(textField);
 		row();
-		hide();
 		Log.registerPrinter(this);
 	}
 

@@ -15,8 +15,8 @@ public class InputManager extends InputMultiplexer {
 	public InputManager()
 	{
 		addProcessor(new GlobalInput());
-		addProcessor(new HudInput());
 		addProcessor(Core.getHudStage());
+		addProcessor(new HudInput());
 	}
 
 }

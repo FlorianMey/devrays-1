@@ -1,9 +1,9 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
-import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
+import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.jtil.JTil;
 
@@ -91,16 +91,18 @@ public abstract class Mob implements Entity {
 		return team != null ? team : Team.OTHER;
 	}
 
+	public abstract Weapon getWeapon();
+
 	@Override
 	public float getWidth()
 	{
 		return texture.getRegionWidth() / 16;
-	}
+	};
 
 	public void heal(int amount)
 	{
 		healthPoints = Math.min(maxHealthPoints, healthPoints + amount);
-	};
+	}
 
 	private void moveByVelocity()
 	{
@@ -110,10 +112,11 @@ public abstract class Mob implements Entity {
 
 	public void push(Angle direction, float power)
 	{
-		if (currentSpeed == 0)
-			angle.setTo(direction);
-		else
-			angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * power * Core.delta * 5);
+		// TEMP Disabled slow direction change until it seems to be needed
+		// if (currentSpeed == 0)
+		angle.setTo(direction);
+		// else
+		// angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * power * Core.delta * 5);
 
 		currentSpeed = Math.max(currentSpeed, power);
 	}

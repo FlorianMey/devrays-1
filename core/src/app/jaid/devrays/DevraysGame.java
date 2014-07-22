@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 /**
  * Gets instantiated by the platform specific launcher. Invokes inits in {@link #create}, provides main loop
  * {@link #render} and manages screens ({@link DevraysScreen}).
- * 
+ *
  * @author jaid
  */
 public class DevraysGame extends Game {
@@ -41,6 +41,7 @@ public class DevraysGame extends Game {
 	{
 		Core.tick();
 		SystemIO.readInput();
+		Core.getHudStage().act();
 		currentScreen.update();
 
 		Core.getBatch().setProjectionMatrix(Core.getCamera().combined);
@@ -53,7 +54,6 @@ public class DevraysGame extends Game {
 		currentScreen.renderShapes();
 		Drawer.getShapeRenderer().end();
 
-		Core.getHudStage().act();
 		Core.getHudStage().draw();
 		Table.drawDebug(Core.getHudStage());
 

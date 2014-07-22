@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 /**
  * Main GDX Widget that fills the whole screen. Every {@link DevraysScreen} can add additional widgets to this base HUD
  * in its constructor.
- * 
+ *
  * @author jaid
  */
 public class Hud extends Table {
@@ -33,6 +33,7 @@ public class Hud extends Table {
 		debug();
 
 		addActor(console);
+		console.hide();
 	}
 
 }

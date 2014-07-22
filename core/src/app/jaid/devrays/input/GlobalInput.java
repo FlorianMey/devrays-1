@@ -8,7 +8,7 @@ import com.badlogic.gdx.InputProcessor;
 
 /**
  * Input listeners with highest priority that are available everywhere and not only in certain screens.
- * 
+ *
  * @author jaid
  */
 public class GlobalInput implements InputProcessor {
@@ -28,14 +28,16 @@ public class GlobalInput implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode)
 	{
-		if (keycode == Keys.ENTER && !Hud.getConsole().isVisible())
+		switch (keycode)
 		{
-			Hud.getConsole().focus(InputCore.isCtrlPressed() ? "/" : "");
-			return true;
-		}
+			case Keys.ENTER:
+				Hud.getConsole().focus(InputCore.isCtrlPressed() ? "/" : "");
+				return true;
 
-		if (keycode == Keys.F11)
-			CommandExecutor.run("fullscreen");
+			case Keys.F11:
+				CommandExecutor.run("fullscreen");
+				return true;
+		}
 
 		return false;
 	}

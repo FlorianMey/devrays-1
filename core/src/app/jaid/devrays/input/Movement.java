@@ -4,15 +4,14 @@ import app.jaid.devrays.entity.Mob;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.mobs.Player;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-
 /**
  * Collection of static methods that help to translate keypresses into entity (mainly {@link Player}) movements.
  *
  * @author jaid
  */
 public class Movement {
+
+	public static boolean up, down, left, right;
 
 	private static int directionsToAngle(int moveX, int moveY)
 	{
@@ -39,12 +38,12 @@ public class Movement {
 
 	public static int getMoveX()
 	{
-		return Gdx.input.isKeyPressed(Keys.D) ? 1 : Gdx.input.isKeyPressed(Keys.A) ? -1 : 0;
+		return right ? 1 : left ? -1 : 0;
 	}
 
 	public static int getMoveY()
 	{
-		return Gdx.input.isKeyPressed(Keys.W) ? 1 : Gdx.input.isKeyPressed(Keys.S) ? -1 : 0;
+		return up ? 1 : down ? -1 : 0;
 	}
 
 	public static void push(Mob mob, float speed)

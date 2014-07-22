@@ -1,12 +1,14 @@
 package app.jaid.devrays.ui;
 
 import app.jaid.devrays.input.InputManager;
+import app.jaid.devrays.input.Movement;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 /**
  * Input listener layer of {@link InputManager} that is related to shortcuts for ingame HUD.
- * 
+ *
  * @author jaid
  */
 public class HudInput implements InputProcessor {
@@ -14,6 +16,30 @@ public class HudInput implements InputProcessor {
 	@Override
 	public boolean keyDown(int keycode)
 	{
+		if (keycode == Keys.W)
+		{
+			Movement.up = true;
+			return true;
+		}
+
+		if (keycode == Keys.S)
+		{
+			Movement.down = true;
+			return true;
+		}
+
+		if (keycode == Keys.A)
+		{
+			Movement.left = true;
+			return true;
+		}
+
+		if (keycode == Keys.D)
+		{
+			Movement.right = true;
+			return true;
+		}
+
 		return false;
 	}
 
@@ -26,6 +52,31 @@ public class HudInput implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode)
 	{
+
+		if (keycode == Keys.W)
+		{
+			Movement.up = false;
+			return true;
+		}
+
+		if (keycode == Keys.S)
+		{
+			Movement.down = false;
+			return true;
+		}
+
+		if (keycode == Keys.A)
+		{
+			Movement.left = false;
+			return true;
+		}
+
+		if (keycode == Keys.D)
+		{
+			Movement.right = false;
+			return true;
+		}
+
 		return false;
 	}
 

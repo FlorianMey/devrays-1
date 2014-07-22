@@ -37,9 +37,9 @@ public class Player extends Ship {
 	{
 		shootLoad += Core.delta;
 
-		if (isShooting() && shootLoad >= getCurrentWeapon().getShootFrequency())
+		if (isShooting() && shootLoad >= getWeapon().getShootFrequency())
 		{
-			Bullet.add(this, getCurrentWeapon());
+			Bullet.add(this, getWeapon());
 			shootLoad = 0;
 		}
 

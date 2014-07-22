@@ -44,7 +44,7 @@ public class Ship extends Mob {
 		return 0.5f * BRAKING_FACTOR;
 	}
 
-	public Weapon getCurrentWeapon()
+	public Weapon getWeapon()
 	{
 		return inventory.equipment.weapons[selectedWeapon];
 	}
