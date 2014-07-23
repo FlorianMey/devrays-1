@@ -1,5 +1,6 @@
 package app.jaid.devrays.input;
 
+import app.jaid.devrays.Core;
 import app.jaid.devrays.debug.CommandExecutor;
 import app.jaid.devrays.ui.Hud;
 
@@ -31,8 +32,12 @@ public class GlobalInput implements InputProcessor {
 		switch (keycode)
 		{
 			case Keys.ENTER:
-				Hud.getConsole().focus(InputCore.isCtrlPressed() ? "/" : "");
-				return true;
+				if (!(Core.getHudStage().getKeyboardFocus() == Hud.getConsole().getTextField()))
+				{
+					Hud.getConsole().focus(InputCore.isCtrlPressed() ? "/" : "");
+					return true;
+				}
+				return false;
 
 			case Keys.F11:
 				CommandExecutor.run("fullscreen");
