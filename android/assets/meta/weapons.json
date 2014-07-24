@@ -1,0 +1,7 @@
+[
+    {
+        shootsPerMinute:200,
+        bulletSpeed:12,
+        bulletSprite:"bullet"
+    }
+]

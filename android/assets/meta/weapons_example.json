@@ -1,0 +1,10 @@
+[
+    {
+        name:"Test Weapon",
+        frequency:200,
+        bulletSpeed:15,
+        bulletSprite:"bullet",
+        bulletWidth:0.5,
+        bulletHeight:0.5
+    }
+]

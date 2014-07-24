@@ -2,7 +2,7 @@ package app.jaid.devrays.items;
 
 /**
  * Equipment instances describe available weapons of a ship and its upgrade slots. Ship stats are based on Equipment.
- * 
+ *
  * @author jaid
  */
 public class Equipment {
@@ -11,6 +11,6 @@ public class Equipment {
 
 	public Equipment()
 	{
-		weapons = new Weapon[] { Weapon.DEFAULT };
+		weapons = new Weapon[] { new Weapon(WeaponDescriptor.getAll().first()) };
 	}
 }

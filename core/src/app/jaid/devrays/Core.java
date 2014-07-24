@@ -1,7 +1,6 @@
 package app.jaid.devrays;
 
 import app.jaid.devrays.debug.Log;
-import app.jaid.devrays.debug.Shell;
 import app.jaid.devrays.input.InputCore;
 import app.jaid.devrays.input.InputManager;
 import app.jaid.devrays.io.Media;
@@ -74,8 +73,6 @@ public class Core {
 	{
 		startTime = TimeUtils.millis();
 		Log.registerPrinter(systemIo);
-		Shell.setCommandLib(Gdx.files.internal("meta/commands.json"));
-		Shell.setShortcuts(Gdx.files.internal("meta/shortcuts.json"));
 
 		Media.addAtlas((TextureAtlas) Media.get("textures/world.atlas"));
 		Media.play = (BitmapFont) Media.get("fonts/play.fnt");

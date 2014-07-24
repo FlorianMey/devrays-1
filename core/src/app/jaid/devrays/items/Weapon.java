@@ -10,35 +10,36 @@ import app.jaid.devrays.mobs.Ship;
  */
 public class Weapon {
 
-	public static final Weapon DEFAULT = new Weapon(12f, 0.2f);
-
-	public static int frequencyToShootsPerMinute(float shootFrequency)
+	public static float frequencyToShootsPerMinute(float shootFrequency)
 	{
-		return Math.round(60 / shootFrequency);
+		return 60 / shootFrequency;
 	}
 
-	float bulletSpeed;
-	float shootFrequency;
-
-	public Weapon(float bulletSpeed, float shootFrequency)
+	public static float shootsPerMinuteToFrequency(float shootsPerMinute)
 	{
-		this.bulletSpeed = bulletSpeed;
-		this.shootFrequency = shootFrequency;
+		return 1 / (shootsPerMinute / 60);
+	}
+
+	private WeaponDescriptor descriptor;
+
+	public Weapon(WeaponDescriptor descriptor)
+	{
+		this.descriptor = descriptor;
 	}
 
 	public float getBulletSpeed()
 	{
-		return bulletSpeed;
+		return descriptor.getBulletSpeed();
 	}
 
 	public float getShootFrequency()
 	{
-		return shootFrequency;
+		return descriptor.getFrequency();
 	}
 
 	public float getShootsPerMinute()
 	{
-		return frequencyToShootsPerMinute(shootFrequency);
+		return frequencyToShootsPerMinute(getShootFrequency());
 	}
 
 }

@@ -1,7 +1,8 @@
 package app.jaid.devrays.debug;
 
 /**
- * Information about a registered command. Gets fetched from commands.json in {@link Shell#setCommandLib}. Also contains
+ * Information about a registered command. Gets fetched from commands.json in {@link Shell#loadLibsFromJson}. Also
+ * contains
  * information about none to many instances of {@link ArgumentDescriptor} and {@link FlagDescriptor}. Its main use is
  * providing a manual for /help command and being compared with a user {@link Command} for validation in
  * {@link CommandProcessor}.
