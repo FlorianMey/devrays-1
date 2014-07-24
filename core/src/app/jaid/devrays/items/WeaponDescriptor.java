@@ -22,6 +22,7 @@ public class WeaponDescriptor {
 
 	private float bulletSpeed;
 	private String bulletSprite;
+	private String name;
 	private float shootsPerMinute;
 
 	public float getBulletSpeed()
@@ -37,6 +38,11 @@ public class WeaponDescriptor {
 	public float getFrequency()
 	{
 		return Weapon.shootsPerMinuteToFrequency(shootsPerMinute);
+	}
+
+	public String getName()
+	{
+		return name;
 	}
 
 	public float getShootsPerMinute()

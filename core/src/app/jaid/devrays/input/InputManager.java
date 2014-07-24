@@ -1,7 +1,7 @@
 package app.jaid.devrays.input;
 
 import app.jaid.devrays.Core;
-import app.jaid.devrays.ui.HudInput;
+import app.jaid.devrays.ui.IngameInput;
 
 import com.badlogic.gdx.InputMultiplexer;
 
@@ -16,7 +16,7 @@ public class InputManager extends InputMultiplexer {
 	{
 		addProcessor(new GlobalInput());
 		addProcessor(Core.getHudStage());
-		addProcessor(new HudInput());
+		addProcessor(new IngameInput());
 	}
 
 }

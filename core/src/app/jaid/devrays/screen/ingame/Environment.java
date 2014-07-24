@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Array;
 
 /**
  * Singleton that contains interactive objects ({@link Bullet}s, {@link Mob}s...) and the map.
- * 
+ *
  * @author jaid
  */
 public class Environment {
@@ -90,6 +90,8 @@ public class Environment {
 		for (Array<? extends Entity> entityGroup : entityGroups)
 			for (Entity entity : entityGroup)
 				entity.renderText();
+
+		Drawer.drawTextOnScreen("Weapon: " + player.getWeapon().getSimpleName(), Core.screenWidth - 180, 40);
 	}
 
 	@SuppressWarnings("unchecked")

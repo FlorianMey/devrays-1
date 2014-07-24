@@ -2,6 +2,7 @@ package app.jaid.devrays.ui;
 
 import app.jaid.devrays.input.InputManager;
 import app.jaid.devrays.input.Movement;
+import app.jaid.devrays.screen.ingame.IngameScreen;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
@@ -11,7 +12,7 @@ import com.badlogic.gdx.InputProcessor;
  *
  * @author jaid
  */
-public class HudInput implements InputProcessor {
+public class IngameInput implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode)
@@ -89,7 +90,18 @@ public class HudInput implements InputProcessor {
 	@Override
 	public boolean scrolled(int amount)
 	{
-		return false;
+		if (amount > 0)
+		{
+			IngameScreen.getEnvironment().getPlayer().nextWeapon();
+			return true;
+		}
+		else
+		{
+			IngameScreen.getEnvironment().getPlayer().lastWeapon();
+			return true;
+		}
+
+		// return false;
 	}
 
 	@Override

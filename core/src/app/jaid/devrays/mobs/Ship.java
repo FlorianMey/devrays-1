@@ -18,7 +18,7 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class Ship extends Mob {
 
-	private Inventory inventory = new Inventory();
+	protected Inventory inventory = new Inventory();
 	private int selectedWeapon = 0;
 	protected float shootLoad;
 
@@ -44,11 +44,6 @@ public class Ship extends Mob {
 		return 0.5f * BRAKING_FACTOR;
 	}
 
-	public Weapon getWeapon()
-	{
-		return inventory.equipment.weapons[selectedWeapon];
-	}
-
 	@Override
 	public Colliding getHitbox()
 	{
@@ -65,6 +60,28 @@ public class Ship extends Mob {
 	public float getSpeed()
 	{
 		return 10f;
+	}
+
+	@Override
+	public Weapon getWeapon()
+	{
+		return inventory.equipment.weapons[selectedWeapon];
+	}
+
+	public void lastWeapon()
+	{
+		if (selectedWeapon == 0)
+			selectedWeapon = inventory.equipment.weapons.length - 1;
+		else
+			selectedWeapon = selectedWeapon - 1;
+	}
+
+	public void nextWeapon()
+	{
+		if (selectedWeapon + 1 == inventory.equipment.weapons.length)
+			selectedWeapon = 0;
+		else
+			selectedWeapon = selectedWeapon + 1;
 	}
 
 	@Override

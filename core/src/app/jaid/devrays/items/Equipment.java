@@ -11,6 +11,6 @@ public class Equipment {
 
 	public Equipment()
 	{
-		weapons = new Weapon[] { new Weapon(WeaponDescriptor.getAll().first()) };
+		weapons = new Weapon[] { new Weapon(WeaponDescriptor.getAll().first()), new Weapon(WeaponDescriptor.getAll().get(1)) };
 	}
 }

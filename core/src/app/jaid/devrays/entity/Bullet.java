@@ -2,7 +2,6 @@ package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
 import app.jaid.devrays.geo.Point;
-import app.jaid.devrays.io.Media;
 import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.IngameScreen;
@@ -77,7 +76,7 @@ public class Bullet implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getBatch().draw(Media.getSprite("bullet"), position.x, position.y, getWidth(), getHeight());
+		Core.getBatch().draw(usedWeapon.getSprite(), position.x, position.y, getWidth(), getHeight());
 	}
 
 	@Override

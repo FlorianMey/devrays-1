@@ -82,7 +82,7 @@ public class Media {
 		for (FileHandle file : files)
 			descriptors.addAll((T[]) Core.getJson().fromJson(arrayClass, file));
 
-		Log.debug("Loaded " + descriptors.size + " " + type.getSimpleName() + " objects from " + files.length + " JSON files.");
+		Log.debug("Loaded " + descriptors.size + " " + type.getSimpleName() + " objects from " + files.length + " JSON file" + (files.length != 1 ? "s" : "") + ".");
 		return descriptors;
 	}
 

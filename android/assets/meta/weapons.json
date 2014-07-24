@@ -1,7 +1,14 @@
 [
     {
+        name:"Base Gun",
         shootsPerMinute:200,
         bulletSpeed:12,
+        bulletSprite:"bullet"
+    },
+    {
+        name:"Rapid Gun",
+        shootsPerMinute:360,
+        bulletSpeed:18,
         bulletSprite:"bullet"
     }
 ]
