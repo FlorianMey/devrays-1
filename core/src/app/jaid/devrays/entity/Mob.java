@@ -18,11 +18,11 @@ public abstract class Mob implements Entity {
 
 	protected static final float BRAKING_FACTOR = 15;
 	protected Angle angle = new Angle();
-	protected float currentSpeed;
 	protected int healthPoints, maxHealthPoints;
 	protected Point position;
 	protected Team team;
 	protected TextureRegion texture;
+	protected float velocity;
 
 	public Mob(Point position)
 	{
@@ -62,20 +62,20 @@ public abstract class Mob implements Entity {
 	public int getHP()
 	{
 		return healthPoints;
-	};
+	}
 
 	public int getMaxHP()
 	{
 		return maxHealthPoints;
-	}
+	};
 
 	public Angle getMovementAngle()
 	{
 		return angle;
-	};
+	}
 
 	@Override
-	public abstract String getName();
+	public abstract String getName();;
 
 	@Override
 	public Point getPosition()
@@ -89,6 +89,11 @@ public abstract class Mob implements Entity {
 	public Team getTeam()
 	{
 		return team != null ? team : Team.OTHER;
+	}
+
+	public float getVelocity()
+	{
+		return velocity;
 	}
 
 	public abstract Weapon getWeapon();
@@ -106,8 +111,8 @@ public abstract class Mob implements Entity {
 
 	private void moveByVelocity()
 	{
-		position.move(angle, currentSpeed * Core.delta);
-		currentSpeed = JTil.normalize(currentSpeed, 5 * getBraking() * Core.delta);
+		position.move(angle, velocity * Core.delta);
+		velocity = JTil.normalize(velocity, 5 * getBraking() * Core.delta);
 	}
 
 	public void push(Angle direction, float power)
@@ -118,7 +123,7 @@ public abstract class Mob implements Entity {
 		// else
 		// angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * power * Core.delta * 5);
 
-		currentSpeed = Math.max(currentSpeed, power);
+		velocity = Math.max(velocity, power);
 	}
 
 	@Override

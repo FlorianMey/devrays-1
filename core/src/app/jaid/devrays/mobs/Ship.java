@@ -41,7 +41,7 @@ public class Ship extends Mob {
 	@Override
 	public float getBraking()
 	{
-		return 0.5f * BRAKING_FACTOR;
+		return 0.3f * BRAKING_FACTOR;
 	}
 
 	@Override

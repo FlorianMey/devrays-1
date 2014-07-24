@@ -2,6 +2,7 @@ package app.jaid.devrays.items;
 
 import app.jaid.devrays.mobs.Ship;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -32,9 +33,24 @@ public class Weapon {
 		sprite = descriptor.getBulletSprite();
 	}
 
+	public Color getBulletColor()
+	{
+		return descriptor.getBulletColor();
+	}
+
+	public float getBulletHeight()
+	{
+		return descriptor.getBulletHeight();
+	}
+
 	public float getBulletSpeed()
 	{
 		return descriptor.getBulletSpeed();
+	}
+
+	public float getBulletWidth()
+	{
+		return descriptor.getBulletWidth();
 	}
 
 	public String getName()

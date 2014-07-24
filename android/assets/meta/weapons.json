@@ -3,12 +3,18 @@
         name:"Base Gun",
         shootsPerMinute:200,
         bulletSpeed:12,
-        bulletSprite:"bullet"
+        bulletSprite:"bullet",
+        bulletWidth:0.8,
+        bulletHeight:0.8,
+        
     },
     {
         name:"Rapid Gun",
         shootsPerMinute:360,
         bulletSpeed:18,
-        bulletSprite:"bullet"
+        bulletSprite:"bullet",
+        bulletWidth:0.5,
+        bulletHeight:0.5,
+        bulletColorHex:"00FFFF"
     }
 ]

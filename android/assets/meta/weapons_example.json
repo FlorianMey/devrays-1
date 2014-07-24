@@ -5,6 +5,7 @@
         bulletSpeed:15,
         bulletSprite:"bullet",
         bulletWidth:0.5,
-        bulletHeight:0.5
+        bulletHeight:0.5,
+        bulletColor:"#0C0"
     }
 ]

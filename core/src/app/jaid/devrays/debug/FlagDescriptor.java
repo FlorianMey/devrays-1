@@ -1,8 +1,10 @@
 package app.jaid.devrays.debug;
 
+import app.jaid.devrays.io.Media;
+
 /**
  * Information about a flag that is member of {@link CommandDescriptor}. Gets fetched from commands.json in
- * {@link Shell#setCommandLib}.
+ * {@link Media#loadJsonArray}.
  *
  * @author jaid
  */

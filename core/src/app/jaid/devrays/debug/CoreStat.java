@@ -93,7 +93,7 @@ public enum CoreStat {
 
 				case MOVEMENT:
 					Player player = IngameScreen.getEnvironment().getPlayer();
-					return "<" + player.getSpeed() + ", " + player.getMovementAngle() + ">";
+					return "<" + player.getVelocity() + ", " + player.getMovementAngle() + ">";
 
 				case POSITION:
 					return IngameScreen.getEnvironment().getPlayer().getPosition().toString(4);

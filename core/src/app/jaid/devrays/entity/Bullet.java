@@ -6,6 +6,8 @@ import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.IngameScreen;
 
+import com.badlogic.gdx.graphics.Color;
+
 /**
  * Bullets that get shot by attacking {@link Mob} instances. May hit other mobs (depends on relation between its team
  * and the hit mob's team) or walls. The bullet's behaviour mostly depends on the {@link Weapon} it got shot from.
@@ -22,13 +24,13 @@ public class Bullet implements Entity {
 
 	private Entity from;
 	private Point position;
-	private Weapon usedWeapon;
+	private Weapon weapon;
 
 	public Bullet(Mob mob, Weapon weapon)
 	{
 		position = new Point(mob.getPosition());
 		from = mob;
-		usedWeapon = weapon;
+		this.weapon = weapon;
 	}
 
 	@Override
@@ -76,7 +78,9 @@ public class Bullet implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getBatch().draw(usedWeapon.getSprite(), position.x, position.y, getWidth(), getHeight());
+		Core.getBatch().setColor(weapon.getBulletColor());
+		Core.getBatch().draw(weapon.getSprite(), position.x, position.y, getWidth(), getHeight());
+		Core.getBatch().setColor(Color.WHITE);
 	}
 
 	@Override
@@ -92,7 +96,7 @@ public class Bullet implements Entity {
 	@Override
 	public boolean update()
 	{
-		position.x += usedWeapon.getBulletSpeed() * Core.delta;
+		position.x += weapon.getBulletSpeed() * Core.delta;
 		return true;
 	}
 }

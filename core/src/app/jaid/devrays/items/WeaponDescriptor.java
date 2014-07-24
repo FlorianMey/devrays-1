@@ -3,6 +3,7 @@ package app.jaid.devrays.items;
 import app.jaid.devrays.io.Media;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
@@ -20,10 +21,29 @@ public class WeaponDescriptor {
 		return weapons;
 	}
 
+	private Color bulletColor;
+	private String bulletColorHex;
 	private float bulletSpeed;
 	private String bulletSprite;
+	private float bulletWidth, bulletHeight;
 	private String name;
 	private float shootsPerMinute;
+
+	public Color getBulletColor()
+	{
+		if (bulletColorHex == null)
+			return Color.WHITE;
+
+		if (bulletColor == null)
+			bulletColor = Color.valueOf(bulletColorHex);
+
+		return bulletColor;
+	}
+
+	public float getBulletHeight()
+	{
+		return bulletHeight;
+	}
 
 	public float getBulletSpeed()
 	{
@@ -33,6 +53,11 @@ public class WeaponDescriptor {
 	public TextureRegion getBulletSprite()
 	{
 		return Media.getSprite(bulletSprite);
+	}
+
+	public float getBulletWidth()
+	{
+		return bulletWidth;
 	}
 
 	public float getFrequency()
