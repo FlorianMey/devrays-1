@@ -16,6 +16,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.foregroundFPS = 60;
 		config.backgroundFPS = 15;
+		config.title = "Devrays";
+		config.useGL30 = true;
 		new LwjglApplication(new DevraysGame(), config);
 	}
 }
