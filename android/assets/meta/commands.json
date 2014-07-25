@@ -43,5 +43,15 @@
                 essential:true
             }
         ]
+    },
+    {
+        name:"weapon",
+        description:"Displays information of specified weapon descriptor or displays weapon count.",
+        arguments:[
+            {
+                name:"weapon_id",
+                type:"Integer"
+            }
+        ]
     }
 ]

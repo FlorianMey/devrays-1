@@ -1,11 +1,15 @@
 [
     {
         name:"Test Weapon",
-        frequency:200,
+        shootsPerMinute:200,
         bulletSpeed:15,
+        bulletSpeedVariation=2,
         bulletSprite:"bullet",
         bulletWidth:0.5,
         bulletHeight:0.5,
-        bulletColor:"#0C0"
+        bulletColor:"00CC00",
+        damage:5,
+        damageVariation:1,
+        
     }
 ]

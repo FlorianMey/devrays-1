@@ -42,6 +42,6 @@ public class ArgumentDescriptor {
 	@Override
 	public String toString()
 	{
-		return (!essential ? "*Optional " : "") + type + " " + name + (description != null ? ": " + description : "");
+		return (!essential ? "*optional " : "") + type + " " + name + (description != null ? ": " + description : "");
 	}
 }

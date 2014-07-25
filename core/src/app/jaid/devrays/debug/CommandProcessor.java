@@ -113,6 +113,8 @@ public class CommandProcessor {
 				return true;
 			case "Float":
 				return validateFloatArgument(arg);
+			case "Integer":
+				return validateIntegerArgument(arg);
 		}
 
 		return false;
@@ -123,6 +125,22 @@ public class CommandProcessor {
 		try
 		{
 			Float.parseFloat(arg);
+			return true;
+		} catch (Exception e)
+		{
+			return false;
+		}
+	}
+
+	private static boolean validateIntegerArgument(String arg)
+	{
+		try
+		{
+			if (arg.startsWith("0x"))
+				// TODO check hex arg
+				return true;
+
+			Integer.parseInt(arg);
 			return true;
 		} catch (Exception e)
 		{

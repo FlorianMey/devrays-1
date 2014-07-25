@@ -80,7 +80,8 @@ public class Media {
 		Class<?> arrayClass = java.lang.reflect.Array.newInstance(type, 0).getClass();
 
 		for (FileHandle file : files)
-			descriptors.addAll((T[]) Core.getJson().fromJson(arrayClass, file));
+			if (file.exists())
+				descriptors.addAll((T[]) Core.getJson().fromJson(arrayClass, file));
 
 		Log.debug("Loaded " + descriptors.size + " " + type.getSimpleName() + " objects from " + files.length + " JSON file" + (files.length != 1 ? "s" : "") + ".");
 		return descriptors;

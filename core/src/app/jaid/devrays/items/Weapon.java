@@ -48,6 +48,11 @@ public class Weapon {
 		return descriptor.getBulletSpeed();
 	}
 
+	public float getBulletSpeedVariation()
+	{
+		return descriptor.getBulletSpeedVariation();
+	}
+
 	public float getBulletWidth()
 	{
 		return descriptor.getBulletWidth();

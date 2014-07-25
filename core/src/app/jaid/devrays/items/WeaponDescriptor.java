@@ -23,9 +23,10 @@ public class WeaponDescriptor {
 
 	private Color bulletColor;
 	private String bulletColorHex;
-	private float bulletSpeed;
+	private float bulletSpeed, bulletSpeedVariation;
 	private String bulletSprite;
 	private float bulletWidth, bulletHeight;
+	private float damage, damageVariation;
 	private String name;
 	private float shootsPerMinute;
 
@@ -50,6 +51,11 @@ public class WeaponDescriptor {
 		return bulletSpeed;
 	}
 
+	public float getBulletSpeedVariation()
+	{
+		return bulletSpeedVariation;
+	}
+
 	public TextureRegion getBulletSprite()
 	{
 		return Media.getSprite(bulletSprite);
@@ -58,6 +64,16 @@ public class WeaponDescriptor {
 	public float getBulletWidth()
 	{
 		return bulletWidth;
+	}
+
+	public float getDamage()
+	{
+		return damage;
+	}
+
+	public float getDamageVariation()
+	{
+		return damageVariation;
 	}
 
 	public float getFrequency()

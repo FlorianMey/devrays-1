@@ -5,6 +5,7 @@ import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.IngameScreen;
+import app.jaid.jtil.JRand;
 
 import com.badlogic.gdx.graphics.Color;
 
@@ -23,7 +24,9 @@ public class Bullet implements Entity {
 	}
 
 	private Entity from;
+
 	private Point position;
+	protected float speed;
 	private Weapon weapon;
 
 	public Bullet(Mob mob, Weapon weapon)
@@ -31,6 +34,7 @@ public class Bullet implements Entity {
 		position = new Point(mob.getPosition());
 		from = mob;
 		this.weapon = weapon;
+		speed = JRand.vary(weapon.getBulletSpeed(), weapon.getBulletSpeedVariation());
 	}
 
 	@Override
@@ -96,7 +100,7 @@ public class Bullet implements Entity {
 	@Override
 	public boolean update()
 	{
-		position.x += weapon.getBulletSpeed() * Core.delta;
+		position.x += speed * Core.delta;
 		return true;
 	}
 }

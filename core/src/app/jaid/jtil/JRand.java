@@ -51,12 +51,12 @@ public class JRand {
 		return random.nextDouble() * max;
 	}
 
-	public static double random(double a, double b)
+	public static float random(float a, float b)
 	{
-		double min = Math.min(a, b);
-		double max = Math.max(a, b);
+		float min = Math.min(a, b);
+		float max = Math.max(a, b);
 
-		return min + random.nextDouble() * (max - min);
+		return min + random.nextFloat() * (max - min);
 	}
 
 	public static int random(int max)
@@ -72,7 +72,7 @@ public class JRand {
 		return min + random.nextInt(max - min + 1);
 	}
 
-	public static double randomRadius(double radius)
+	public static float randomRadius(float radius)
 	{
 		return random(-radius, radius);
 	}
@@ -102,5 +102,13 @@ public class JRand {
 		List<T> list = Arrays.asList(array);
 		Collections.shuffle(list, random);
 		return list.toArray(array);
+	}
+
+	public static float vary(float base, float radius)
+	{
+		if (radius == 0)
+			return base;
+
+		return base + randomRadius(radius);
 	}
 }

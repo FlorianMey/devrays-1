@@ -2,6 +2,7 @@ package app.jaid.devrays.debug;
 
 import app.jaid.devrays.Core;
 import app.jaid.devrays.graphics.DisplayUtils;
+import app.jaid.devrays.items.WeaponDescriptor;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.Gdx;
@@ -138,5 +139,18 @@ public class CommandLib {
 		Stats.track(stat.getName(), stat);
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 
+	}
+
+	public static int weapon(String[] args, String[] flags)
+	{
+
+		WeaponDescriptor weaponDescriptor = WeaponDescriptor.getAll().get(Integer.parseInt(args[0]));
+
+		Log.info("--- Weapon " + weaponDescriptor.getName() + " ---");
+		Log.info("Frequency: every " + JTil.formatDouble(weaponDescriptor.getFrequency(), 2) + "s (" + JTil.formatDouble(weaponDescriptor.getShootsPerMinute()) + "/min)");
+		Log.info("Damage: " + JTil.formatDouble(weaponDescriptor.getDamage()) + (weaponDescriptor.getDamageVariation() != 0 ? " (vary: " + JTil.formatDouble(weaponDescriptor.getDamageVariation(), 2) + ")" : ""));
+		Log.info("DPS: " + JTil.formatDouble(1 / weaponDescriptor.getFrequency() * weaponDescriptor.getDamage(), 2));
+		Log.info("Bullet Speed: " + JTil.formatDouble(weaponDescriptor.getBulletSpeed()) + (weaponDescriptor.getBulletSpeedVariation() != 0 ? " (vary: " + JTil.formatDouble(weaponDescriptor.getBulletSpeedVariation(), 2) + ")" : ""));
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 }
