@@ -15,7 +15,7 @@ public class Gfx {
 		if (DebugFlags.debugMode)
 			ShaderProgram.pedantic = false;
 
-		Log.debug(HUD_SHADER.isCompiled() + HUD_SHADER.getLog());
+		Log.debug((HUD_SHADER.isCompiled() ? "HUD shader compiled. " : "HUD shader compilation failed. ") + HUD_SHADER.getLog());
 	}
 
 }

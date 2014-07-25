@@ -68,11 +68,11 @@ public class DevraysGame extends Game {
 		// HUD rendering to FBO
 
 		hudFbo.begin();
-		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Core.getHudStage().draw();
 		hudFbo.end();
 
-		// FBO rendering to screen (hudnoise.frag applied)
+		// FBO rendering to screen (apply hudnoise.frag)
 
 		Core.getBatch().setShader(Gfx.HUD_SHADER);
 		Core.getBatch().begin();
