@@ -7,6 +7,7 @@ import app.jaid.devrays.graphics.Gfx;
 import app.jaid.devrays.io.SystemIO;
 import app.jaid.devrays.screen.DevraysScreen;
 import app.jaid.devrays.screen.ingame.IngameScreen;
+import app.jaid.devrays.ui.Hud;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -15,7 +16,6 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
  * Gets instantiated by the platform specific launcher. Invokes inits in {@link #create}, provides main loop
@@ -59,10 +59,14 @@ public class DevraysGame extends Game {
 		super.render();
 		Core.getBatch().end();
 
-		// Shape rendering
+		// Shape rendering (includes Debug lines)
 
 		Drawer.getShapeRenderer().begin(ShapeType.Line);
 		currentScreen.renderShapes();
+
+		if (DebugFlags.debugMode)
+			Hud.get().drawDebug(Drawer.getShapeRenderer());
+
 		Drawer.getShapeRenderer().end();
 
 		// HUD rendering to FBO
@@ -80,11 +84,7 @@ public class DevraysGame extends Game {
 		Gfx.HUD_SHADER.setUniformf("u_resolution", Core.screenWidth, Core.screenHeight);
 		Core.getBatch().draw(hudFbo.getColorBufferTexture(), 0, 0);
 		Core.getBatch().end();
-
 		Core.getBatch().setShader(null);
-
-		if (DebugFlags.debugMode)
-			Table.drawDebug(Core.getHudStage());
 
 		// Text rendering
 
