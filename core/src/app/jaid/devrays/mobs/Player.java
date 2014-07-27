@@ -1,7 +1,6 @@
 package app.jaid.devrays.mobs;
 
-import app.jaid.devrays.Core;
-import app.jaid.devrays.entity.Bullet;
+import app.jaid.devrays.entity.Entity;
 import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.input.Movement;
@@ -27,6 +26,12 @@ public class Player extends Ship {
 		healthPoints = 100;
 	}
 
+	@Override
+	public Entity getTarget()
+	{
+		return null;
+	}
+
 	public boolean isShooting()
 	{
 		return Gdx.input.isKeyPressed(Keys.SPACE);
@@ -35,13 +40,8 @@ public class Player extends Ship {
 	@Override
 	public boolean update()
 	{
-		shootLoad += Core.delta;
-
-		if (isShooting() && shootLoad >= getWeapon().getShootFrequency())
-		{
-			Bullet.add(this, getWeapon());
-			shootLoad = 0;
-		}
+		if (isShooting())
+			getWeapon().tryToShoot();
 
 		Movement.push(this, getSpeed());
 		super.update();

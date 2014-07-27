@@ -10,7 +10,7 @@ import app.jaid.devrays.physics.Colliding;
  */
 public interface Entity {
 
-	public abstract Point getCenter();
+	public abstract Point getCenterPosition();
 
 	public abstract float getHeight();
 

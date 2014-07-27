@@ -72,7 +72,7 @@ public class Point implements Colliding {
 
 	public Angle angleTo(Point origin)
 	{
-		return Angle.fromRadians(Math.atan2(origin.x - x, origin.y - y));
+		return Angle.fromRadians(Math.atan2(x - origin.x, y - origin.y));
 	}
 
 	@Override

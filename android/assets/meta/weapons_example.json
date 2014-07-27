@@ -1,5 +1,6 @@
 [
     {
+    	id:"test",
         name:"Test Weapon",
         shootsPerMinute:200,
         bulletSpeed:15,
@@ -10,6 +11,5 @@
         bulletColor:"00CC00",
         damage:5,
         damageVariation:1,
-        
     }
 ]

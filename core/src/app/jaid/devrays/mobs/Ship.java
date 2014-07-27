@@ -16,20 +16,16 @@ import com.badlogic.gdx.graphics.Color;
  *
  * @author jaid
  */
-public class Ship extends Mob {
+public abstract class Ship extends Mob {
 
 	protected Inventory inventory = new Inventory();
 	private int selectedWeapon = 0;
-	protected float shootLoad;
-
-	public Ship(Point position)
-	{
-		super(position);
-	}
 
 	public Ship(Point position, Team team)
 	{
 		super(position, team);
+		for (Weapon weapon : inventory.equipment.arsenal)
+			weapon.setOwner(this);
 	}
 
 	@Override
@@ -65,20 +61,20 @@ public class Ship extends Mob {
 	@Override
 	public Weapon getWeapon()
 	{
-		return inventory.equipment.weapons[selectedWeapon];
+		return inventory.equipment.arsenal[selectedWeapon];
 	}
 
 	public void lastWeapon()
 	{
 		if (selectedWeapon == 0)
-			selectedWeapon = inventory.equipment.weapons.length - 1;
+			selectedWeapon = inventory.equipment.arsenal.length - 1;
 		else
 			selectedWeapon = selectedWeapon - 1;
 	}
 
 	public void nextWeapon()
 	{
-		if (selectedWeapon + 1 == inventory.equipment.weapons.length)
+		if (selectedWeapon + 1 == inventory.equipment.arsenal.length)
 			selectedWeapon = 0;
 		else
 			selectedWeapon = selectedWeapon + 1;

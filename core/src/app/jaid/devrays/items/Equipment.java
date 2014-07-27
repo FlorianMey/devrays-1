@@ -7,10 +7,10 @@ package app.jaid.devrays.items;
  */
 public class Equipment {
 
-	public Weapon[] weapons;
+	public Weapon[] arsenal;
 
 	public Equipment()
 	{
-		weapons = new Weapon[] { new Weapon(WeaponDescriptor.getAll().first()), new Weapon(WeaponDescriptor.getAll().get(1)), new Weapon(WeaponDescriptor.getAll().get(2)) };
+		arsenal = new Weapon[] { new Weapon(WeaponDescriptor.getAll().first()), new Weapon(WeaponDescriptor.getAll().get(1)), new Weapon(WeaponDescriptor.getAll().get(2)) };
 	}
 }

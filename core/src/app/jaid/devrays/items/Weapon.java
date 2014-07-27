@@ -1,5 +1,8 @@
 package app.jaid.devrays.items;
 
+import app.jaid.devrays.Core;
+import app.jaid.devrays.entity.Bullet;
+import app.jaid.devrays.entity.Mob;
 import app.jaid.devrays.mobs.Ship;
 
 import com.badlogic.gdx.graphics.Color;
@@ -23,14 +26,20 @@ public class Weapon {
 		return 1 / (shootsPerMinute / 60);
 	}
 
-	private WeaponDescriptor descriptor;
-
-	private TextureRegion sprite;
+	protected float charge;
+	protected WeaponDescriptor descriptor;
+	protected Mob owner;
+	protected TextureRegion sprite;
 
 	public Weapon(WeaponDescriptor descriptor)
 	{
 		this.descriptor = descriptor;
 		sprite = descriptor.getBulletSprite();
+	}
+
+	public boolean canShoot()
+	{
+		return charge >= getShootFrequency();
 	}
 
 	public Color getBulletColor()
@@ -81,5 +90,27 @@ public class Weapon {
 	public TextureRegion getSprite()
 	{
 		return sprite;
+	}
+
+	public void setOwner(Mob owner)
+	{
+		this.owner = owner;
+	}
+
+	public boolean tryToShoot()
+	{
+		if (canShoot())
+		{
+			Bullet.add(owner, this);
+			charge = 0;
+			return true;
+		}
+
+		return false;
+	}
+
+	public void update()
+	{
+		charge += Core.delta;
 	}
 }

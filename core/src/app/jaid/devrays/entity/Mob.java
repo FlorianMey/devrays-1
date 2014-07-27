@@ -1,6 +1,7 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.items.Weapon;
@@ -18,8 +19,10 @@ public abstract class Mob implements Entity {
 
 	protected static final float BRAKING_FACTOR = 15;
 	protected Angle angle = new Angle();
+	protected Point centerPosition = new Point(); // Cache
 	protected int healthPoints, maxHealthPoints;
-	protected Point position;
+	private boolean isPushing;
+	protected Point position, wayPoint;
 	protected Team team;
 	protected TextureRegion texture;
 	protected float velocity;
@@ -45,9 +48,9 @@ public abstract class Mob implements Entity {
 	public abstract float getBraking();
 
 	@Override
-	public Point getCenter()
+	public Point getCenterPosition()
 	{
-		return position.add(getWidth() / 2, getHeight() / 2);
+		return centerPosition;
 	}
 
 	@Override
@@ -67,23 +70,25 @@ public abstract class Mob implements Entity {
 	public int getMaxHP()
 	{
 		return maxHealthPoints;
-	};
+	}
 
 	public Angle getMovementAngle()
 	{
 		return angle;
-	}
+	};
 
 	@Override
-	public abstract String getName();;
+	public abstract String getName();
 
 	@Override
 	public Point getPosition()
 	{
 		return position;
-	}
+	};
 
 	public abstract float getSpeed();
+
+	public abstract Entity getTarget();
 
 	@Override
 	public Team getTeam()
@@ -112,18 +117,30 @@ public abstract class Mob implements Entity {
 	private void moveByVelocity()
 	{
 		position.move(angle, velocity * Core.delta);
-		velocity = JTil.normalize(velocity, 5 * getBraking() * Core.delta);
+
+		if (!isPushing)
+			if (getBraking() == 1)
+				velocity = 0;
+			else
+				velocity = JTil.normalize(velocity, 5 * getBraking() * Core.delta);
 	}
 
 	public void push(Angle direction, float power)
 	{
-		// TEMP Disabled slow direction change until it seems to be needed
-		// if (currentSpeed == 0)
 		angle.setTo(direction);
-		// else
-		// angle = angle.moveTo(direction, angle.getShortestRotateDirection(direction) * power * Core.delta * 5);
-
 		velocity = Math.max(velocity, power);
+	}
+
+	public void push(Point target, float power)
+	{
+		push(centerPosition.angleTo(wayPoint), power);
+
+		if (centerPosition.distanceTo(wayPoint) < power * Core.delta)
+		{
+			Log.debug("Mob " + getClass().getSimpleName() + " finished waypoint movement. (Distance " + centerPosition.distanceTo(wayPoint) + " < Speed " + power * Core.delta + ").");
+			teleportCenter(wayPoint);
+			wayPoint = null;
+		}
 	}
 
 	@Override
@@ -151,15 +168,28 @@ public abstract class Mob implements Entity {
 	@Override
 	public boolean update()
 	{
+		updateCenter();
+
+		if (getWeapon() != null)
+			getWeapon().update();
+
 		if (healthPoints <= 0)
 		{
 			die();
 			return false;
 		}
 
-		if (getBraking() != 1)
-			moveByVelocity();
+		isPushing = false;
+		if (wayPoint != null)
+			push(wayPoint, getSpeed());
+
+		moveByVelocity();
 
 		return true;
+	}
+
+	public void updateCenter()
+	{
+		centerPosition.set(position.x + getWidth() / 2, position.y + getHeight() / 2);
 	}
 }

@@ -40,6 +40,14 @@ public class JTil {
 		return false;
 	}
 
+	public static String capitalizeStrictly(String string)
+	{
+		if (string.length() == 0)
+			return string;
+
+		return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
+	}
+
 	public static String explode(List<? extends Object> list, String seperator)
 	{
 		return explode(list, seperator, seperator);

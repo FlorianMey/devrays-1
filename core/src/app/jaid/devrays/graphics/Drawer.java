@@ -1,10 +1,12 @@
 package app.jaid.devrays.graphics;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.io.Media;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -26,6 +28,39 @@ public class Drawer {
 	public static void drawRect(Rectangle rect, Color color)
 	{
 		drawRect(rect.x, rect.y, rect.width, rect.height, color);
+	}
+
+	public static void drawSprite(TextureRegion texture, Point position)
+	{
+		drawSprite(texture, position, texture.getRegionWidth() / 16f, texture.getRegionHeight() / 16f);
+	}
+
+	public static void drawSprite(TextureRegion texture, Point position, float width, float height)
+	{
+		drawSprite(texture, position, width, height, null);
+	}
+
+	public static void drawSprite(TextureRegion texture, Point position, float width, float height, Color color)
+	{
+		if (texture == null)
+		{
+			Log.warn("Tried to render a sprite with texture null.");
+			return;
+		}
+
+		boolean changedColor = false;
+		Color previousColor = Core.getBatch().getColor();
+
+		if (previousColor.equals(color))
+		{
+			Core.getBatch().setColor(color);
+			changedColor = true;
+		}
+
+		Core.getBatch().draw(texture, position.x, position.y, width, height);
+
+		if (changedColor)
+			Core.getBatch().setColor(previousColor);
 	}
 
 	public static void drawTextOnScreen(String text, int x, int y)

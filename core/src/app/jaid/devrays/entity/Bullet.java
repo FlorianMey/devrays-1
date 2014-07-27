@@ -38,7 +38,7 @@ public class Bullet implements Entity {
 	}
 
 	@Override
-	public Point getCenter()
+	public Point getCenterPosition()
 	{
 		return null;
 	}

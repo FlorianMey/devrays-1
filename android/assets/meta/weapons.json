@@ -1,5 +1,6 @@
 [
     {
+    	id:"base",
         name:"Base Gun",
         damage:5,
         shootsPerMinute:200,
@@ -9,6 +10,7 @@
         bulletHeight:0.8
     },
     {
+    	id:"rapid",
         name:"Rapid Gun",
         damage:3,
         shootsPerMinute:360,
@@ -20,6 +22,7 @@
         bulletColorHex:"00FFFF"
     },
     {
+    	id:"op",
         name:"OP Gun",
         damage:10,
         shootsPerMinute:800,

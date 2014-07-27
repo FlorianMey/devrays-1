@@ -1,0 +1,15 @@
+[
+	{
+		id: "testmonster",
+		name: "Evil Test Monster",
+		type: "TestMonster",
+		sprite: "testmonster",
+		hp: 100,
+		speed: 3,
+		braking: 2,
+		width: 2,
+		height: 2.5,
+		weapons: ["weapon1"],
+		team: "ENEMIES_BONUS"
+	}
+]

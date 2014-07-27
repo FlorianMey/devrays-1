@@ -5,6 +5,7 @@ import java.util.HashMap;
 import app.jaid.devrays.Core;
 import app.jaid.devrays.debug.Log;
 import app.jaid.jtil.JFiles;
+import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -41,8 +42,16 @@ public class Media {
 
 	public static void addAtlas(TextureAtlas atlas)
 	{
+		String[] names = new String[atlas.getRegions().size];
+		int i = 0;
+
 		for (AtlasRegion region : atlas.getRegions())
+		{
 			index.put(region.name, region);
+			names[i++] = region.name;
+		}
+
+		Log.debug("Loaded atlas regions: " + JTil.explode(names, ", "));
 	}
 
 	public static Object get(String fileName)
@@ -60,7 +69,14 @@ public class Media {
 	public static TextureRegion getSprite(String name)
 	{
 		TextureRegion texture = index.get(name);
-		return texture != null ? texture : index.get("none");
+
+		if (texture == null)
+		{
+			Log.warn("Sprite " + name + " not found in Media.");
+			return index.get("none");
+		}
+
+		return texture;
 	}
 
 	private static Class<?> guessTypeByFileName(String fileName)

@@ -6,18 +6,12 @@ import app.jaid.jtil.JTil;
  * Each {@link Entity} must be assigned to a team. An entity's team specifies here which other teams they are able to
  * attack. The assigned team of an enemy or NPC also affects its behaviour, it tells them which teams to help, which
  * teams to ignore and which teams to attack.
- * 
+ *
  * @author jaid
  */
-public class Team {
+public enum Team {
 
-	public static final Team ALLIES = new Team("Allies", false);
-	public static final Team ENEMIES_BONUS = new Team("Bonus Enemies", true);
-	public static final Team ENEMIES_MAIN = new Team("Enemies", true);
-	public static final Team NEUTRALS_AGGRESSIVE = new Team("Neutral (aggressive)", true);
-	public static final Team NEUTRALS_FORGIVING = new Team("Neutral", false);
-	public static final Team OTHER = new Team("Other", false);
-	public static final Team PLAYERS = new Team("Players", false);
+	ALLIES("Allies", false), ENEMIES_BONUS("Bonus Enemies", true), ENEMIES_MAIN("Enemies", true), NEUTRALS_AGGRESSIVE("Neutral (aggressive)", true), NEUTRALS_FORGIVING("Neutral", false), OTHER("Other", false), PLAYERS("Players", false);
 
 	static
 	{

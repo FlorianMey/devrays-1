@@ -1,5 +1,6 @@
 package app.jaid.devrays.items;
 
+import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.io.Media;
 
 import com.badlogic.gdx.Gdx;
@@ -21,13 +22,25 @@ public class WeaponDescriptor {
 		return weapons;
 	}
 
+	public static WeaponDescriptor getById(String id)
+	{
+		for (WeaponDescriptor descriptor : getAll())
+			if (id.equals(descriptor.id))
+				return descriptor;
+
+		Log.warn("WeaponDescriptor with ID " + id + " not found.");
+		return null;
+	}
+
 	private Color bulletColor;
 	private String bulletColorHex;
 	private float bulletSpeed, bulletSpeedVariation;
 	private String bulletSprite;
 	private float bulletWidth, bulletHeight;
 	private float damage, damageVariation;
+	private String id;
 	private String name;
+
 	private float shootsPerMinute;
 
 	public Color getBulletColor()
