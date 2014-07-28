@@ -1,6 +1,6 @@
 [
     {
-    	id:"base",
+        id:"base",
         name:"Base Gun",
         damage:5,
         shootsPerMinute:200,
@@ -10,7 +10,7 @@
         bulletHeight:0.8
     },
     {
-    	id:"rapid",
+        id:"rapid",
         name:"Rapid Gun",
         damage:3,
         shootsPerMinute:360,
@@ -22,7 +22,7 @@
         bulletColorHex:"00FFFF"
     },
     {
-    	id:"op",
+        id:"op",
         name:"OP Gun",
         damage:10,
         shootsPerMinute:800,
@@ -33,14 +33,15 @@
         bulletColorHex:"FF0000"
     },
     {
-    	id:"basemonster",
-    	name:"Base Gun (Monster Edition)",
-    	damage:10,
-    	shootsPerMinute:60,
-    	shootsPerMinuteVariation:20,
-    	bulletSpeed:9,
-    	bulletSprite:"bullet",
-    	bulletWidth:0.4,
-    	bulletHeight:0.4
+        id:"basemonster",
+        type:"Basemonster",
+        name:"Base Gun (Monster Edition)",
+        damage:10,
+        shootsPerMinute:60,
+        shootsPerMinuteVariation:20,
+        bulletSpeed:9,
+        bulletSprite:"bullet",
+        bulletWidth:0.4,
+        bulletHeight:0.4
     }
 ]

@@ -37,6 +37,11 @@ public enum Team {
 		return isAggressive;
 	}
 
+	public boolean isGood()
+	{
+		return this == PLAYERS || this == ALLIES;
+	}
+
 	public boolean isHating(Team other)
 	{
 		return JTil.arrayContainsReference(hates, other);

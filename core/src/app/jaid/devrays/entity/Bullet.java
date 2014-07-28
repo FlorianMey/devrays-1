@@ -1,8 +1,9 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
-import app.jaid.devrays.items.Weapon;
+import app.jaid.devrays.items.weapons.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.Environment;
 import app.jaid.jtil.JRand;
@@ -17,21 +18,29 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class Bullet implements Entity {
 
-	public static void add(Weapon weapon)
+	public static Bullet add(Weapon weapon)
 	{
 		Bullet bullet = new Bullet(weapon);
 		Environment.get().getBullets().add(bullet);
+		return bullet;
 	}
 
+	public Angle angle;
 	private Point position;
 	protected float speed;
 	private Weapon weapon;
 
 	public Bullet(Weapon weapon)
 	{
+		angle = weapon.getShootAngle();
 		position = new Point(weapon.getOwner().getBulletSpawnLocation());
 		this.weapon = weapon;
 		speed = JRand.vary(weapon.getBulletSpeed(), weapon.getBulletSpeedVariation());
+	}
+
+	public Angle getAngle()
+	{
+		return angle;
 	}
 
 	@Override
@@ -97,7 +106,7 @@ public class Bullet implements Entity {
 	@Override
 	public boolean update()
 	{
-		position.x += speed * Core.delta;
+		position.move(angle, speed * Core.delta);
 		return true;
 	}
 }

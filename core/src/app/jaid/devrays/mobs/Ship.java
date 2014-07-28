@@ -5,7 +5,7 @@ import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.items.Inventory;
-import app.jaid.devrays.items.Weapon;
+import app.jaid.devrays.items.weapons.Weapon;
 import app.jaid.devrays.physics.Colliding;
 
 import com.badlogic.gdx.graphics.Color;
@@ -23,8 +23,6 @@ public abstract class Ship extends Mob {
 	public Ship(Point position, Team team)
 	{
 		super(position, team);
-		for (Weapon weapon : inventory.equipment.arsenal)
-			weapon.setOwner(this);
 	}
 
 	@Override
@@ -60,20 +58,20 @@ public abstract class Ship extends Mob {
 	@Override
 	public Weapon getWeapon()
 	{
-		return inventory.equipment.arsenal[selectedWeapon];
+		return inventory.equipment.arsenal.get(selectedWeapon);
 	}
 
 	public void lastWeapon()
 	{
 		if (selectedWeapon == 0)
-			selectedWeapon = inventory.equipment.arsenal.length - 1;
+			selectedWeapon = inventory.equipment.arsenal.size - 1;
 		else
 			selectedWeapon = selectedWeapon - 1;
 	}
 
 	public void nextWeapon()
 	{
-		if (selectedWeapon + 1 == inventory.equipment.arsenal.length)
+		if (selectedWeapon + 1 == inventory.equipment.arsenal.size)
 			selectedWeapon = 0;
 		else
 			selectedWeapon = selectedWeapon + 1;

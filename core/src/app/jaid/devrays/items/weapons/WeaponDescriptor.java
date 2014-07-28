@@ -1,4 +1,4 @@
-package app.jaid.devrays.items;
+package app.jaid.devrays.items.weapons;
 
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.io.Media;
@@ -33,7 +33,9 @@ public class WeaponDescriptor {
 	}
 
 	private Color bulletColor;
+
 	private String bulletColorHex;
+
 	private float bulletSpeed, bulletSpeedVariation;
 	private String bulletSprite;
 	private float bulletWidth, bulletHeight;
@@ -41,6 +43,7 @@ public class WeaponDescriptor {
 	private String id;
 	private String name;
 	private float shootsPerMinute, shootsPerMinuteVariation;
+	private String type;
 
 	public Color getBulletColor()
 	{
@@ -111,6 +114,22 @@ public class WeaponDescriptor {
 	public float getShootsPerMinuteVariation()
 	{
 		return shootsPerMinuteVariation;
+	}
+
+	public Class<?> getType()
+	{
+		String className = type != null ? type : "DefaultWeapon";
+
+		try
+		{
+			if (className.contains("."))
+				return Class.forName(className);
+			else
+				return Class.forName("app.jaid.devrays.items.weapons." + className);
+		} catch (ClassNotFoundException e)
+		{
+			return null;
+		}
 	}
 
 }

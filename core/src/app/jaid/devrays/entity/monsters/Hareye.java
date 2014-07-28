@@ -3,7 +3,7 @@ package app.jaid.devrays.entity.monsters;
 import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.graphics.Drawer;
-import app.jaid.devrays.items.Weapon;
+import app.jaid.devrays.items.weapons.Weapon;
 import app.jaid.jtil.JRand;
 
 public class Hareye extends Monster {

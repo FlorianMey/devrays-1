@@ -5,6 +5,8 @@ import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.input.Movement;
 import app.jaid.devrays.io.Media;
+import app.jaid.devrays.items.weapons.Weapon;
+import app.jaid.devrays.items.weapons.WeaponDescriptor;
 import app.jaid.devrays.screen.ingame.Environment;
 
 import com.badlogic.gdx.Gdx;
@@ -24,6 +26,7 @@ public class Player extends Ship {
 		super(position, Team.PLAYERS);
 		texture = new Sprite(Media.getSprite("ship"));
 		healthPoints = 100;
+		inventory.equipment.arsenal.add(Weapon.create(WeaponDescriptor.getAll().first(), this));
 	}
 
 	@Override

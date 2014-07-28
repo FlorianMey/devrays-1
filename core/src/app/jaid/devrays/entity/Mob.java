@@ -4,7 +4,7 @@ import app.jaid.devrays.Core;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
-import app.jaid.devrays.items.Weapon;
+import app.jaid.devrays.items.weapons.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.jtil.JTil;
 
@@ -133,7 +133,7 @@ public abstract class Mob implements Entity {
 
 	public void push(Angle direction, float power)
 	{
-		angle.setTo(direction);
+		angle.set(direction);
 		velocity = Math.max(velocity, power);
 	}
 

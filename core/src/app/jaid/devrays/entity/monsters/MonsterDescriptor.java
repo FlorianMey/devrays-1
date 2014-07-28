@@ -3,8 +3,8 @@ package app.jaid.devrays.entity.monsters;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.io.Media;
-import app.jaid.devrays.items.Weapon;
-import app.jaid.devrays.items.WeaponDescriptor;
+import app.jaid.devrays.items.weapons.Weapon;
+import app.jaid.devrays.items.weapons.WeaponDescriptor;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.Gdx;
@@ -108,10 +108,7 @@ public class MonsterDescriptor {
 		Weapon[] weaponInstances = new Weapon[weapons.length];
 
 		for (int i = 0; i != weapons.length; i++)
-		{
-			weaponInstances[i] = new Weapon(WeaponDescriptor.getById(weapons[i]));
-			weaponInstances[i].setOwner(monster);
-		}
+			weaponInstances[i] = Weapon.create(WeaponDescriptor.getById(weapons[i]), monster);
 
 		return weaponInstances;
 	}

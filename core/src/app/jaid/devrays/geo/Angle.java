@@ -9,10 +9,10 @@ import app.jaid.jtil.JTil;
  */
 public class Angle {
 
-	public static final Angle ANGLE_EAST = fromDegrees(90);
-	public static final Angle ANGLE_NORTH = fromDegrees(0);
-	public static final Angle ANGLE_SOUTH = fromDegrees(180);
-	public static final Angle ANGLE_WEST = fromDegrees(270);
+	public static final Angle ANGLE_EAST = fromDegrees(270);
+	public static final Angle ANGLE_NORTH = fromDegrees(180);
+	public static final Angle ANGLE_SOUTH = fromDegrees(0);
+	public static final Angle ANGLE_WEST = fromDegrees(90);
 	public static final float MAX_DEGREES = 360;
 	public static final float MAX_DEGREES_SIGNED = 180;
 	public static final float MAX_RADIANS = (float) (Math.PI * 2);
@@ -31,6 +31,11 @@ public class Angle {
 	public static Angle fromDegrees(float degrees)
 	{
 		return new Angle(degreesToRadians(degrees));
+	}
+
+	public static Angle fromOther(Angle other)
+	{
+		return Angle.fromRadians(other.radians);
 	}
 
 	public static Angle fromRadians(double radians)
@@ -158,6 +163,11 @@ public class Angle {
 		return Angle.fromRadians(radians + radiansRotate);
 	}
 
+	public void set(Angle other)
+	{
+		radians = other.radians;
+	}
+
 	public void setDegrees(float degrees)
 	{
 		setRadians(degreesToRadians(degrees));
@@ -167,11 +177,6 @@ public class Angle {
 	{
 		this.radians = radians;
 		ensureRadiansInBounds();
-	}
-
-	public void setTo(Angle other)
-	{
-		radians = other.radians;
 	}
 
 	public Angle snapToGrid(int steps)

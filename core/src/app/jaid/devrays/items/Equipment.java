@@ -1,5 +1,9 @@
 package app.jaid.devrays.items;
 
+import app.jaid.devrays.items.weapons.Weapon;
+
+import com.badlogic.gdx.utils.Array;
+
 /**
  * Equipment instances describe available weapons of a ship and its upgrade slots. Ship stats are based on Equipment.
  *
@@ -7,10 +11,14 @@ package app.jaid.devrays.items;
  */
 public class Equipment {
 
-	public Weapon[] arsenal;
+	public Array<Weapon> arsenal = new Array<Weapon>(4);
 
 	public Equipment()
 	{
-		arsenal = new Weapon[] { new Weapon(WeaponDescriptor.getAll().first()), new Weapon(WeaponDescriptor.getAll().get(1)), new Weapon(WeaponDescriptor.getAll().get(2)) };
+	}
+
+	public Array<Weapon> getArsenal()
+	{
+		return arsenal;
 	}
 }
