@@ -41,7 +41,7 @@ public abstract class Weapon {
 
 	public static float shootsPerMinuteToFrequency(float shootsPerMinute)
 	{
-		return 1 / (shootsPerMinute / 60);
+		return 60 / shootsPerMinute;
 	}
 
 	protected float charge;
@@ -132,7 +132,11 @@ public abstract class Weapon {
 			shoot(Bullet.add(this));
 
 			if (descriptor.getShootsPerMinuteVariation() != 0)
-				scheduler.changeFrequency(JRand.vary(descriptor.getShootFrequency(), descriptor.getShootFrequencyVariation()));
+			{
+				scheduler.changeFrequency(Weapon.shootsPerMinuteToFrequency(JRand.vary(descriptor.getShootsPerMinute(), descriptor.getShootsPerMinuteVariation())));
+				Log.debug("Changed frequency of weapon " + getName() + " of " + owner.getName() + " to vary(" + descriptor.getShootsPerMinute() + ", " + descriptor.getShootsPerMinuteVariation() + ") = "
+						+ Weapon.frequencyToShootsPerMinute(scheduler.getFrequency()) + ".");
+			}
 
 			return true;
 		}

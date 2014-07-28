@@ -17,6 +17,11 @@ public class Scheduler {
 		frequency = newFrequency;
 	}
 
+	public float getFrequency()
+	{
+		return frequency;
+	}
+
 	public boolean isReady()
 	{
 		return charge >= frequency;
