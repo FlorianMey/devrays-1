@@ -3,7 +3,7 @@ package app.jaid.devrays.debug;
 import app.jaid.devrays.Core;
 import app.jaid.devrays.input.InputCore;
 import app.jaid.devrays.mobs.Player;
-import app.jaid.devrays.screen.ingame.IngameScreen;
+import app.jaid.devrays.screen.ingame.Environment;
 import app.jaid.jtil.JTil;
 import app.jaid.jtil.JTime;
 
@@ -23,7 +23,7 @@ public enum CoreStat {
 
 	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR("Cursor Position"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("Frames per second"), MOVEMENT(
 			"Player Movement"), POSITION("Player Position"), RAM("Available RAM"), RAM_USAGE("Used RAM"), RAW_DELTA("Delta"), RUNTIME("Runtime"), SIZE("Window Size"), SPEED("Speed Factor"), VERTICES("Drawn Vertices"), VIEWPORT(
-			"World Viewport"), WORLD_CURSOR("World Cursor");
+					"World Viewport"), WORLD_CURSOR("World Cursor");
 
 	public static boolean contains(String name)
 	{
@@ -86,17 +86,17 @@ public enum CoreStat {
 					return String.valueOf(GLProfiler.drawCalls);
 
 				case ENTITIES:
-					return IngameScreen.getEnvironment().getMobs().size + " mobs, " + IngameScreen.getEnvironment().getBullets().size + " bullets";
+					return Environment.get().getMobs().size + " mobs, " + Environment.get().getBullets().size + " bullets";
 
 				case FPS:
 					return String.valueOf(Gdx.graphics.getFramesPerSecond());
 
 				case MOVEMENT:
-					Player player = IngameScreen.getEnvironment().getPlayer();
+					Player player = Environment.get().getPlayer();
 					return "<" + player.getVelocity() + ", " + player.getMovementAngle() + ">";
 
 				case POSITION:
-					return IngameScreen.getEnvironment().getPlayer().getPosition().toString(4);
+					return Environment.get().getPlayer().getPosition().toString(4);
 
 				case RAM:
 					return String.valueOf(JTil.formatBytes(Runtime.getRuntime().totalMemory()));

@@ -89,7 +89,7 @@ public class WeaponDescriptor {
 		return damageVariation;
 	}
 
-	public float getFrequency()
+	public float getShootFrequency()
 	{
 		return Weapon.shootsPerMinuteToFrequency(shootsPerMinute);
 	}

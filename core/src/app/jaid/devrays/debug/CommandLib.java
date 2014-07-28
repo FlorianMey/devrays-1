@@ -147,9 +147,9 @@ public class CommandLib {
 		WeaponDescriptor weaponDescriptor = WeaponDescriptor.getAll().get(Integer.parseInt(args[0]));
 
 		Log.info("--- Weapon " + weaponDescriptor.getName() + " ---");
-		Log.info("Frequency: every " + JTil.formatDouble(weaponDescriptor.getFrequency(), 2) + "s (" + JTil.formatDouble(weaponDescriptor.getShootsPerMinute()) + "/min)");
+		Log.info("Frequency: every " + JTil.formatDouble(weaponDescriptor.getShootFrequency(), 2) + "s (" + JTil.formatDouble(weaponDescriptor.getShootsPerMinute()) + "/min)");
 		Log.info("Damage: " + JTil.formatDouble(weaponDescriptor.getDamage()) + (weaponDescriptor.getDamageVariation() != 0 ? " (vary: " + JTil.formatDouble(weaponDescriptor.getDamageVariation(), 2) + ")" : ""));
-		Log.info("DPS: " + JTil.formatDouble(1 / weaponDescriptor.getFrequency() * weaponDescriptor.getDamage(), 2));
+		Log.info("DPS: " + JTil.formatDouble(1 / weaponDescriptor.getShootFrequency() * weaponDescriptor.getDamage(), 2));
 		Log.info("Bullet Speed: " + JTil.formatDouble(weaponDescriptor.getBulletSpeed()) + (weaponDescriptor.getBulletSpeedVariation() != 0 ? " (vary: " + JTil.formatDouble(weaponDescriptor.getBulletSpeedVariation(), 2) + ")" : ""));
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}

@@ -1,4 +1,4 @@
-package app.jaid.devrays.tools;
+package app.jaid.devrays.etc;
 
 import java.io.File;
 

@@ -3,6 +3,7 @@ package app.jaid.devrays.entity.monsters;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.io.Media;
+import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.items.WeaponDescriptor;
 import app.jaid.jtil.JTil;
 
@@ -112,6 +113,19 @@ public class MonsterDescriptor {
 	public float getWidth()
 	{
 		return width;
+	}
+
+	public Weapon[] getWeaponInstances()
+	{
+		if (weapons == null || weapons.length == 0)
+			return null;
+
+		Weapon[] weaponInstances = new Weapon[weapons.length];
+
+		for (int i = 0; i != weapons.length; i++)
+			weaponInstances[i] = new Weapon(WeaponDescriptor.getById(weapons[i]));
+
+		return weaponInstances;
 	}
 
 }

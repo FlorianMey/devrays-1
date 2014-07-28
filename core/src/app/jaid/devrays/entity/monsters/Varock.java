@@ -4,7 +4,6 @@ import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.items.Weapon;
-import app.jaid.devrays.screen.ingame.IngameScreen;
 
 public class Varock extends Monster {
 
@@ -22,7 +21,7 @@ public class Varock extends Monster {
 	@Override
 	public Weapon getWeapon()
 	{
-		return IngameScreen.getEnvironment().getPlayer().getWeapon();
+		return null;
 	}
 
 	@Override

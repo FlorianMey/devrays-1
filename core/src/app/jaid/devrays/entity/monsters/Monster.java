@@ -6,7 +6,7 @@ import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
-import app.jaid.devrays.screen.ingame.IngameScreen;
+import app.jaid.devrays.screen.ingame.Environment;
 
 public abstract class Monster extends Mob {
 
@@ -24,6 +24,7 @@ public abstract class Monster extends Mob {
 			monster.texture = descriptor.getSprite();
 			monster.healthPoints = descriptor.getHp();
 			monster.speed = descriptor.getSpeed();
+			monster.weapons = descriptor.getWeaponInstances();
 			monster.team = team;
 			return monster;
 		} catch (Exception e)
@@ -35,6 +36,7 @@ public abstract class Monster extends Mob {
 
 	private MonsterDescriptor descriptor;
 	protected float speed;
+	private Weapon[] weapons;
 
 	protected Monster(Point position, Team team)
 	{
@@ -84,7 +86,7 @@ public abstract class Monster extends Mob {
 	@Override
 	public Entity getTarget()
 	{
-		return IngameScreen.getEnvironment().getPlayer();
+		return Environment.get().getPlayer();
 	}
 
 	@Override

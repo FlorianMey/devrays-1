@@ -1,8 +1,8 @@
 package app.jaid.devrays.items;
 
-import app.jaid.devrays.Core;
 import app.jaid.devrays.entity.Bullet;
 import app.jaid.devrays.entity.Mob;
+import app.jaid.devrays.etc.Scheduler;
 import app.jaid.devrays.mobs.Ship;
 
 import com.badlogic.gdx.graphics.Color;
@@ -29,12 +29,14 @@ public class Weapon {
 	protected float charge;
 	protected WeaponDescriptor descriptor;
 	protected Mob owner;
+	protected Scheduler scheduler;
 	protected TextureRegion sprite;
 
 	public Weapon(WeaponDescriptor descriptor)
 	{
 		this.descriptor = descriptor;
 		sprite = descriptor.getBulletSprite();
+		scheduler = new Scheduler(descriptor.getShootFrequency());
 	}
 
 	public boolean canShoot()
@@ -72,9 +74,14 @@ public class Weapon {
 		return getSimpleName() + " LV.1";
 	}
 
+	public Mob getOwner()
+	{
+		return owner;
+	}
+
 	public float getShootFrequency()
 	{
-		return descriptor.getFrequency();
+		return descriptor.getShootFrequency();
 	}
 
 	public float getShootsPerMinute()
@@ -99,10 +106,9 @@ public class Weapon {
 
 	public boolean tryToShoot()
 	{
-		if (canShoot())
+		if (scheduler.request())
 		{
-			Bullet.add(owner, this);
-			charge = 0;
+			Bullet.add(this);
 			return true;
 		}
 
@@ -111,6 +117,6 @@ public class Weapon {
 
 	public void update()
 	{
-		charge += Core.delta;
+		scheduler.update();
 	}
 }

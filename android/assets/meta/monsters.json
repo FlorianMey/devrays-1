@@ -3,7 +3,7 @@
 		id:"varock",
 		hp: 100,
 		braking: 1,
-		weapons: ["a"],
+		weapons: ["base"],
 		width: 1.5,
 		height: 2,
 		speed: 3
@@ -12,7 +12,7 @@
 		id:"hareye",
 		hp: 50,
 		braking: 0.8,
-		weapons: ["a"],
+		weapons: ["base"],
 		width: 1,
 		height: 1,
 		speed: 7

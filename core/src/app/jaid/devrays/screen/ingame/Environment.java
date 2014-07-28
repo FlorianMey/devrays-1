@@ -21,8 +21,14 @@ public class Environment {
 	private static final int INITIAL_CAPACITY_BULLETS = 255;
 	private static final int INITIAL_CAPACITY_MOBS = 255;
 
+	public static Environment get()
+	{
+		return IngameScreen.getEnvironment();
+	}
+
 	private Array<Bullet> bullets = new Array<Bullet>(false, INITIAL_CAPACITY_BULLETS);
 	private Array<Mob> mobs = new Array<Mob>(false, INITIAL_CAPACITY_MOBS);
+
 	private Player player;
 
 	// is add and not set, because player will be an array in the future

@@ -2,7 +2,7 @@ package app.jaid.devrays.ui;
 
 import app.jaid.devrays.input.InputManager;
 import app.jaid.devrays.input.Movement;
-import app.jaid.devrays.screen.ingame.IngameScreen;
+import app.jaid.devrays.screen.ingame.Environment;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
@@ -91,17 +91,11 @@ public class IngameInput implements InputProcessor {
 	public boolean scrolled(int amount)
 	{
 		if (amount > 0)
-		{
-			IngameScreen.getEnvironment().getPlayer().nextWeapon();
-			return true;
-		}
+			Environment.get().getPlayer().nextWeapon();
 		else
-		{
-			IngameScreen.getEnvironment().getPlayer().lastWeapon();
-			return true;
-		}
+			Environment.get().getPlayer().lastWeapon();
 
-		// return false;
+		return true;
 	}
 
 	@Override
