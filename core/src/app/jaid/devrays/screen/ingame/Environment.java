@@ -87,7 +87,12 @@ public class Environment {
 	{
 		for (Array<? extends Entity> entityGroup : entityGroups)
 			for (Entity entity : entityGroup)
+			{
 				entity.renderShapes();
+
+				if (DebugFlags.drawCollisionLines && entity.getHitbox() != null)
+					entity.getHitbox().renderWorldBounds(Color.RED);
+			}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -103,7 +108,8 @@ public class Environment {
 	@SuppressWarnings("unchecked")
 	public void renderShapes()
 	{
-		renderEntityShapes();
+		Drawer.drawPointOnWorld(new Point(3, 3), Color.PINK);
+		renderEntityShapes(mobs, bullets);
 	}
 
 	@SuppressWarnings("unchecked")

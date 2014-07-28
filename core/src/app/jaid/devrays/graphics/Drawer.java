@@ -3,6 +3,7 @@ package app.jaid.devrays.graphics;
 import app.jaid.devrays.Core;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Point;
+import app.jaid.devrays.geo.Rect;
 import app.jaid.devrays.io.Media;
 
 import com.badlogic.gdx.graphics.Color;
@@ -19,15 +20,33 @@ public class Drawer {
 
 	private static final ShapeRenderer shapeRenderer = new ShapeRenderer();
 
+	public static void drawPointOnWorld(Point point, Color color)
+	{
+		drawRectOnScreen(Rect.fromCenter(Point.worldPointToScreenPoint(point), 2), color);
+	}
+
 	public static void drawRect(float x, float y, float width, float height, Color color)
 	{
 		shapeRenderer.setColor(color);
 		shapeRenderer.rect(x, y, width, height);
 	}
 
-	public static void drawRect(Rectangle rect, Color color)
+	public static void drawRectOnScreen(Rectangle rect, Color color)
 	{
+		// Log.debug("Draw rect " + rect + " with color " + color + ".");
+		boolean changedColor = false;
+		Color previousColor = shapeRenderer.getColor();
+
+		if (previousColor.equals(color))
+		{
+			shapeRenderer.setColor(color);
+			changedColor = true;
+		}
+
 		drawRect(rect.x, rect.y, rect.width, rect.height, color);
+
+		if (changedColor)
+			shapeRenderer.setColor(previousColor);
 	}
 
 	public static void drawSprite(TextureRegion texture, Point position)

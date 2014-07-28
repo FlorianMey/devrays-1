@@ -14,7 +14,7 @@ public class Basemonster extends Weapon {
 	@Override
 	public Angle getShootAngle()
 	{
-		return owner.getPosition().angleTo(owner.getTarget().getPosition());
+		return owner.getPosition().angleTo(owner.getTarget().getCenterPosition());
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package app.jaid.devrays.entity.monsters;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.entity.*;
 import app.jaid.devrays.geo.Point;
+import app.jaid.devrays.geo.Rect;
 import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.items.weapons.Weapon;
 import app.jaid.devrays.physics.Colliding;
@@ -68,7 +69,7 @@ public abstract class Monster extends Mob {
 	@Override
 	public Colliding getHitbox()
 	{
-		return null;
+		return new Rect(position, getWidth(), getHeight());
 	}
 
 	@Override

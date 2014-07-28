@@ -4,8 +4,8 @@
 		hp: 100,
 		braking: 1,
 		weapons: ["basemonster"],
-		width: 1.5,
-		height: 2,
+		width: 0.75,
+		height: 1,
 		speed: 3
 	},
 	{

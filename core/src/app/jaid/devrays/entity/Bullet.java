@@ -26,6 +26,7 @@ public class Bullet implements Entity {
 	}
 
 	public Angle angle;
+	private final Point centerPosition = new Point();
 	private Point position;
 	protected float speed;
 	private Weapon weapon;
@@ -46,7 +47,7 @@ public class Bullet implements Entity {
 	@Override
 	public Point getCenterPosition()
 	{
-		return null;
+		return centerPosition;
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class Bullet implements Entity {
 	@Override
 	public Colliding getHitbox()
 	{
-		return getPosition();
+		return getCenterPosition();
 	}
 
 	@Override
@@ -107,6 +108,12 @@ public class Bullet implements Entity {
 	public boolean update()
 	{
 		position.move(angle, speed * Core.delta);
+		updateCenter();
 		return true;
+	}
+
+	public void updateCenter()
+	{
+		centerPosition.set(position.x + getWidth() / 2, position.y + getHeight() / 2);
 	}
 }

@@ -174,8 +174,6 @@ public abstract class Mob implements Entity {
 	@Override
 	public boolean update()
 	{
-		updateCenter();
-
 		if (getWeapon() != null)
 			getWeapon().update();
 
@@ -191,6 +189,7 @@ public abstract class Mob implements Entity {
 
 		moveByVelocity();
 
+		updateCenter();
 		return true;
 	}
 

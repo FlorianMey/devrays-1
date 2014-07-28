@@ -1,10 +1,12 @@
 package app.jaid.devrays.geo;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 
 /**
  * X/Y coordinate in world. Gets assigned to every entity. Provides projection methods for cameras and transform
@@ -37,6 +39,14 @@ public class Point implements Colliding {
 	public static Point worldPointToScreenPoint(float worldX, float worldY)
 	{
 		Camera camera = Core.getCamera();
+
+		// Log.debug("float screenX = (" + worldX + " - " + camera.position.x + " + " + camera.viewportWidth + " / " + 2
+		// + ") * (" + Core.screenWidth + " / " + camera.viewportWidth + ");");
+		// Log.debug("float screenX = (" + (worldX - camera.position.x + camera.viewportWidth / 2) + ") * (" +
+		// Core.screenWidth / camera.viewportWidth + ");");
+		// Log.debug("float screenX = " + (worldX - camera.position.x + camera.viewportWidth / 2) * (Core.screenWidth /
+		// camera.viewportWidth) + "f;");
+
 		float screenX = (worldX - camera.position.x + camera.viewportWidth / 2) * (Core.screenWidth / camera.viewportWidth);
 		float screenY = (worldY - camera.position.y + camera.viewportHeight / 2) * (Core.screenHeight / camera.viewportHeight);
 		return new Point(screenX, screenY);
@@ -119,6 +129,12 @@ public class Point implements Colliding {
 			set(origin);
 		else
 			move(origin.angleTo(this), distance);
+	}
+
+	@Override
+	public void renderWorldBounds(Color color)
+	{
+		Drawer.drawPointOnWorld(this, color);
 	}
 
 	public void set(float newX, float newY)
