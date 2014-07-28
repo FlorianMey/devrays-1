@@ -23,6 +23,7 @@ public abstract class Mob implements Entity {
 	protected int healthPoints, maxHealthPoints;
 	private boolean isPushing;
 	protected Point position, wayPoint;
+	protected int selectedWeapon;
 	protected Team team;
 	protected TextureRegion texture;
 	protected float velocity;
@@ -41,11 +42,16 @@ public abstract class Mob implements Entity {
 	public void damage(int damage)
 	{
 		healthPoints -= damage;
-	};
+	}
 
 	public abstract void die();
 
 	public abstract float getBraking();
+
+	public Point getBulletSpawnLocation()
+	{
+		return getCenterPosition();
+	}
 
 	@Override
 	public Point getCenterPosition()
@@ -107,7 +113,7 @@ public abstract class Mob implements Entity {
 	public float getWidth()
 	{
 		return texture.getRegionWidth() / 16;
-	};
+	}
 
 	public void heal(int amount)
 	{

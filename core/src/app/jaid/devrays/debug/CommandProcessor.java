@@ -19,7 +19,7 @@ public class CommandProcessor {
 			return "Too few arguments.";
 
 		if (command.getArguments().length > (descriptor.getArguments() == null ? 0 : descriptor.getArguments().length))
-			return "Too many arguments.";
+			return "Too many arguments. (max: " + (descriptor.getArguments() == null ? 0 : descriptor.getArguments().length) + ")";
 
 		for (int i = 0; i != command.getArguments().length; i++)
 		{
@@ -136,10 +136,6 @@ public class CommandProcessor {
 	{
 		try
 		{
-			if (arg.startsWith("0x"))
-				// TODO check hex arg
-				return true;
-
 			Integer.parseInt(arg);
 			return true;
 		} catch (Exception e)

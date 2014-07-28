@@ -28,5 +28,5 @@ void main(void)
 		finalColor *= vec4(actualStrength, actualStrength, actualStrength, actualStrength);
 	}
 	
-	gl_FragColor = v_color * finalColor;
+	gl_FragColor = finalColor;
 }

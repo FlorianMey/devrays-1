@@ -31,5 +31,16 @@
         bulletWidth:0.3,
         bulletHeight:0.3,
         bulletColorHex:"FF0000"
+    },
+    {
+    	id:"basemonster",
+    	name:"Base Gun (Monster Edition)",
+    	damage:10,
+    	shootsPerMinute:60,
+    	shootsPerMinuteVariation:20,
+    	bulletSpeed:9,
+    	bulletSprite:"bullet",
+    	bulletWidth:0.4,
+    	bulletHeight:0.4
     }
 ]

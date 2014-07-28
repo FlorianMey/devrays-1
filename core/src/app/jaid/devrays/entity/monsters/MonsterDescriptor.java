@@ -100,6 +100,22 @@ public class MonsterDescriptor {
 		}
 	}
 
+	public Weapon[] getWeaponInstances(Monster monster)
+	{
+		if (weapons == null || weapons.length == 0)
+			return null;
+
+		Weapon[] weaponInstances = new Weapon[weapons.length];
+
+		for (int i = 0; i != weapons.length; i++)
+		{
+			weaponInstances[i] = new Weapon(WeaponDescriptor.getById(weapons[i]));
+			weaponInstances[i].setOwner(monster);
+		}
+
+		return weaponInstances;
+	}
+
 	public WeaponDescriptor[] getWeapons()
 	{
 		WeaponDescriptor[] weaponDescriptors = new WeaponDescriptor[weapons.length];
@@ -113,19 +129,6 @@ public class MonsterDescriptor {
 	public float getWidth()
 	{
 		return width;
-	}
-
-	public Weapon[] getWeaponInstances()
-	{
-		if (weapons == null || weapons.length == 0)
-			return null;
-
-		Weapon[] weaponInstances = new Weapon[weapons.length];
-
-		for (int i = 0; i != weapons.length; i++)
-			weaponInstances[i] = new Weapon(WeaponDescriptor.getById(weapons[i]));
-
-		return weaponInstances;
 	}
 
 }

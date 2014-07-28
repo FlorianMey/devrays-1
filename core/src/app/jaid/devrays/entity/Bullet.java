@@ -29,7 +29,7 @@ public class Bullet implements Entity {
 
 	public Bullet(Weapon weapon)
 	{
-		position = new Point(weapon.getOwner().getPosition());
+		position = new Point(weapon.getOwner().getBulletSpawnLocation());
 		this.weapon = weapon;
 		speed = JRand.vary(weapon.getBulletSpeed(), weapon.getBulletSpeedVariation());
 	}

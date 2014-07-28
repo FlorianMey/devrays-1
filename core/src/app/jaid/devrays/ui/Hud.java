@@ -42,7 +42,6 @@ public class Hud extends Table {
 		gdxSkin.add("default", new BitmapFont(), BitmapFont.class);
 		setFillParent(true);
 		setTransform(false);
-		setDebug(true, true);
 
 		addActor(console);
 		console.hide();

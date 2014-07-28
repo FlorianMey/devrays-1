@@ -3,6 +3,7 @@ package app.jaid.devrays.debug;
 import app.jaid.devrays.Core;
 import app.jaid.devrays.graphics.DisplayUtils;
 import app.jaid.devrays.items.WeaponDescriptor;
+import app.jaid.devrays.ui.Hud;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.Gdx;
@@ -139,6 +140,12 @@ public class CommandLib {
 		Stats.track(stat.getName(), stat);
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 
+	}
+
+	public static int uidebug(String[] args, String flags[])
+	{
+		Hud.get().setDebug(!Hud.get().getDebug(), true);
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 
 	public static int weapon(String[] args, String[] flags)

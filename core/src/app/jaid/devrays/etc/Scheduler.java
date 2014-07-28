@@ -12,6 +12,11 @@ public class Scheduler {
 		this.frequency = frequency;
 	}
 
+	public void changeFrequency(float newFrequency)
+	{
+		frequency = newFrequency;
+	}
+
 	public boolean isReady()
 	{
 		return charge >= frequency;

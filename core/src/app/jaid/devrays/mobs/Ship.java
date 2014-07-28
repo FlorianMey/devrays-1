@@ -19,7 +19,6 @@ import com.badlogic.gdx.graphics.Color;
 public abstract class Ship extends Mob {
 
 	protected Inventory inventory = new Inventory();
-	private int selectedWeapon = 0;
 
 	public Ship(Point position, Team team)
 	{

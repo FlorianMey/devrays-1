@@ -11,7 +11,7 @@ import app.jaid.devrays.ui.Hud;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -53,6 +53,7 @@ public class DevraysGame extends Game {
 
 		// World rendering
 
+		Core.getBatch().setColor(Color.WHITE);
 		Core.getBatch().setProjectionMatrix(Core.getCamera().combined);
 		Core.getBatch().begin();
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);

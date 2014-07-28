@@ -4,6 +4,7 @@ import app.jaid.devrays.entity.Bullet;
 import app.jaid.devrays.entity.Mob;
 import app.jaid.devrays.etc.Scheduler;
 import app.jaid.devrays.mobs.Ship;
+import app.jaid.jtil.JRand;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -109,6 +110,10 @@ public class Weapon {
 		if (scheduler.request())
 		{
 			Bullet.add(this);
+
+			if (descriptor.getShootsPerMinuteVariation() != 0)
+				scheduler.changeFrequency(JRand.vary(descriptor.getShootFrequency(), descriptor.getShootFrequencyVariation()));
+
 			return true;
 		}
 

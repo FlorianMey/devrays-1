@@ -34,6 +34,7 @@ public class GlobalInput implements InputProcessor {
 			case Keys.ENTER:
 				if (!(Core.getHudStage().getKeyboardFocus() == Hud.getConsole().getTextField()))
 				{
+					Movement.reset();
 					Hud.getConsole().focus(InputCore.isCtrlPressed() ? "/" : "");
 					return true;
 				}

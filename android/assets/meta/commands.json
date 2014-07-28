@@ -53,5 +53,9 @@
                 type:"Integer"
             }
         ]
+    },
+    {
+    	name:"uidebug",
+    	description:"Toggles displaying debug lines of all UI widgets."
     }
 ]

@@ -116,6 +116,11 @@ public class Console extends Table implements Printing {
 								hide();
 								return true;
 
+							case Keys.TAB:
+								Core.getHudStage().setKeyboardFocus(null);
+								textField.setVisible(false);
+								return true;
+
 							case Keys.SPACE:
 								if (getText().startsWith("/"))
 								{

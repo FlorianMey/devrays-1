@@ -40,8 +40,7 @@ public class WeaponDescriptor {
 	private float damage, damageVariation;
 	private String id;
 	private String name;
-
-	private float shootsPerMinute;
+	private float shootsPerMinute, shootsPerMinuteVariation;
 
 	public Color getBulletColor()
 	{
@@ -89,19 +88,29 @@ public class WeaponDescriptor {
 		return damageVariation;
 	}
 
-	public float getShootFrequency()
-	{
-		return Weapon.shootsPerMinuteToFrequency(shootsPerMinute);
-	}
-
 	public String getName()
 	{
 		return name;
 	}
 
+	public float getShootFrequency()
+	{
+		return Weapon.shootsPerMinuteToFrequency(shootsPerMinute);
+	}
+
+	public float getShootFrequencyVariation()
+	{
+		return Weapon.shootsPerMinuteToFrequency(shootsPerMinuteVariation);
+	}
+
 	public float getShootsPerMinute()
 	{
 		return shootsPerMinute;
+	}
+
+	public float getShootsPerMinuteVariation()
+	{
+		return shootsPerMinuteVariation;
 	}
 
 }

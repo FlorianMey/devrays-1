@@ -57,4 +57,12 @@ public class Movement {
 		mob.push(Angle.fromDegrees(directionsToAngle(moveX, moveY) * 45), speed);
 	}
 
+	public static void reset()
+	{
+		up = false;
+		down = false;
+		left = false;
+		right = false;
+	}
+
 }

@@ -3,7 +3,6 @@ package app.jaid.devrays.entity.monsters;
 import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.graphics.Drawer;
-import app.jaid.devrays.items.Weapon;
 
 public class Varock extends Monster {
 
@@ -16,12 +15,7 @@ public class Varock extends Monster {
 	@Override
 	public void act()
 	{
-	}
-
-	@Override
-	public Weapon getWeapon()
-	{
-		return null;
+		getWeapon().tryToShoot();
 	}
 
 	@Override

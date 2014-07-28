@@ -20,12 +20,12 @@ public abstract class Monster extends Mob {
 		try
 		{
 			Monster monster = (Monster) descriptor.getType().getDeclaredConstructors()[0].newInstance(position, descriptor.getTeam());
+			monster.team = team;
 			monster.descriptor = descriptor;
 			monster.texture = descriptor.getSprite();
 			monster.healthPoints = descriptor.getHp();
 			monster.speed = descriptor.getSpeed();
-			monster.weapons = descriptor.getWeaponInstances();
-			monster.team = team;
+			monster.weapons = descriptor.getWeaponInstances(monster);
 			return monster;
 		} catch (Exception e)
 		{
@@ -34,7 +34,7 @@ public abstract class Monster extends Mob {
 		}
 	}
 
-	private MonsterDescriptor descriptor;
+	protected MonsterDescriptor descriptor;
 	protected float speed;
 	private Weapon[] weapons;
 
@@ -90,7 +90,15 @@ public abstract class Monster extends Mob {
 	}
 
 	@Override
-	public abstract Weapon getWeapon();
+	public Weapon getWeapon()
+	{
+		return weapons[selectedWeapon];
+	}
+
+	public Weapon[] getWeapons()
+	{
+		return weapons;
+	}
 
 	@Override
 	public float getWidth()
