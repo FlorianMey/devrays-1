@@ -1,8 +1,8 @@
 {
-    "platform":"linux64",
+    "platform":"linux32",
     "jdk":"https://bitbucket.org/alexkasko/openjdk-unofficial-builds/downloads/openjdk-1.7.0-u60-unofficial-linux-i586-image.zip",
     "executable":"devrays",
-    "appjar":"desktop/build/libs/desktop-1.0.jar",
+    "appjar":"out/devrays.jar",
     "mainclass":"app/jaid/devrays/desktop/DesktopApplication",
     "vmargs":[
         "-Xmx1G"
@@ -11,5 +11,5 @@
         
     ],
     "minimizejre":"soft",
-    "outdir":"out/devrays-linux64"
+    "outdir":"out/devrays-linux32"
 }

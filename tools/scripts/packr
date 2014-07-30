@@ -1,7 +1,0 @@
-#!/bin/bash
-cd ../..
-./gradlew desktop:dist
-for platform in windows mac linux32 linux64; do
-	echo Building $platform...
-	java -jar tools/jar/packr.jar release/profiles/packr-$platform.json
-done

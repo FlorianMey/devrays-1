@@ -1,0 +1,27 @@
+#!/bin/bash
+cd ../..
+
+## Desktop
+
+./gradlew desktop:dist
+
+# Move created jar from desktop folder to out folder
+mv `find desktop/build/libs/ -type f -iname 'desktop-*.jar'` out/devrays.jar
+
+# Create packr folders in out
+for platform in windows mac linux32 linux64; do
+	java -jar tools/packr/packr.jar tools/packr/profile-$platform.json
+done
+
+# Zip all folders in out
+for folder in `find out -type d -mindepth 1 -maxdepth 1`; do
+	zip -9 -r "${folder%/}.zip" "$folder"
+	rm -rf $folder
+done
+
+## Android
+
+./gradlew android:assembleRelease
+
+# Move created apk from desktop folder to out folder
+mv `find android/build/libs/ -type f -iname 'android*.ap*'` out/devrays-unsigned.apk
