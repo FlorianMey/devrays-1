@@ -1,6 +1,7 @@
 package app.jaid.devrays.debug;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 import app.jaid.devrays.Core;
 import app.jaid.devrays.graphics.DisplayUtils;
@@ -33,6 +34,12 @@ public class CommandLib {
 		if (args[0].equalsIgnoreCase("alpha") && args.length > 1)
 			DebugFlags.showCoordsAlpha = Float.valueOf(args[1]);
 
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
+	}
+
+	public static int echo(String[] args, Flags flags)
+	{
+		Log.log(args[0], args.length > 1 ? LogContext.valueOf(args[1].toUpperCase()) : LogContext.INFO);
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 
@@ -129,7 +136,7 @@ public class CommandLib {
 			return CommandExecutor.EXEC_RESULT_WRONG_USAGE;
 		}
 
-		BufferedReader reader = new BufferedReader(new FileReader(scriptFile.file()));
+		BufferedReader reader = new BufferedReader(scriptFile.reader());
 		int successfulRuns = 0, failedRuns = 0;
 
 		String line = null;
@@ -146,12 +153,19 @@ public class CommandLib {
 			else
 				failedRuns++;
 		}
+		reader.close();
 
 		if (successfulRuns + failedRuns > 0)
 			Log.info("Executed script " + scriptFile.name() + " (" + successfulRuns + " successful" + (failedRuns != 0 ? ", " + failedRuns + " failed" : "") + ").");
 		else
 			Log.info("Script " + scriptFile.name() + " does not contain executable commands.");
 
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
+	}
+
+	public static int say(String[] args, Flags flags)
+	{
+		Hud.getConsole().say(args[0]);
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 

@@ -91,17 +91,13 @@ public class Core {
 		Media.play.setMarkupEnabled(true);
 
 		worldStage = new Stage(new ExtendViewport(24, 16));
-
 		hudStage = new Stage(new ScreenViewport(), worldStage.getBatch());
 		hudCamera = new OrthographicCamera(Core.screenWidth, Core.screenHeight);
 		hudCamera.setToOrtho(false, Core.screenWidth, Core.screenHeight);
 		Gdx.input.setInputProcessor(new InputManager());
 		Hud.getConsole().init();
 
-		if (getDataFile("scripts/init").exists())
-			CommandExecutor.run("run init");
-		else
-			Log.warn("External init script not found.");
+		CommandExecutor.run("run init.devrcmd -internal");
 	}
 
 	public static void resize(int width, int height)

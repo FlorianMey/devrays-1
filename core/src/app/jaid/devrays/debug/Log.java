@@ -53,7 +53,7 @@ public class Log {
 		log(message, LogContext.INFO);
 	}
 
-	private static void log(String message, LogContext context)
+	public static void log(String message, LogContext context)
 	{
 		message = message.replace("[", "[[");
 

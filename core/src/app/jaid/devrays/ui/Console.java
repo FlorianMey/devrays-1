@@ -107,7 +107,7 @@ public class Console extends Table implements Printing {
 									CommandExecutor.run(getText());
 								}
 								else
-									Log.chat("You said: " + getText().trim());
+									say(getText().trim());
 
 								setText("");
 								return true;
@@ -188,6 +188,11 @@ public class Console extends Table implements Printing {
 		lines.layout();
 		linesWrapper.layout();
 		linesWrapper.setScrollPercentY(100);
+	}
+
+	public void say(String message)
+	{
+		Log.chat("You said: " + message);
 	}
 
 	private void setCursorToEnd()

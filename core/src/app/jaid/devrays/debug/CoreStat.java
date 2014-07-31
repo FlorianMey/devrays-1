@@ -21,9 +21,9 @@ import com.badlogic.gdx.utils.Array;
  */
 public enum CoreStat {
 
-	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR("Cursor Position"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("Frames per second"), MOVEMENT(
+	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR("Cursor Position"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("FPS"), MOVEMENT(
 			"Player Movement"), POSITION("Player Position"), RAM("Available RAM"), RAM_USAGE("Used RAM"), RAW_DELTA("Delta"), RUNTIME("Runtime"), SIZE("Window Size"), SPEED("Speed Factor"), VERTICES("Drawn Vertices"), VIEWPORT(
-					"World Viewport"), WORLD_CURSOR("World Cursor");
+			"World Viewport"), WORLD_CURSOR("World Cursor");
 
 	public static boolean contains(String name)
 	{

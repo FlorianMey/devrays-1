@@ -62,7 +62,7 @@ public class CommandExecutor {
 			return EXEC_RESULT_EXCEPTION;
 		}
 
-		Log.debug("Ran command " + command + " in " + (System.currentTimeMillis() - start) + " ms.");
+		Log.debug("Ran command " + command + " in " + (System.currentTimeMillis() - start) + " ms. (Status " + status + ")");
 
 		return status;
 	}

@@ -79,5 +79,34 @@
       		description:"Does not look in ~/devrays/scripts but [internal]/meta/ instead."
       	}
       ]
+   },
+   {
+      name:"echo",
+      description:"Displays a message.",
+      arguments:[
+         {
+            name:"message",
+            description:"String message that gets displayed.",
+            type:"String",
+            essential: true
+         },
+         {
+         	name:"context",
+         	description:"Log context that this message gets sent to",
+         	type:"String"
+         }
+      ]
+   },
+   {
+      name:"say",
+      description:"Says a message (same as using ingame console without \"/\").",
+      arguments:[
+         {
+            name:"message",
+            description:"String message that gets said.",
+            type:"String",
+            essential: true
+         }
+      ]
    }
 ]
