@@ -55,6 +55,8 @@ public class Log {
 
 	private static void log(String message, LogContext context)
 	{
+		message = message.replace("[", "[[");
+
 		for (Printing printer : printers)
 			if (printer.getContexts().contains(context, true))
 				printer.print(printer.isDisplayingContextInfo() ? dateFormat.format(new Date()) + "<" + context.name().charAt(0) + "> " + message : message, context);

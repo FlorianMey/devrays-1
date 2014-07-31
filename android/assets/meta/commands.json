@@ -1,61 +1,83 @@
 [
-    {
-        name:"help",
-        description:"Shows manual for specified command or lists all available commands if no argument is given.",
-        arguments:[
-            {
-                name:"command_name",
-                type:"String"
-            }
-        ]
-    },
-    {
-        name:"exit",
-        description:"Closes game."
-    },
-    {
-        name:"fullscreen",
-        description:"Toggles fullscreen mode.",
-        flags:[
-            {
-                name:"keepres",
-                description:"Does not resize the window and scales instead."
-            }
-        ]
-    },
-    {
-        name:"get",
-        description:"Displays core stat value or all available core stats if no arguments are given.",
-        arguments:[
-            {
-                name:"core_stat_name",
-                type:"String"
-            }
-        ]
-    },
-    {
-        name:"track",
-        description:"Permanently displays core stat in windows corner.",
-        arguments:[
-            {
-                name:"core_stat_name",
-                type:"String",
-                essential:true
-            }
-        ]
-    },
-    {
-        name:"weapon",
-        description:"Displays information of specified weapon descriptor or displays weapon count.",
-        arguments:[
-            {
-                name:"weapon_id",
-                type:"Integer"
-            }
-        ]
-    },
-    {
-    	name:"uidebug",
-    	description:"Toggles displaying debug lines of all UI widgets."
-    }
+   {
+      name:"help",
+      description:"Shows manual for specified command or lists all available commands if no argument is given.",
+      arguments:[
+         {
+            name:"command_name",
+            type:"String"
+         }
+      ]
+   },
+   {
+      name:"exit",
+      description:"Closes game."
+   },
+   {
+      name:"fullscreen",
+      description:"Toggles fullscreen mode.",
+      flags:[
+         {
+            name:"keepres",
+            description:"Does not resize the window and scales instead."
+         }
+      ]
+   },
+   {
+      name:"get",
+      description:"Displays core stat value or all available core stats if no arguments are given.",
+      arguments:[
+         {
+            name:"core_stat_name",
+            type:"String"
+         }
+      ]
+   },
+   {
+      name:"track",
+      description:"Permanently displays core stat in windows corner.",
+      arguments:[
+         {
+            name:"core_stat_name",
+            type:"String",
+            essential:true
+         }
+      ]
+   },
+   {
+      name:"weapon",
+      description:"Displays information of specified weapon descriptor or displays weapon count.",
+      arguments:[
+         {
+            name:"weapon_id",
+            type:"Integer"
+         }
+      ]
+   },
+   {
+      name:"uidebug",
+      description:"Toggles displaying debug lines of all UI widgets."
+   },
+   {
+      name:"run",
+      description:"Executes commands listed in a specified Devrays script file.",
+      arguments:[
+         {
+            name:"filename",
+            type:"String",
+            description:"Filename (with extension) of a Devrays script file in ~/devrays/scripts/",
+            essential: true
+         }
+      ],
+      flags: [
+      	{
+      		name:"log",
+      		description:"Displays command lines before executed."
+      	}, 
+      	{
+      		name:"internal",
+      		description:"Does not look in ~/devrays/scripts but [internal]/meta/ instead."
+      	}
+      ]
+   }
 ]

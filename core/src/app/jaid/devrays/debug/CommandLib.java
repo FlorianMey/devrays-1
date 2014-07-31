@@ -1,5 +1,7 @@
 package app.jaid.devrays.debug;
 
+import java.io.*;
+
 import app.jaid.devrays.Core;
 import app.jaid.devrays.graphics.DisplayUtils;
 import app.jaid.devrays.items.weapons.WeaponDescriptor;
@@ -7,6 +9,7 @@ import app.jaid.devrays.ui.Hud;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -21,7 +24,7 @@ public class CommandLib {
 	private static final String OFF = "off";
 	private static final String ON = "on";
 
-	public static int coords(String[] args, String[] flags)
+	public static int coords(String[] args, Flags flags)
 	{
 		if (args[0].equalsIgnoreCase(ON))
 			DebugFlags.drawCoords = true;
@@ -33,19 +36,16 @@ public class CommandLib {
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 
-	public static int exit(String[] args, String[] flags)
+	public static int exit(String[] args, Flags flags)
 	{
 		Gdx.app.exit();
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 
-	public static int fullscreen(String[] args, String[] flags)
+	public static int fullscreen(String[] args, Flags flags)
 	{
-		if (flags.length > 0)
-		{
-			if (JTil.arrayContainsIgnoreCase(flags, "keepres"))
-				Gdx.graphics.setDisplayMode(Core.screenWidth, Core.screenHeight, true);
-		}
+		if (flags.has("keepres"))
+			Gdx.graphics.setDisplayMode(Core.screenWidth, Core.screenHeight, true);
 		else if (Gdx.graphics.isFullscreen())
 			Gdx.graphics.setDisplayMode(640, 320, false);
 		else
@@ -55,7 +55,7 @@ public class CommandLib {
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 
-	public static int get(String[] args, String flags[])
+	public static int get(String[] args, Flags flags)
 	{
 		if (args.length == 0)
 		{
@@ -76,7 +76,7 @@ public class CommandLib {
 
 	}
 
-	public static int help(String[] args, String flags[])
+	public static int help(String[] args, Flags flags)
 	{
 		if (args.length == 0)
 		{
@@ -119,7 +119,43 @@ public class CommandLib {
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 
-	public static int track(String[] args, String flags[])
+	public static int run(String[] args, Flags flags) throws IOException
+	{
+		FileHandle scriptFile = flags.has("internal") ? Gdx.files.internal("meta/" + args[0]) : Core.getDataFile("scripts/" + args[0]);
+
+		if (!scriptFile.exists())
+		{
+			Log.error("File " + scriptFile + " does not exist.");
+			return CommandExecutor.EXEC_RESULT_WRONG_USAGE;
+		}
+
+		BufferedReader reader = new BufferedReader(new FileReader(scriptFile.file()));
+		int successfulRuns = 0, failedRuns = 0;
+
+		String line = null;
+		while ((line = reader.readLine()) != null)
+		{
+			if (line.isEmpty())
+				continue;
+
+			if (flags.has("log"))
+				Log.info(">> " + line);
+
+			if (CommandExecutor.run(line) == CommandExecutor.EXEC_RESULT_SUCCESS)
+				successfulRuns++;
+			else
+				failedRuns++;
+		}
+
+		if (successfulRuns + failedRuns > 0)
+			Log.info("Executed script " + scriptFile.name() + " (" + successfulRuns + " successful" + (failedRuns != 0 ? ", " + failedRuns + " failed" : "") + ").");
+		else
+			Log.info("Script " + scriptFile.name() + " does not contain executable commands.");
+
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
+	}
+
+	public static int track(String[] args, Flags flags)
 	{
 		if (args[0].equalsIgnoreCase("*"))
 		{
@@ -142,13 +178,13 @@ public class CommandLib {
 
 	}
 
-	public static int uidebug(String[] args, String flags[])
+	public static int uidebug(String[] args, Flags flags)
 	{
 		Hud.get().setDebug(!Hud.get().getDebug(), true);
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}
 
-	public static int weapon(String[] args, String[] flags)
+	public static int weapon(String[] args, Flags flags)
 	{
 
 		WeaponDescriptor weaponDescriptor = WeaponDescriptor.getAll().get(Integer.parseInt(args[0]));

@@ -41,6 +41,12 @@ public class IngameInput implements InputProcessor {
 			return true;
 		}
 
+		if (keycode == Keys.SPACE)
+		{
+			Movement.shooting = true;
+			return true;
+		}
+
 		return false;
 	}
 
@@ -75,6 +81,12 @@ public class IngameInput implements InputProcessor {
 		if (keycode == Keys.D)
 		{
 			Movement.right = false;
+			return true;
+		}
+
+		if (keycode == Keys.SPACE)
+		{
+			Movement.shooting = false;
 			return true;
 		}
 

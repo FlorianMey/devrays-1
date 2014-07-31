@@ -43,7 +43,7 @@ public class CommandExecutor {
 
 		try
 		{
-			Method method = CommandLib.class.getMethod(cmd, new Class[] { String[].class, String[].class });
+			Method method = CommandLib.class.getMethod(cmd, new Class[] { String[].class, Flags.class });
 
 			if (!method.getReturnType().equals(Integer.TYPE))
 			{
@@ -51,7 +51,7 @@ public class CommandExecutor {
 				return EXEC_RESULT_BROKEN_LIB;
 			}
 
-			status = (int) method.invoke(null, new Object[] { args, command.getFlags() });
+			status = (int) method.invoke(null, new Object[] { args, new Flags(command.getFlags()) });
 		} catch (NoSuchMethodException e)
 		{
 			Log.exception("The command library is broken and cannot run " + cmd + ".");

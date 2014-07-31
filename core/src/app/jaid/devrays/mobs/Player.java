@@ -9,8 +9,6 @@ import app.jaid.devrays.items.weapons.Weapon;
 import app.jaid.devrays.items.weapons.WeaponDescriptor;
 import app.jaid.devrays.screen.ingame.Environment;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
@@ -35,15 +33,10 @@ public class Player extends Ship {
 		return null;
 	}
 
-	public boolean isShooting()
-	{
-		return Gdx.input.isKeyPressed(Keys.SPACE);
-	}
-
 	@Override
 	public boolean update()
 	{
-		if (isShooting())
+		if (Movement.shooting)
 			getWeapon().tryToShoot();
 
 		Movement.push(this, getSpeed());

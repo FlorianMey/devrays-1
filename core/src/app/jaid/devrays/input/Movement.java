@@ -11,6 +11,7 @@ import app.jaid.devrays.mobs.Player;
  */
 public class Movement {
 
+	public static boolean shooting;
 	public static boolean up, down, left, right;
 
 	private static int directionsToAngle(int moveX, int moveY)
@@ -63,6 +64,7 @@ public class Movement {
 		down = false;
 		left = false;
 		right = false;
+		shooting = false;
 	}
 
 }

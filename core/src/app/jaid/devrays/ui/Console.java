@@ -67,8 +67,8 @@ public class Console extends Table implements Printing {
 
 	public void hide()
 	{
+		unfocus();
 		setVisible(false);
-		Core.getHudStage().setKeyboardFocus(null);
 	}
 
 	public void init()
@@ -117,7 +117,7 @@ public class Console extends Table implements Printing {
 								return true;
 
 							case Keys.TAB:
-								Core.getHudStage().setKeyboardFocus(null);
+								unfocus();
 								textField.setVisible(false);
 								return true;
 
@@ -193,6 +193,12 @@ public class Console extends Table implements Printing {
 	private void setCursorToEnd()
 	{
 		textField.setCursorPosition(textField.getText().length());
+	}
+
+	public void unfocus()
+	{
+		Core.getHudStage().setKeyboardFocus(null);
+		Core.getHudStage().setScrollFocus(null);
 	}
 
 	private void updateInputColor()

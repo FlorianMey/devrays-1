@@ -1,5 +1,6 @@
 package app.jaid.devrays;
 
+import app.jaid.devrays.debug.CommandExecutor;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.input.InputCore;
 import app.jaid.devrays.input.InputManager;
@@ -8,6 +9,7 @@ import app.jaid.devrays.io.SystemIO;
 import app.jaid.devrays.ui.Hud;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -24,6 +26,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  * @author jaid
  */
 public class Core {
+	private static FileHandle dataFolder;
 	public static boolean debug;
 	public static float delta, deltaPeak;
 	private static OrthographicCamera hudCamera;
@@ -42,6 +45,11 @@ public class Core {
 	public static Camera getCamera()
 	{
 		return worldStage.getCamera();
+	}
+
+	public static FileHandle getDataFile(String fileName)
+	{
+		return dataFolder.child(fileName);
 	}
 
 	public static float getDeltaPeak()
@@ -74,6 +82,10 @@ public class Core {
 		startTime = TimeUtils.millis();
 		Log.registerPrinter(systemIo);
 
+		dataFolder = Gdx.files.external("devrays_data");
+		if (!dataFolder.exists())
+			dataFolder.file().mkdir();
+
 		Media.addAtlas((TextureAtlas) Media.get("textures/world.atlas"));
 		Media.play = (BitmapFont) Media.get("fonts/play.fnt");
 		Media.play.setMarkupEnabled(true);
@@ -85,6 +97,11 @@ public class Core {
 		hudCamera.setToOrtho(false, Core.screenWidth, Core.screenHeight);
 		Gdx.input.setInputProcessor(new InputManager());
 		Hud.getConsole().init();
+
+		if (getDataFile("scripts/init").exists())
+			CommandExecutor.run("run init");
+		else
+			Log.warn("External init script not found.");
 	}
 
 	public static void resize(int width, int height)
