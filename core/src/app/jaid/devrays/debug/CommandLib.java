@@ -92,6 +92,7 @@ public class CommandLib {
 			for (CommandDescriptor descriptor : Shell.getCommandDescriptors())
 				availableCommands.add(descriptor.getName());
 
+			availableCommands.sort();
 			Log.info("Available commands: " + availableCommands.toString(", "));
 			return CommandExecutor.EXEC_RESULT_SUCCESS;
 		}

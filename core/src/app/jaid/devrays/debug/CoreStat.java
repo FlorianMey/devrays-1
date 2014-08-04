@@ -23,7 +23,7 @@ public enum CoreStat {
 
 	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR("Cursor Position"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("FPS"), MOVEMENT(
 			"Player Movement"), POSITION("Player Position"), RAM("Available RAM"), RAM_USAGE("Used RAM"), RAW_DELTA("Delta"), RUNTIME("Runtime"), SIZE("Window Size"), SPEED("Speed Factor"), VERTICES("Drawn Vertices"), VIEWPORT(
-			"World Viewport"), WORLD_CURSOR("World Cursor");
+					"World Viewport"), WORLD_CURSOR("World Cursor");
 
 	public static boolean contains(String name)
 	{
@@ -120,7 +120,8 @@ public enum CoreStat {
 					return String.valueOf(GLProfiler.vertexCount.latest);
 
 				case VIEWPORT:
-					return "<" + Core.getCamera().viewportWidth + ", " + Core.getCamera().viewportHeight + "> (" + JTil.formatDouble(Core.getCamera().viewportWidth / Core.getCamera().viewportHeight, 2) + ":1)";
+					return "<" + Core.getCamera().viewportWidth + ", " + Core.getCamera().viewportHeight + "> (" + JTil.formatDouble(Core.getCamera().viewportWidth / Core.getCamera().viewportHeight, 2) + ":1), shifted by <"
+							+ Core.getCamera().position.x + ", " + Core.getCamera().position.y + ">";
 
 				case WORLD_CURSOR:
 					return InputCore.getWorldCursor().toString(4);

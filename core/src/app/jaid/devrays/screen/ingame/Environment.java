@@ -115,21 +115,6 @@ public class Environment {
 	@SuppressWarnings("unchecked")
 	public void renderText()
 	{
-		if (DebugFlags.drawCoords)
-		{
-			for (int x = -100; x != 100; x++)
-			{
-				Point screenPoint = Point.worldPointToScreenPoint(x, 0);
-				Drawer.drawTextOnWorld(String.valueOf(x), screenPoint.x, Core.screenHeight / 2);
-			}
-
-			for (int y = -100; y != 100; y++)
-			{
-				Point screenPoint = Point.worldPointToScreenPoint(0, y);
-				Drawer.drawTextOnWorld(String.valueOf(y), Core.screenWidth / 2, screenPoint.y);
-			}
-		}
-
 		renderEntityText(mobs, bullets);
 	}
 

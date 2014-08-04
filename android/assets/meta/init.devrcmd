@@ -1,2 +1,7 @@
 track fps
+track delta_peak
+track viewport
+track world_cursor
+track position
+track size
 run init

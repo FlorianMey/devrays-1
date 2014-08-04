@@ -106,6 +106,7 @@ public class Core {
 		screenHeight = height;
 		worldStage.getViewport().update(screenWidth, screenHeight);
 		hudStage.getViewport().update(screenWidth, screenHeight, true);
+		worldStage.getCamera().update();
 	}
 
 	public static void tick()
