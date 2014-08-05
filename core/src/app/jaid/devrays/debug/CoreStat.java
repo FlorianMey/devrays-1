@@ -120,14 +120,17 @@ public enum CoreStat {
 					return String.valueOf(GLProfiler.vertexCount.latest);
 
 				case VIEWPORT:
-					return "<" + Core.getCamera().viewportWidth + ", " + Core.getCamera().viewportHeight + "> (" + JTil.formatDouble(Core.getCamera().viewportWidth / Core.getCamera().viewportHeight, 2) + ":1), shifted by <"
-							+ Core.getCamera().position.x + ", " + Core.getCamera().position.y + ">";
+					return "<" + Core.getWorldCamera().viewportWidth + ", " + Core.getWorldCamera().viewportHeight + "> (" + JTil.formatDouble(Core.getWorldCamera().viewportWidth / Core.getWorldCamera().viewportHeight, 2)
+							+ ":1), shifted by <" + Core.getWorldCamera().position.x + ", " + Core.getWorldCamera().position.y + ">";
 
 				case WORLD_CURSOR:
 					return InputCore.getWorldCursor().toString(4);
 			}
 		} catch (Exception e)
 		{
+			if (DebugFlags.debugMode)
+				Log.exception("Could not retrieve value of stat " + name, e);
+
 			return "?";
 		}
 

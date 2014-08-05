@@ -46,6 +46,6 @@ public class InputCore {
 	{
 		cursorX = Gdx.input.getX();
 		cursorY = Gdx.input.getY();
-		worldCursor.set(Point.screenPointToWorldPoint(InputCore.getCursorX(), InputCore.getCursorYInverted()));
+		worldCursor.set(Point.screenPointToWorldPoint(InputCore.getCursorX(), InputCore.getCursorY()));
 	}
 }

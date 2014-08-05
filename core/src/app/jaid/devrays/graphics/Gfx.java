@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 public class Gfx {
 
-	public static final ShaderProgram HUD_SHADER = new ShaderProgram(Gdx.files.internal("glsl/default.vert"), Gdx.files.internal("glsl/hudnoise.frag"));
+	public static final ShaderProgram HUD_SHADER = new ShaderProgram(Gdx.files.internal("glsl/default.vert"), Gdx.files.internal("glsl/hud.frag"));
 
 	static
 	{

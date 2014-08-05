@@ -16,8 +16,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.*;
 
 /**
  * Contains static fields and methods that get accessed from many classes, such as util methods, profiling results and
@@ -26,25 +25,22 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  * @author jaid
  */
 public class Core {
+	private static Batch batch;
 	private static FileHandle dataFolder;
 	public static boolean debug;
 	public static float delta, deltaPeak;
-	private static OrthographicCamera hudCamera;
 	private static Json json = new Json();
 	public static int screenWidth, screenHeight;
 	public static float speed = 1;
 	public static long startTime, now;
 	private static SystemIO systemIo = new SystemIO();
+	private static OrthographicCamera worldCamera, hudCamera;
 	private static Stage worldStage, hudStage;
+	private static Viewport worldViewport, hudViewport;
 
 	public static Batch getBatch()
 	{
-		return worldStage.getBatch();
-	}
-
-	public static Camera getCamera()
-	{
-		return worldStage.getCamera();
+		return batch;
 	}
 
 	public static FileHandle getDataFile(String fileName)
@@ -67,6 +63,11 @@ public class Core {
 		return hudStage;
 	}
 
+	public static Viewport getHudViewport()
+	{
+		return hudViewport;
+	}
+
 	public static Json getJson()
 	{
 		return json;
@@ -75,6 +76,21 @@ public class Core {
 	public static int getRuntime()
 	{
 		return (int) (now - startTime);
+	}
+
+	public static Camera getWorldCamera()
+	{
+		return worldCamera;
+	}
+
+	public static Stage getWorldStage()
+	{
+		return worldStage;
+	}
+
+	public static Viewport getWorldViewport()
+	{
+		return worldViewport;
 	}
 
 	static void init()
@@ -90,10 +106,15 @@ public class Core {
 		Media.play = (BitmapFont) Media.get("fonts/play.fnt");
 		Media.play.setMarkupEnabled(true);
 
-		worldStage = new Stage(new ExtendViewport(24, 16));
-		hudStage = new Stage(new ScreenViewport(), worldStage.getBatch());
+		batch = new SpriteBatch(1024);
+		worldCamera = new OrthographicCamera(Core.screenWidth, Core.screenHeight);
+		worldViewport = new ExtendViewport(24, 16, worldCamera);
+		worldStage = new Stage(worldViewport, batch);
+
 		hudCamera = new OrthographicCamera(Core.screenWidth, Core.screenHeight);
-		hudCamera.setToOrtho(false, Core.screenWidth, Core.screenHeight);
+		hudViewport = new ScreenViewport(hudCamera);
+		hudStage = new Stage(hudViewport, batch);
+
 		Gdx.input.setInputProcessor(new InputManager());
 		Hud.getConsole().init();
 
@@ -104,9 +125,9 @@ public class Core {
 	{
 		screenWidth = width;
 		screenHeight = height;
-		worldStage.getViewport().update(screenWidth, screenHeight);
-		hudStage.getViewport().update(screenWidth, screenHeight, true);
-		worldStage.getCamera().update();
+		worldViewport.update(screenWidth, screenHeight, true);
+		worldCamera.setToOrtho(false, worldViewport.getWorldWidth(), worldViewport.getWorldHeight());
+		hudViewport.update(screenWidth, screenHeight, true);
 	}
 
 	public static void tick()
@@ -121,6 +142,6 @@ public class Core {
 
 	public static void zoom(float change)
 	{
-		worldStage.getViewport().setWorldSize(worldStage.getViewport().getWorldWidth() + change, worldStage.getViewport().getWorldHeight() + change);
+		// worldViewport.setWorldSize(worldViewport.getWorldWidth() + change, worldViewport.getWorldHeight() + change);
 	}
 }

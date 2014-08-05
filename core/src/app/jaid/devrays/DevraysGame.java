@@ -54,7 +54,7 @@ public class DevraysGame extends Game {
 		// World rendering
 
 		Core.getBatch().setColor(Color.WHITE);
-		Core.getBatch().setProjectionMatrix(Core.getCamera().combined);
+		Core.getBatch().setProjectionMatrix(Core.getWorldCamera().combined);
 		Core.getBatch().begin();
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		super.render();

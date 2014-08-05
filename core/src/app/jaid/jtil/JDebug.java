@@ -10,7 +10,7 @@ public class JDebug {
 	public static String formatException(Exception exception, int stackElements)
 	{
 		String stackTrace = "";
-		String message = exception.getMessage();
+		String message = getMessage(exception);
 		StackTraceElement[] stack = exception.getStackTrace();
 
 		int i = 0;
@@ -26,5 +26,10 @@ public class JDebug {
 		}
 
 		return exception.getClass().getSimpleName() + (message != null && !message.isEmpty() ? "" : ": " + exception.getMessage()) + " " + stackTrace;
+	}
+
+	public static String getMessage(Exception exception)
+	{
+		return exception.getMessage();
 	}
 }

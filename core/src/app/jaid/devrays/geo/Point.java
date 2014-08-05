@@ -5,9 +5,8 @@ import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.jtil.JTil;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * X/Y coordinate in world. Gets assigned to every entity. Provides projection methods for cameras and transform
@@ -31,34 +30,14 @@ public class Point implements Colliding {
 
 	public static Point screenPointToWorldPoint(int screenX, int screenY)
 	{
-		Camera camera = Core.getCamera();
-		float worldX = JTil.keepBetween(0, screenX, Core.screenWidth) / (Core.screenWidth / camera.viewportWidth) + camera.position.x - camera.viewportWidth / 2;
-		float worldY = JTil.keepBetween(0, screenY, Core.screenHeight) / (Core.screenHeight / camera.viewportHeight) + camera.position.y - camera.viewportHeight / 2;
-		return new Point(worldX, worldY);
+		Vector2 unprojection = Core.getWorldViewport().unproject(new Vector2(screenX, screenY));
+		return new Point(unprojection.x, unprojection.y);
 	}
 
 	public static Point worldPointToScreenPoint(float worldX, float worldY)
 	{
-		Camera camera = Core.getCamera();
-
-		// Log.debug("float screenX = (" + worldX + " - " + camera.position.x + " + " + camera.viewportWidth + " / " + 2
-		// + ") * (" + Core.screenWidth + " / " + camera.viewportWidth + ");");
-		// Log.debug("float screenX = (" + (worldX - camera.position.x + camera.viewportWidth / 2) + ") * (" +
-		// Core.screenWidth / cameras.viewportWidth + ");");
-		// Log.debug("float screenX = " + (worldX - camera.position.x + camera.viewportWidth / 2) * (Core.screenWidth /
-		// camera.viewportWidth) + "f;");
-
-		// float screenX = (worldX - camera.position.x + camera.viewportWidth / 2) * (Core.screenWidth /
-		// camera.viewportWidth);
-		// float screenY = (worldY - camera.position.y + camera.viewportHeight / 2) * (Core.screenHeight /
-		// camera.viewportHeight);
-		// return new Point(screenX, screenY);
-
-		camera.update();
-		Vector3 projection = camera.project(new Vector3(worldX, worldY, 0), Core.getHudStage().getViewport().getViewportX(), Core.getHudStage().getViewport().getViewportY(), Core.getHudStage().getViewport().getViewportWidth(), Core
-				.getHudStage().getViewport().getViewportHeight());
+		Vector2 projection = Core.getWorldViewport().project(new Vector2(worldX, worldY));
 		return new Point(projection.x, projection.y);
-		// ssreturn new Point(0, 0);
 	}
 
 	public static Point worldPointToScreenPoint(Point worldPoint)
