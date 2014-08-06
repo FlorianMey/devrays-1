@@ -46,7 +46,7 @@ public class DevraysGame extends Game {
 	{
 		// Update routines
 
-		Core.tick();
+		Core.update();
 		SystemIO.readInput();
 		Core.getHudStage().act();
 		currentScreen.update();

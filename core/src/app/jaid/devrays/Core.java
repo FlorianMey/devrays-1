@@ -2,6 +2,7 @@ package app.jaid.devrays;
 
 import app.jaid.devrays.debug.CommandExecutor;
 import app.jaid.devrays.debug.Log;
+import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.input.InputCore;
 import app.jaid.devrays.input.InputManager;
 import app.jaid.devrays.io.Media;
@@ -107,11 +108,11 @@ public class Core {
 		Media.play.setMarkupEnabled(true);
 
 		batch = new SpriteBatch(1024);
-		worldCamera = new OrthographicCamera(Core.screenWidth, Core.screenHeight);
+		worldCamera = new OrthographicCamera();
 		worldViewport = new ExtendViewport(24, 16, worldCamera);
 		worldStage = new Stage(worldViewport, batch);
 
-		hudCamera = new OrthographicCamera(Core.screenWidth, Core.screenHeight);
+		hudCamera = new OrthographicCamera();
 		hudViewport = new ScreenViewport(hudCamera);
 		hudStage = new Stage(hudViewport, batch);
 
@@ -126,11 +127,11 @@ public class Core {
 		screenWidth = width;
 		screenHeight = height;
 		worldViewport.update(screenWidth, screenHeight, true);
-		worldCamera.setToOrtho(false, worldViewport.getWorldWidth(), worldViewport.getWorldHeight());
 		hudViewport.update(screenWidth, screenHeight, true);
+		Drawer.getShapeRenderer().setProjectionMatrix(hudCamera.combined);
 	}
 
-	public static void tick()
+	public static void update()
 	{
 		delta = Gdx.graphics.getDeltaTime() * speed;
 		if (Gdx.graphics.getRawDeltaTime() > deltaPeak)
