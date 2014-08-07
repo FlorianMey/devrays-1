@@ -84,7 +84,7 @@ public class DevraysGame extends Game {
 		Gfx.updateHudShader();
 		Core.getBatch().draw(hudFbo.getColorBufferTexture(), 0, 0);
 		Core.getBatch().end();
-		Core.getBatch().setShader(null);
+		Core.getBatch().setShader(Gfx.DEFAULT_SHADER);
 
 		// Text rendering
 

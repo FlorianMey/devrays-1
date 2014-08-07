@@ -10,8 +10,10 @@ import com.badlogic.gdx.math.Interpolation;
 
 public class Gfx {
 
+	public static final ShaderProgram DEFAULT_SHADER = new ShaderProgram(Gdx.files.internal("glsl/opt/default.vert"), Gdx.files.internal("glsl/opt/default.frag"));
 	private static final long HUD_DAMAGE_DISPLAY_TIME = 500;
-	public static final ShaderProgram HUD_SHADER = new ShaderProgram(Gdx.files.internal("glsl/default.vert"), Gdx.files.internal("glsl/hud.frag"));
+	public static final ShaderProgram HUD_SHADER = new ShaderProgram(Gdx.files.internal("glsl/opt/default.vert"), Gdx.files.internal("glsl/opt/hud.frag"));
+
 	private static float hudDamageAngle, hudInitialDamageStrength;
 	private static long lastHudDamageStrengthSet;
 

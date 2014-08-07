@@ -1,0 +1,40 @@
+#!/bin/bash
+
+glslOptimizerDir=$HOME/.temp/glsl-optimizer
+devraysDir=$HOME/dev/devrays
+glslOptDir=$devraysDir/android/assets/glsl/opt
+
+if [ ! -d $glslOptimizerDir ]; then
+	mkdir $glslOptimizerDir
+fi
+
+if [ ! -d $glslOptDir ]; then
+	mkdir $glslOptDir
+fi
+
+cd $glslOptimizerDir
+
+if [ ! -f glsl_compiler ]; then
+
+	if [ ! -f contrib/glslopt/Makefile ]; then
+		git clone https://github.com/aras-p/glsl-optimizer.git .
+	fi
+
+	cmake .
+	make
+fi
+
+for shaderPath in $devraysDir/android/assets/glsl/*; do
+	if [ -f $shaderPath ]; then
+		shaderDirectory=$(dirname "$shaderPath")
+		filename=$(basename "$shaderPath")
+		extension="${filename##*.}"
+		filename="${filename%.*}"
+		firstLetter=${extension:0:1}
+		outfile=$shaderDirectory/opt/$filename.$extension
+		./glslopt -$firstLetter $shaderPath $outfile
+		echo $shaderPath
+	fi
+done
+
+echo Done!

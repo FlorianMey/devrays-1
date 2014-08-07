@@ -3,6 +3,7 @@ package app.jaid.devrays;
 import app.jaid.devrays.debug.CommandExecutor;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.graphics.Drawer;
+import app.jaid.devrays.graphics.Gfx;
 import app.jaid.devrays.input.InputCore;
 import app.jaid.devrays.input.InputManager;
 import app.jaid.devrays.io.Media;
@@ -107,7 +108,7 @@ public class Core {
 		Media.play = (BitmapFont) Media.get("fonts/play.fnt");
 		Media.play.setMarkupEnabled(true);
 
-		batch = new SpriteBatch(1024);
+		batch = new SpriteBatch(1024, Gfx.DEFAULT_SHADER);
 		worldCamera = new OrthographicCamera();
 		worldViewport = new ExtendViewport(24, 16, worldCamera);
 		worldStage = new Stage(worldViewport, batch);
