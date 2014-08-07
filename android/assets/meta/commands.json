@@ -108,5 +108,22 @@
             essential: true
          }
       ]
+   },
+    {
+      name:"dmgeffect",
+      description:"Sets HUD shader variables to simulate damage effect.",
+      arguments:[
+         {
+            name:"strength",
+            description:"Strength of HUD shifting.",
+            type:"Float",
+            essential: true
+         },
+         {
+            name:"angle",
+            description:"Angle of HUD shifting in degrees (0-360).",
+            type:"Float"
+         }
+      ]
    }
 ]

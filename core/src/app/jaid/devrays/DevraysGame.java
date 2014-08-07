@@ -81,8 +81,7 @@ public class DevraysGame extends Game {
 
 		Core.getBatch().setShader(Gfx.HUD_SHADER);
 		Core.getBatch().begin();
-		Gfx.HUD_SHADER.setUniformf("u_runtime", Core.getRuntime());
-		Gfx.HUD_SHADER.setUniformf("u_resolution", Core.screenWidth, Core.screenHeight);
+		Gfx.updateHudShader();
 		Core.getBatch().draw(hudFbo.getColorBufferTexture(), 0, 0);
 		Core.getBatch().end();
 		Core.getBatch().setShader(null);

@@ -126,6 +126,7 @@ public class Core {
 	{
 		screenWidth = width;
 		screenHeight = height;
+
 		worldViewport.update(screenWidth, screenHeight, true);
 		hudViewport.update(screenWidth, screenHeight, true);
 		Drawer.getShapeRenderer().setProjectionMatrix(hudCamera.combined);

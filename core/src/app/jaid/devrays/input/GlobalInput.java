@@ -43,6 +43,10 @@ public class GlobalInput implements InputProcessor {
 			case Keys.F11:
 				CommandExecutor.run("fullscreen");
 				return true;
+
+			case Keys.F10:
+				CommandExecutor.run("dmgeffect " + (InputCore.isCtrlPressed() ? InputCore.isShiftPressed() ? "1.5" : "1" : "0.5"));
+				return true;
 		}
 
 		return false;

@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.graphics.DisplayUtils;
+import app.jaid.devrays.graphics.Gfx;
 import app.jaid.devrays.items.weapons.WeaponDescriptor;
 import app.jaid.devrays.ui.Hud;
 import app.jaid.jtil.JTil;
@@ -33,6 +35,16 @@ public class CommandLib {
 			DebugFlags.drawCoords = false;
 		if (args[0].equalsIgnoreCase("alpha") && args.length > 1)
 			DebugFlags.showCoordsAlpha = Float.valueOf(args[1]);
+
+		return CommandExecutor.EXEC_RESULT_SUCCESS;
+	}
+
+	public static int dmgeffect(String[] args, Flags flags)
+	{
+		Gfx.setHudStrength(Float.valueOf(args[0]));
+
+		if (args.length > 1)
+			Gfx.setHudAngle(Angle.degreesToRadians(Float.valueOf(args[1])));
 
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}

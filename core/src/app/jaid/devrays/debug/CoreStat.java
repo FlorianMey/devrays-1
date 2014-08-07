@@ -21,9 +21,9 @@ import com.badlogic.gdx.utils.Array;
  */
 public enum CoreStat {
 
-	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR("Cursor Position"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("FPS"), MOVEMENT(
-			"Player Movement"), POSITION("Player Position"), RAM("Available RAM"), RAM_USAGE("Used RAM"), RAW_DELTA("Delta"), RUNTIME("Runtime"), SIZE("Window Size"), SPEED("Speed Factor"), VERTICES("Drawn Vertices"), VIEWPORT(
-					"World Viewport"), WORLD_CURSOR("World Cursor");
+	BINDINGS("Texture Bindings"), CALLS("GL Calls"), CURSOR_STATE("Cursor State"), DELTA("Smoothed Delta"), DELTA_PEAK("Delta Peak"), DRAWS("Draw Calls"), ENTITIES("Entities Count"), FPS("FPS"), MOUSE("Mouse"), MOVEMENT("Player Movement"), POSITION(
+			"Player Position"), RAM("Available RAM"), RAM_USAGE("Used RAM"), RAW_DELTA("Delta"), RUNTIME("Runtime"), SIZE("Window Size"), SPEED("Speed Factor"), VERTICES("Drawn Vertices"), VIEWPORT("World Viewport"), WORLD_CURSOR(
+					"World Cursor");
 
 	public static boolean contains(String name)
 	{
@@ -63,9 +63,6 @@ public enum CoreStat {
 				case CALLS:
 					return String.valueOf(GLProfiler.calls);
 
-				case CURSOR:
-					return "<" + InputCore.getCursorX() + ", " + InputCore.getCursorY() + ">";
-
 				case CURSOR_STATE:
 					Array<String> activeStates = new Array<String>(3);
 					if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
@@ -90,6 +87,9 @@ public enum CoreStat {
 
 				case FPS:
 					return String.valueOf(Gdx.graphics.getFramesPerSecond());
+
+				case MOUSE:
+					return "Screen <" + InputCore.getCursorX() + ", " + InputCore.getCursorY() + "> | World " + InputCore.getWorldCursor().toString(2);
 
 				case MOVEMENT:
 					Player player = Environment.get().getPlayer();
@@ -122,9 +122,6 @@ public enum CoreStat {
 				case VIEWPORT:
 					return "<" + Core.getWorldCamera().viewportWidth + ", " + Core.getWorldCamera().viewportHeight + "> (" + JTil.formatDouble(Core.getWorldCamera().viewportWidth / Core.getWorldCamera().viewportHeight, 2)
 							+ ":1), shifted by <" + Core.getWorldCamera().position.x + ", " + Core.getWorldCamera().position.y + ">";
-
-				case WORLD_CURSOR:
-					return InputCore.getWorldCursor().toString(4);
 			}
 		} catch (Exception e)
 		{

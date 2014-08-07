@@ -42,6 +42,11 @@ public class InputCore {
 		return Gdx.input.isKeyPressed(Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT);
 	}
 
+	public static boolean isShiftPressed()
+	{
+		return Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT);
+	}
+
 	public static void update()
 	{
 		cursorX = Gdx.input.getX();
