@@ -10,12 +10,15 @@ import java.lang.reflect.Method;
  */
 public class CommandExecutor {
 
+	public static final String BOOLEAN_NO = "no", BOOLEAN_FALSE = "false", BOOLEAN_OFF = "off";
+	public static final String BOOLEAN_YES = "yes", BOOLEAN_TRUE = "true", BOOLEAN_ON = "on";
 	public static final int EXEC_RESULT_BROKEN_LIB = 5;
 	public static final int EXEC_RESULT_COMMAND_NOT_FOUND = 4;
 	public static final int EXEC_RESULT_EXCEPTION = 7;
 	public static final int EXEC_RESULT_NO_PERMISSION = 3;
 	public static final int EXEC_RESULT_NOT_NOW = 2;
 	public static final int EXEC_RESULT_SUCCESS = 0;
+
 	public static final int EXEC_RESULT_TOO_FEW_ARGUMENTS = 1;
 	public static final int EXEC_RESULT_WRONG_USAGE = 6;
 
@@ -70,5 +73,10 @@ public class CommandExecutor {
 	public static int run(String line)
 	{
 		return run(CommandProcessor.process(line));
+	}
+
+	public static boolean valueOfBooleanArg(String arg)
+	{
+		return arg.equalsIgnoreCase(BOOLEAN_ON) || arg.equalsIgnoreCase(BOOLEAN_TRUE) || arg.equalsIgnoreCase(BOOLEAN_YES);
 	}
 }

@@ -24,14 +24,11 @@ import com.badlogic.gdx.utils.Array;
  */
 public class CommandLib {
 
-	private static final String OFF = "off";
-	private static final String ON = "on";
-
 	public static int coords(String[] args, Flags flags)
 	{
-		if (args[0].equalsIgnoreCase(ON))
+		if (args[0].equalsIgnoreCase(CommandExecutor.BOOLEAN_ON))
 			DebugFlags.drawCoords = true;
-		if (args[0].equalsIgnoreCase(OFF))
+		if (args[0].equalsIgnoreCase(CommandExecutor.BOOLEAN_OFF))
 			DebugFlags.drawCoords = false;
 		if (args[0].equalsIgnoreCase("alpha") && args.length > 1)
 			DebugFlags.showCoordsAlpha = Float.valueOf(args[1]);

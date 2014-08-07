@@ -80,11 +80,26 @@ public class CommandProcessor {
 		Array<String> args = new Array<String>(8);
 		Array<String> flags = new Array<String>(8);
 		int segmentStart = 0;
+		char currentChar, nextChar;
+		boolean isInString = false;
 
 		for (int i = 0; i != line.length(); i++)
-			if (line.charAt(i) == ' ')
+		{
+			currentChar = line.charAt(i);
+			nextChar = i + 1 != line.length() ? line.charAt(i + 1) : 0;
+
+			if (currentChar == '"')
 			{
-				String segment = line.substring(segmentStart, i);
+				isInString = !isInString;
+				continue;
+			}
+
+			if (currentChar == ' ' && !isInString)
+			{
+				if (nextChar == ' ')
+					continue;
+
+				String segment = line.substring(segmentStart, i).trim();
 
 				if (command == null)
 					command = segment;
@@ -95,6 +110,7 @@ public class CommandProcessor {
 
 				segmentStart = i + 1;
 			}
+		}
 
 		String endSegment = line.substring(segmentStart, line.length());
 		if (endSegment.startsWith("-"))
@@ -115,7 +131,18 @@ public class CommandProcessor {
 				return validateFloatArgument(arg);
 			case "Integer":
 				return validateIntegerArgument(arg);
+			case "Boolean":
+				return validateBooleanArgument(arg);
 		}
+
+		return false;
+	}
+
+	private static boolean validateBooleanArgument(String arg)
+	{
+		for (String booleanToken : new String[] { CommandExecutor.BOOLEAN_FALSE, CommandExecutor.BOOLEAN_NO, CommandExecutor.BOOLEAN_OFF, CommandExecutor.BOOLEAN_TRUE, CommandExecutor.BOOLEAN_YES })
+			if (arg.equalsIgnoreCase(booleanToken))
+				return true;
 
 		return false;
 	}
@@ -143,4 +170,5 @@ public class CommandProcessor {
 			return false;
 		}
 	}
+
 }
