@@ -142,8 +142,13 @@ public class CommandLib {
 
 		if (!scriptFile.exists())
 		{
-			Log.error("File " + scriptFile + " does not exist.");
-			return CommandExecutor.EXEC_RESULT_WRONG_USAGE;
+			scriptFile = flags.has("internal") ? Gdx.files.internal("meta/" + args[0] + ".devrcmd") : Core.getDataFile("scripts/" + args[0] + ".devrcmd");
+
+			if (!scriptFile.exists())
+			{
+				Log.error("File " + scriptFile + " does not exist.");
+				return CommandExecutor.EXEC_RESULT_WRONG_USAGE;
+			}
 		}
 
 		BufferedReader reader = new BufferedReader(scriptFile.reader());

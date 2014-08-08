@@ -6,7 +6,8 @@ public class JDebug {
 	private static final boolean SHOW_CAUSES = true;
 	private static final boolean SHOW_LINE_NUMBER = true;
 	private static final boolean SHOW_METHOD_NAME = true;
-	private static final String STACK_ELEMENTS_SEPERATOR = " ← ";
+	private static final String STACK_ELEMENTS_SEPERATOR = " \u2190 ";
+	private static final String STACK_PREFIX = " @ ";
 	private static final String STACKS_SEPERATOR = " \n<caused by> ";
 
 	public static String formatException(Throwable exception)
@@ -21,8 +22,11 @@ public class JDebug {
 		String message = getMessage(exception);
 
 		out.append(exception.getClass().getSimpleName());
-		out.append(message != null && !message.isEmpty() && !message.equals("null") ? " (" + message + ")" : "");
-		out.append(" @ ");
+
+		if (message != null && !message.isEmpty() && !message.equals("null"))
+			out.append(": " + message);
+
+		out.append(STACK_PREFIX);
 
 		StackTraceElement[] stack = exception.getStackTrace();
 
