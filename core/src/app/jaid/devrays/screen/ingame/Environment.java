@@ -101,8 +101,6 @@ public class Environment {
 		for (Array<? extends Entity> entityGroup : entityGroups)
 			for (Entity entity : entityGroup)
 				entity.renderText();
-
-		Drawer.drawTextOnScreen("Weapon: " + player.getWeapon().getSimpleName(), Core.screenWidth - 180, 40);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -1,7 +1,6 @@
 package app.jaid.devrays.graphics;
 
 import app.jaid.devrays.Core;
-import app.jaid.devrays.debug.DebugFlags;
 import app.jaid.devrays.debug.Log;
 
 import com.badlogic.gdx.Gdx;
@@ -19,9 +18,7 @@ public class Gfx {
 
 	static
 	{
-		if (DebugFlags.debugMode)
-			ShaderProgram.pedantic = false;
-
+		ShaderProgram.pedantic = false;
 		Log.debug((HUD_SHADER.isCompiled() ? "HUD shader compiled. " : "HUD shader compilation failed. ") + HUD_SHADER.getLog());
 	}
 

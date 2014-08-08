@@ -130,7 +130,8 @@ public class Core {
 
 		worldViewport.update(screenWidth, screenHeight, true);
 		hudViewport.update(screenWidth, screenHeight, true);
-		Drawer.getShapeRenderer().setProjectionMatrix(hudCamera.combined);
+
+		Drawer.resize();
 	}
 
 	public static void update()

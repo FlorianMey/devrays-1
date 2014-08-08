@@ -3,6 +3,8 @@ package app.jaid.devrays.screen.ingame;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.mobs.Player;
 import app.jaid.devrays.screen.DevraysScreen;
+import app.jaid.devrays.ui.ArsenalBox;
+import app.jaid.devrays.ui.Hud;
 
 /**
  * Most important Screen of the game, contains an {@link Environment} and will simulate / render the game world.
@@ -31,6 +33,8 @@ public class IngameScreen implements DevraysScreen {
 		environment = new Environment();
 		environment.addPlayer(new Player(new Point()));
 		environment.getMobs().add(environment.getPlayer());
+
+		Hud.get().getArsenalBoxCell().setActor(new ArsenalBox(environment.getPlayer()));
 
 		/*
 		 * environment.getMobs().add(Monster.create(environment.getPlayer().getPosition().add(JRand.vary(20, 10),

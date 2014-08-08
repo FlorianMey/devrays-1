@@ -1,6 +1,8 @@
 package app.jaid.devrays.debug;
 
-import app.jaid.devrays.graphics.Drawer;
+import app.jaid.devrays.ui.Hud;
+
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 /**
  * Stat object that has a stat reference that gets polled every frame and rendered in a screen corner (FPS for
@@ -8,14 +10,13 @@ import app.jaid.devrays.graphics.Drawer;
  *
  * @author jaid
  */
-public class Stat {
+public class Stat extends Label {
 
-	private String name;
 	private Object value;
 
-	Stat(String name, Object value)
+	Stat(Object value)
 	{
-		this.name = name;
+		super(String.valueOf(value), Hud.oldSkin);
 		this.value = value;
 	}
 
@@ -27,9 +28,9 @@ public class Stat {
 		return String.valueOf(value);
 	}
 
-	void render(int x, int y)
+	public void update()
 	{
-		Drawer.drawTextOnScreen("[GRAY]" + name + ": [WHITE]" + getOutput(), x, y);
+		setText(getOutput());
 	}
 
 }

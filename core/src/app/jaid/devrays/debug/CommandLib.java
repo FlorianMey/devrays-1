@@ -184,7 +184,7 @@ public class CommandLib {
 		if (args[0].equalsIgnoreCase("*"))
 		{
 			for (CoreStat stat : CoreStat.values())
-				Stats.track(stat.getName(), stat);
+				StatsTracker.get().track(stat.getName(), stat);
 
 			return CommandExecutor.EXEC_RESULT_SUCCESS;
 		}
@@ -197,7 +197,7 @@ public class CommandLib {
 
 		CoreStat stat = CoreStat.getByName(args[0]);
 
-		Stats.track(stat.getName(), stat);
+		StatsTracker.get().track(stat.getName(), stat);
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 
 	}

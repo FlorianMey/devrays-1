@@ -8,6 +8,8 @@ import app.jaid.devrays.items.Inventory;
 import app.jaid.devrays.items.weapons.Weapon;
 import app.jaid.devrays.physics.Colliding;
 
+import com.badlogic.gdx.utils.Array;
+
 /**
  * Special kind of mobs whose instances are either controlled by a human (see {@link Player}) or are NPCs who have the
  * same conditions as players.
@@ -27,6 +29,11 @@ public abstract class Ship extends Mob {
 	public void die()
 	{
 
+	}
+
+	public Array<Weapon> getArsenal()
+	{
+		return inventory.equipment.arsenal;
 	}
 
 	@Override

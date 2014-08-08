@@ -1,7 +1,7 @@
 package app.jaid.devrays;
 
 import app.jaid.devrays.debug.DebugFlags;
-import app.jaid.devrays.debug.Stats;
+import app.jaid.devrays.debug.StatsTracker;
 import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.graphics.Gfx;
 import app.jaid.devrays.io.SystemIO;
@@ -11,9 +11,8 @@ import app.jaid.devrays.ui.Hud;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 
@@ -26,7 +25,6 @@ import com.badlogic.gdx.graphics.profiling.GLProfiler;
 public class DevraysGame extends Game {
 
 	private static DevraysScreen currentScreen;
-	private static FrameBuffer hudFbo;
 
 	public static DevraysScreen getDevraysScreen()
 	{
@@ -66,32 +64,40 @@ public class DevraysGame extends Game {
 		currentScreen.renderShapes();
 
 		if (DebugFlags.debugMode)
+		{
+			Hud.get().debugAll();
 			Hud.get().drawDebug(Drawer.getShapeRenderer());
+		}
 
 		Drawer.getShapeRenderer().end();
 
 		// HUD rendering to FBO
 
-		hudFbo.begin();
+		Drawer.getHudFbo().begin();
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Core.getHudStage().draw();
-		hudFbo.end();
+		Core.getBatch().begin();
+		currentScreen.renderText();
+		Core.getBatch().end();
+		Drawer.getHudFbo().end();
 
 		// FBO rendering to screen (apply hudnoise.frag)
 
 		Core.getBatch().setShader(Gfx.HUD_SHADER);
 		Core.getBatch().begin();
 		Gfx.updateHudShader();
-		Core.getBatch().draw(hudFbo.getColorBufferTexture(), 0, 0);
+		Core.getBatch().draw(Drawer.getHudFbo().getColorBufferTexture(), 0, 0);
 		Core.getBatch().end();
 		Core.getBatch().setShader(Gfx.DEFAULT_SHADER);
 
 		// Text rendering
 
 		Core.getBatch().begin();
-		Stats.render();
-		currentScreen.renderText();
 		Core.getBatch().end();
+
+		// Updating stats
+
+		StatsTracker.get().update();
 
 		// Finishing frame
 
@@ -101,7 +107,6 @@ public class DevraysGame extends Game {
 	@Override
 	public void resize(int width, int height)
 	{
-		hudFbo = new FrameBuffer(Format.RGBA8888, width, height, false);
 		Core.resize(width, height);
 		super.resize(width, height);
 	}

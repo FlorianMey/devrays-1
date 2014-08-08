@@ -8,7 +8,7 @@ package app.jaid.devrays.debug;
  */
 public class DebugFlags {
 
-	public static boolean debugMode = true;
+	public static boolean debugMode = false;
 	public static boolean displayContextInfoIngame = false;
 	public static boolean drawCollisionLines = true;
 	public static boolean drawCoords = true;

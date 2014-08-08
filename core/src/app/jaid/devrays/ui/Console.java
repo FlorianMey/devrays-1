@@ -26,6 +26,7 @@ public class Console extends Table implements Printing {
 
 	public Console()
 	{
+		super(Hud.oldSkin);
 		contexts.addAll(LogContext.INFO, LogContext.HUMAN_ERROR, LogContext.CHAT, LogContext.GUILD, LogContext.TEAM);
 
 		if (DebugFlags.debugMode)
@@ -160,17 +161,12 @@ public class Console extends Table implements Printing {
 			}
 		};
 
-		linesWrapper = new ScrollPane(lines, Hud.oldSkin) {
-			{
-				setBounds(0, textField.getHeight(), 600, 200);
-			}
-		};
+		linesWrapper = new ScrollPane(lines, Hud.oldSkin);
 
-		debug();
-		addActor(linesWrapper);
-		row(); // TODO Fix the overlapping of both rows (current fix: setY(textfield height))
-		addActor(textField);
+		add(linesWrapper).prefSize(600, 200).colspan(2).left();
 		row();
+		add(">").prefSize(16);
+		add(textField).prefSize(600, 18);
 		Log.registerPrinter(this);
 	}
 
@@ -184,8 +180,6 @@ public class Console extends Table implements Printing {
 	public void print(String message, LogContext context)
 	{
 		lines.setText(lines.getText() + "\n[#" + context.getColor() + "]" + message);
-		lines.layout();
-		lines.layout();
 		linesWrapper.layout();
 		linesWrapper.setScrollPercentY(100);
 	}

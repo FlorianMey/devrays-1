@@ -1,11 +1,15 @@
 #!/bin/bash
 
+for dependency in cmake mesa-common-dev; do
+	command -v $dependency >/dev/null 2>&1 || { echo >&2 "Please install package $dependency."; exit 1; }
+done
+
 glslOptimizerDir=$HOME/.temp/glsl-optimizer
 devraysDir=$HOME/dev/devrays
 glslOptDir=$devraysDir/android/assets/glsl/opt
 
 if [ ! -d $glslOptimizerDir ]; then
-	mkdir $glslOptimizerDir
+	mkdir -p $glslOptimizerDir
 fi
 
 if [ ! -d $glslOptDir ]; then

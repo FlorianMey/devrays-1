@@ -7,7 +7,9 @@ import app.jaid.devrays.geo.Rect;
 import app.jaid.devrays.io.Media;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -18,6 +20,7 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Drawer {
 
+	private static FrameBuffer hudFbo;
 	private static final ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 	public static void drawPointOnWorld(Point point, Color color)
@@ -98,8 +101,19 @@ public class Drawer {
 		drawTextOnWorld(text, position.x, position.y);
 	}
 
+	public static FrameBuffer getHudFbo()
+	{
+		return hudFbo;
+	}
+
 	public static ShapeRenderer getShapeRenderer()
 	{
 		return shapeRenderer;
+	}
+
+	public static void resize()
+	{
+		Drawer.getShapeRenderer().setProjectionMatrix(Core.getHudCamera().combined);
+		hudFbo = new FrameBuffer(Format.RGBA8888, Core.screenWidth, Core.screenHeight, false);
 	}
 }

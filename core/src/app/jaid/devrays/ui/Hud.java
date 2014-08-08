@@ -1,13 +1,12 @@
 package app.jaid.devrays.ui;
 
 import app.jaid.devrays.Core;
-import app.jaid.devrays.debug.Log;
+import app.jaid.devrays.debug.StatsTracker;
 import app.jaid.devrays.io.Media;
 import app.jaid.devrays.screen.DevraysScreen;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 
 /**
  * Main GDX Widget that fills the whole screen. Every {@link DevraysScreen} can add additional widgets to this base HUD
@@ -34,6 +33,7 @@ public class Hud extends Table {
 		return get().console;
 	}
 
+	private Cell<?> arsenalBoxCell;
 	private final Console console = new Console();
 
 	public Hud()
@@ -43,10 +43,18 @@ public class Hud extends Table {
 		setFillParent(true);
 		setTransform(false);
 
-		addActor(console);
+		top().left();
+		add(StatsTracker.get()).left();
+		row();
+		add(console).expandY().bottom().left();
+		arsenalBoxCell = add().expandX().bottom().right().pad(10);
 		console.hide();
 
 		Core.getHudStage().addActor(this);
-		Log.debug("Created HUD.");
+	}
+
+	public Cell<?> getArsenalBoxCell()
+	{
+		return arsenalBoxCell;
 	}
 }
