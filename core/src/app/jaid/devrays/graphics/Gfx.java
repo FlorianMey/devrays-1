@@ -1,25 +1,32 @@
 package app.jaid.devrays.graphics;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.debug.DebugFlags;
 import app.jaid.devrays.debug.Log;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Interpolation;
 
 public class Gfx {
 
-	public static final ShaderProgram DEFAULT_SHADER = new ShaderProgram(Gdx.files.internal("glsl/opt/default.vert"), Gdx.files.internal("glsl/opt/default.frag"));
+	public static final ShaderProgram DEFAULT_SHADER;
 	private static final long HUD_DAMAGE_DISPLAY_TIME = 500;
-	public static final ShaderProgram HUD_SHADER = new ShaderProgram(Gdx.files.internal("glsl/opt/default.vert"), Gdx.files.internal("glsl/opt/hud.frag"));
-
+	public static final ShaderProgram HUD_SHADER;
 	private static float hudDamageAngle, hudInitialDamageStrength;
 	private static long lastHudDamageStrengthSet;
+	private static FileHandle shaderFolder;
 
 	static
 	{
 		ShaderProgram.pedantic = false;
-		Log.debug((HUD_SHADER.isCompiled() ? "HUD shader compiled. " : "HUD shader compilation failed. ") + HUD_SHADER.getLog());
+		shaderFolder = DebugFlags.debugMode ? Gdx.files.internal("glsl") : Gdx.files.internal("glsl/opt");
+
+		DEFAULT_SHADER = new ShaderProgram(shaderFolder.child("default.vert"), shaderFolder.child("default.frag"));
+		HUD_SHADER = new ShaderProgram(shaderFolder.child("default.vert"), shaderFolder.child("hud.frag"));
+
+		Log.debug(HUD_SHADER.isCompiled() ? "HUD shader compiled." : "HUD shader compilation failed.\n" + HUD_SHADER.getLog());
 	}
 
 	public static float getHudStrength()

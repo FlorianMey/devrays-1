@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for dependency in cmake mesa-common-dev; do
+for dependency in cmake; do
 	command -v $dependency >/dev/null 2>&1 || { echo >&2 "Please install package $dependency."; exit 1; }
 done
 

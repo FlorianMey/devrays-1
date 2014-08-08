@@ -5,6 +5,8 @@ uniform sampler2D u_texture;
 uniform float u_runtime;
 uniform vec2 u_resolution, u_screen_center;
 
+const vec4 COLOR_RED = vec4(1.0, 0.0, 0.0, 1.0);
+
 // NOISE EFFECT
 
 const float NOISE_LINE_MOVEMENT_SPEED = 0.2;
@@ -19,7 +21,7 @@ uniform float u_damage_angle;
 uniform float u_damage_strength;
 
 const float BRIGHTNESS_MIN = 1.0;
-const float DAMAGE_SHIFT_STRENGTH = 100.0;
+const float DAMAGE_SHIFT_STRENGTH = 0.1;
 const float DAMAGE_NOISE_ABSTRACTION_FREQUENCY = 0.2;
 const float DAMAGE_NOISE_ABSTRACTION_STRENGTH = 30.0;
 const float DAMAGE_VIGNETTE_STRENGTH = 1.0;
@@ -46,7 +48,7 @@ float getDistanceToMidNormalized(vec2 uv)
 
 float getColorBrightNess(vec4 color)
 {
-	return (color.r + color.g + color.b + BRIGHTNESS_MIN) / (255.0 * 3.0);
+	return (color.r + color.g + color.b) / 3.0;
 }
 
 void main(void)
@@ -76,13 +78,16 @@ void main(void)
 		float midDistance = getDistanceToMidNormalized(uv);
 	    float distanceNoiseFactor = abs(sin(midDistance * DAMAGE_NOISE_ABSTRACTION_FREQUENCY)) * midDistance * DAMAGE_NOISE_ABSTRACTION_STRENGTH;
 	    
-	    uv.xy = move(uv.xy, u_damage_angle + distanceNoiseFactor, u_damage_strength * DAMAGE_SHIFT_STRENGTH * brightness);
+	    uv.xy = move(uv.xy, u_damage_angle + distanceNoiseFactor, u_damage_strength * DAMAGE_SHIFT_STRENGTH);
+	 	currentColor = mix(currentColor, COLOR_RED, currentColor.a * brightness);
 	    currentColor = texture2D(u_texture, uv);
 	    
 	    float damageVignetteFactor = midDistance * u_damage_strength * DAMAGE_VIGNETTE_STRENGTH;
 	    currentColor.ar += damageVignetteFactor;
-	    if (damageVignetteFactor >= 1.0)
+	    	    
+	    if (damageVignetteFactor >= 1.0) {
 	    	currentColor *= midDistance * u_damage_strength;
+	    }
     }
     
     // FINISHING
