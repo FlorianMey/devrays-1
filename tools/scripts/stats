@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for dependency in sloccount grep tput; do
+	command -v $dependency >/dev/null 2>&1 || { echo >&2 "Please install package $dependency."; exit 1; }
+done
+
+cd ../..
+
+for folder in core/src desktop/src android/src ios/src tools/scripts; do
+	tput bold && tput setaf 3
+	echo LoC in $folder:
+	tput sgr0
+	sloccount --autogen --wide --follow --duplicates $folder 2>/dev/null | grep --color=never "[a-zA-Z]:"
+done
