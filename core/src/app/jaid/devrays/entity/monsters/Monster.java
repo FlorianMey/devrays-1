@@ -123,10 +123,10 @@ public abstract class Monster extends Mob {
 	public abstract void renderText();
 
 	@Override
-	public boolean update()
+	public boolean updatePersonal()
 	{
 		act();
-		return super.update();
+		return true;
 	}
 
 }

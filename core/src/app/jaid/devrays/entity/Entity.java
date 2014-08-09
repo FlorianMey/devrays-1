@@ -5,7 +5,7 @@ import app.jaid.devrays.physics.Colliding;
 
 /**
  * Interface for living and non living entities, gets implemented by all interacting objects in the world.
- * 
+ *
  * @author jaid
  */
 public interface Entity {
@@ -15,6 +15,8 @@ public interface Entity {
 	public abstract float getHeight();
 
 	public abstract Colliding getHitbox();
+
+	public abstract float getLifetime();
 
 	public abstract String getName();
 
@@ -31,5 +33,4 @@ public interface Entity {
 	public abstract void renderText();
 
 	public abstract boolean update();
-
 }

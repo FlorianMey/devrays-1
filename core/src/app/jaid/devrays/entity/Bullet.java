@@ -1,8 +1,11 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
+import app.jaid.devrays.debug.CommandExecutor;
+import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
+import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.items.weapons.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.Environment;
@@ -27,6 +30,8 @@ public class Bullet implements Entity {
 
 	public Angle angle;
 	private final Point centerPosition = new Point();
+	private boolean isDead;
+	private float lifetime;
 	private Point position;
 	protected float speed;
 	private Weapon weapon;
@@ -63,9 +68,20 @@ public class Bullet implements Entity {
 	}
 
 	@Override
+	public float getLifetime()
+	{
+		return lifetime;
+	}
+
+	@Override
 	public String getName()
 	{
-		return null;
+		return "Bullet from " + getOwner().getName() + " / " + weapon;
+	}
+
+	public Mob getOwner()
+	{
+		return weapon.getOwner();
 	}
 
 	@Override
@@ -77,7 +93,7 @@ public class Bullet implements Entity {
 	@Override
 	public Team getTeam()
 	{
-		return weapon.getOwner().getTeam();
+		return getOwner().getTeam();
 	}
 
 	@Override
@@ -102,18 +118,36 @@ public class Bullet implements Entity {
 	@Override
 	public void renderText()
 	{
+		Drawer.drawTextOnWorld(getHitbox().toString(), getPosition());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public boolean update()
+	public final boolean update()
 	{
-		position.move(angle, speed * Core.delta);
+		updatePersonal();
 		updateCenter();
-		return true;
+
+		for (Entity collidingEntity : Environment.get().getCollisions(this, Environment.get().getMobs()))
+			if (getTeam().canAttack(collidingEntity.getTeam()))
+			{
+				CommandExecutor.run("dmgeffect 1");
+				Log.debug(getName() + "(Hitbox " + getHitbox() + ") collides with " + collidingEntity.getName() + " (Hitbox " + collidingEntity.getHitbox() + ")");
+				isDead = true;
+			}
+
+		lifetime += Core.delta;
+		return !isDead;
 	}
 
 	public void updateCenter()
 	{
 		centerPosition.set(position.x + getWidth() / 2, position.y + getHeight() / 2);
+	}
+
+	public boolean updatePersonal()
+	{
+		position.move(angle, speed * Core.delta);
+		return true;
 	}
 }

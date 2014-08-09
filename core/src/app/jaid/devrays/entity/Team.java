@@ -32,6 +32,11 @@ public enum Team {
 		this.name = name;
 	}
 
+	public boolean canAttack(Team other)
+	{
+		return this != other;
+	}
+
 	public boolean isAggressive()
 	{
 		return isAggressive;

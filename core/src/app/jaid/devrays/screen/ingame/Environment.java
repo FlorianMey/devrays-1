@@ -42,6 +42,18 @@ public class Environment {
 		return bullets;
 	}
 
+	public Entity[] getCollisions(Entity entity, @SuppressWarnings("unchecked") Array<? extends Entity>... entityGroups)
+	{
+		Array<Entity> collisions = new Array<Entity>(4);
+
+		for (Array<? extends Entity> entityGroup : entityGroups)
+			for (Entity collidingEntity : entityGroup)
+				if (entity != collidingEntity && entity.getHitbox().intersects(collidingEntity.getHitbox()))
+					collisions.add(collidingEntity);
+
+		return collisions.toArray(Entity.class);
+	}
+
 	public Array<Mob> getMobs()
 	{
 		return mobs;

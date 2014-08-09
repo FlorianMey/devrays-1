@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.Color;
 public class PatchHitbox implements Colliding {
 
 	@Override
-	public boolean collidesWith(Colliding other)
+	public boolean intersects(Colliding other)
 	{
 		return false;
 	}

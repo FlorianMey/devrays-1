@@ -73,19 +73,6 @@ public class Point implements Colliding {
 		return Angle.fromRadians(Math.atan2(x - origin.x, y - origin.y));
 	}
 
-	@Override
-	public boolean collidesWith(Colliding other)
-	{
-		if (other instanceof Point)
-		{
-			Point otherPoint = (Point) other;
-
-			return x == otherPoint.x && y == otherPoint.y;
-		}
-
-		return false;
-	}
-
 	public float distanceTo(Point origin)
 	{
 		return (float) Math.sqrt(Math.pow(origin.y - y, 2) + Math.pow(origin.x - x, 2));
@@ -101,6 +88,18 @@ public class Point implements Colliding {
 
 		if (x == point.x && y == point.y)
 			return true;
+
+		return false;
+	}
+
+	@Override
+	public boolean intersects(Colliding other)
+	{
+		if (other instanceof Point)
+			return ((Point) other).equals(this);
+
+		if (other instanceof Rect)
+			return ((Rect) other).contains(this);
 
 		return false;
 	}

@@ -81,7 +81,7 @@ public class DevraysGame extends Game {
 		Core.getBatch().end();
 		Drawer.getHudFbo().end();
 
-		// FBO rendering to screen (apply hudnoise.frag)
+		// FBO rendering to screen (apply hud.frag)
 
 		Core.getBatch().setShader(Gfx.HUD_SHADER);
 		Core.getBatch().begin();

@@ -22,6 +22,7 @@ public abstract class Mob implements Entity {
 	protected Point centerPosition = new Point(); // Cache
 	protected int healthPoints, maxHealthPoints;
 	private boolean isPushing;
+	private float lifetime;
 	protected Point position, wayPoint;
 	protected int selectedWeapon;
 	protected Team team;
@@ -73,24 +74,30 @@ public abstract class Mob implements Entity {
 		return healthPoints;
 	}
 
+	@Override
+	public float getLifetime()
+	{
+		return lifetime;
+	}
+
 	public int getMaxHP()
 	{
 		return maxHealthPoints;
-	}
+	};
 
 	public Angle getMovementAngle()
 	{
 		return angle;
-	};
+	}
 
 	@Override
-	public abstract String getName();
+	public abstract String getName();;
 
 	@Override
 	public Point getPosition()
 	{
 		return position;
-	};
+	}
 
 	public abstract float getSpeed();
 
@@ -172,7 +179,7 @@ public abstract class Mob implements Entity {
 	}
 
 	@Override
-	public boolean update()
+	public final boolean update()
 	{
 		if (getWeapon() != null)
 			getWeapon().update();
@@ -188,13 +195,16 @@ public abstract class Mob implements Entity {
 			push(wayPoint, getSpeed());
 
 		moveByVelocity();
-
 		updateCenter();
-		return true;
+
+		lifetime += Core.delta;
+		return updatePersonal();
 	}
 
 	public void updateCenter()
 	{
 		centerPosition.set(position.x + getWidth() / 2, position.y + getHeight() / 2);
 	}
+
+	public abstract boolean updatePersonal();
 }

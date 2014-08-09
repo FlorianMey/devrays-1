@@ -1,10 +1,13 @@
 package app.jaid.devrays.screen.ingame;
 
+import app.jaid.devrays.entity.monsters.Monster;
+import app.jaid.devrays.entity.monsters.MonsterDescriptor;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.mobs.Player;
 import app.jaid.devrays.screen.DevraysScreen;
 import app.jaid.devrays.ui.ArsenalBox;
 import app.jaid.devrays.ui.Hud;
+import app.jaid.jtil.JRand;
 
 /**
  * Most important Screen of the game, contains an {@link Environment} and will simulate / render the game world.
@@ -36,13 +39,10 @@ public class IngameScreen implements DevraysScreen {
 
 		Hud.get().getArsenalBoxCell().setActor(new ArsenalBox(environment.getPlayer()));
 
-		/*
-		 * environment.getMobs().add(Monster.create(environment.getPlayer().getPosition().add(JRand.vary(20, 10),
-		 * JRand.vary(20, 10)), MonsterDescriptor.getById("varock")));
-		 * for (int i = 0; i != 5; i++)
-		 * environment.getMobs().add(Monster.create(environment.getPlayer().getPosition().add(JRand.vary(20, 10),
-		 * JRand.vary(20, 10)), MonsterDescriptor.getById("hareye")));
-		 */
+		environment.getMobs().add(Monster.create(environment.getPlayer().getPosition().add(JRand.vary(20, 10), JRand.vary(20, 10)), MonsterDescriptor.getById("varock")));
+		for (int i = 0; i != 5; i++)
+			environment.getMobs().add(Monster.create(environment.getPlayer().getPosition().add(JRand.vary(20, 10), JRand.vary(20, 10)), MonsterDescriptor.getById("hareye")));
+
 	}
 
 	@Override

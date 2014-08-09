@@ -41,10 +41,9 @@ public class Rect extends Rectangle implements Colliding {
 		this(corner1.x, corner1.y, corner2.x - corner1.x, corner2.y - corner1.y);
 	}
 
-	@Override
-	public boolean collidesWith(Colliding other)
+	public boolean contains(Point point)
 	{
-		return false;
+		return contains(point.x, point.y);
 	}
 
 	public Point getHigherPoint()
@@ -58,9 +57,21 @@ public class Rect extends Rectangle implements Colliding {
 	}
 
 	@Override
+	public boolean intersects(Colliding other)
+	{
+		return false;
+	}
+
+	@Override
 	public void renderWorldBounds(Color color)
 	{
 		Drawer.getShapeRenderer().set(ShapeType.Line);
 		Drawer.drawRectOnScreen(worldRectToScreenRect(this), color);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "<" + x + ", " + y + ", " + (x + width) + ", " + (y + height) + ">";
 	}
 }

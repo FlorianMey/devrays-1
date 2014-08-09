@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Color;
  */
 public interface Colliding {
 
-	public abstract boolean collidesWith(Colliding other);
+	public abstract boolean intersects(Colliding other);
 
 	public abstract void renderWorldBounds(Color color);
 }

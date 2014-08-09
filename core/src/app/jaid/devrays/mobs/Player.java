@@ -34,13 +34,12 @@ public class Player extends Ship {
 	}
 
 	@Override
-	public boolean update()
+	public boolean updatePersonal()
 	{
 		if (Movement.shooting)
 			getWeapon().tryToShoot();
 
 		Movement.push(this, getSpeed());
-		super.update();
 
 		return true;
 	}
