@@ -3,8 +3,6 @@ package app.jaid.devrays.screen.ingame;
 import app.jaid.devrays.Core;
 import app.jaid.devrays.debug.DebugFlags;
 import app.jaid.devrays.entity.*;
-import app.jaid.devrays.geo.Point;
-import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.io.Media;
 import app.jaid.devrays.mobs.Player;
 
@@ -102,7 +100,7 @@ public class Environment {
 			{
 				entity.renderShapes();
 
-				if (DebugFlags.drawCollisionLines && entity.getHitbox() != null)
+				if (DebugFlags.drawHitboxes && entity.getHitbox() != null)
 					entity.getHitbox().renderWorldBounds(Color.RED);
 			}
 	}
@@ -118,7 +116,6 @@ public class Environment {
 	@SuppressWarnings("unchecked")
 	public void renderShapes()
 	{
-		Drawer.drawPointOnWorld(new Point(3, 3), Color.PINK);
 		renderEntityShapes(mobs, bullets);
 	}
 

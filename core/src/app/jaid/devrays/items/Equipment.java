@@ -1,7 +1,5 @@
 package app.jaid.devrays.items;
 
-import app.jaid.devrays.items.weapons.Weapon;
-
 import com.badlogic.gdx.utils.Array;
 
 /**

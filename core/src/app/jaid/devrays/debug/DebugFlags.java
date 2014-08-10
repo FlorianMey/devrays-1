@@ -10,9 +10,8 @@ public class DebugFlags {
 
 	public static boolean debugMode = false;
 	public static boolean displayContextInfoIngame = false;
-	public static boolean drawCollisionLines = true;
 	public static boolean drawCoords = true;
+	public static boolean drawHitboxes = false;
 	public static float showCoordsAlpha = 0.5f;
 	public static boolean showMobPosition = true;
-
 }

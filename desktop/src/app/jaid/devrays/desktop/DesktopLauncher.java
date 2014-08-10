@@ -17,7 +17,7 @@ public class DesktopLauncher {
 		config.foregroundFPS = 60;
 		config.backgroundFPS = 15;
 		config.title = "Devrays";
-		config.useGL30 = true;
+		config.useGL30 = false;
 		config.addIcon("textures/logo32.png", FileType.Internal);
 		new LwjglApplication(new DevraysGame(), config);
 	}

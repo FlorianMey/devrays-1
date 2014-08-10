@@ -23,10 +23,8 @@ public class Gfx {
 		ShaderProgram.pedantic = false;
 		shaderFolder = DebugFlags.debugMode ? Gdx.files.internal("glsl") : Gdx.files.internal("glsl/opt");
 
-		DEFAULT_SHADER = new ShaderProgram(shaderFolder.child("default.vert"), shaderFolder.child("default.frag"));
-		HUD_SHADER = new ShaderProgram(shaderFolder.child("default.vert"), shaderFolder.child("hud.frag"));
-
-		Log.debug(HUD_SHADER.isCompiled() ? "HUD shader compiled." : "HUD shader compilation failed.\n" + HUD_SHADER.getLog());
+		DEFAULT_SHADER = getShader(null, null);
+		HUD_SHADER = getShader(null, shaderFolder.child("hud.frag").readString());
 	}
 
 	public static float getHudStrength()
@@ -37,6 +35,20 @@ public class Gfx {
 			return 0;
 
 		return Interpolation.circle.apply(0, hudInitialDamageStrength, (HUD_DAMAGE_DISPLAY_TIME - timeSinceSet) / (float) HUD_DAMAGE_DISPLAY_TIME);
+	}
+
+	private static ShaderProgram getShader(String vertexSource, String fragmentSource)
+	{
+		ShaderProgram shader = new ShaderProgram(vertexSource != null ? vertexSource : shaderFolder.child("default.vert").readString(), fragmentSource != null ? fragmentSource : shaderFolder.child("default.frag").readString());
+
+		if (!shader.isCompiled())
+		{
+			Log.exception("Could not compile shader.\n" + HUD_SHADER.getLog());
+			return DEFAULT_SHADER;
+		}
+
+		return shader;
+
 	}
 
 	public static void setHudAngle(float hudDamageAngle)

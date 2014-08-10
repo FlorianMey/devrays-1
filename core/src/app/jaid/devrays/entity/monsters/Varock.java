@@ -1,12 +1,13 @@
 package app.jaid.devrays.entity.monsters;
 
+import app.jaid.devrays.entity.Monster;
 import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.graphics.Drawer;
 
 public class Varock extends Monster {
 
-	protected Varock(Point position, Team team)
+	public Varock(Point position, Team team)
 	{
 		super(position, team);
 		wayPoint = getTarget().getCenterPosition();
@@ -28,5 +29,4 @@ public class Varock extends Monster {
 	{
 		Drawer.drawTextOnWorld(getName(), getPosition());
 	}
-
 }

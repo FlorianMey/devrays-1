@@ -1,12 +1,14 @@
 package app.jaid.devrays.mobs;
 
-import app.jaid.devrays.entity.Entity;
-import app.jaid.devrays.entity.Team;
+import app.jaid.devrays.debug.Log;
+import app.jaid.devrays.entity.*;
+import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
+import app.jaid.devrays.graphics.Gfx;
 import app.jaid.devrays.input.Movement;
 import app.jaid.devrays.io.Media;
-import app.jaid.devrays.items.weapons.Weapon;
-import app.jaid.devrays.items.weapons.WeaponDescriptor;
+import app.jaid.devrays.items.Weapon;
+import app.jaid.devrays.items.WeaponDescriptor;
 import app.jaid.devrays.screen.ingame.Environment;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -31,6 +33,17 @@ public class Player extends Ship {
 	public Entity getTarget()
 	{
 		return null;
+	}
+
+	@Override
+	public boolean hit(Bullet bullet, Angle hitAngle)
+	{
+		Gfx.setHudStrength(1);
+		Gfx.setHudAngle(hitAngle.getRadians());
+
+		Log.debug(hitAngle);
+
+		return super.hit(bullet, hitAngle);
 	}
 
 	@Override

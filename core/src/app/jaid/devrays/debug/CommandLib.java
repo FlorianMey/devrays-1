@@ -7,7 +7,7 @@ import app.jaid.devrays.Core;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.graphics.DisplayUtils;
 import app.jaid.devrays.graphics.Gfx;
-import app.jaid.devrays.items.weapons.WeaponDescriptor;
+import app.jaid.devrays.items.WeaponDescriptor;
 import app.jaid.devrays.ui.Hud;
 import app.jaid.jtil.JTil;
 

@@ -1,7 +1,6 @@
 package app.jaid.devrays;
 
-import app.jaid.devrays.debug.DebugFlags;
-import app.jaid.devrays.debug.StatsTracker;
+import app.jaid.devrays.debug.*;
 import app.jaid.devrays.graphics.Drawer;
 import app.jaid.devrays.graphics.Gfx;
 import app.jaid.devrays.io.SystemIO;
@@ -49,51 +48,53 @@ public class DevraysGame extends Game {
 		Core.getHudStage().act();
 		currentScreen.update();
 
-		// World rendering
-
-		Core.getBatch().setColor(Color.WHITE);
-		Core.getBatch().setProjectionMatrix(Core.getWorldCamera().combined);
-		Core.getBatch().begin();
-		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		super.render();
-		Core.getBatch().end();
-
-		// Shape rendering (includes Debug lines)
-
-		Drawer.getShapeRenderer().begin(ShapeType.Line);
-		currentScreen.renderShapes();
-
-		if (DebugFlags.debugMode)
+		try
 		{
-			Hud.get().debugAll();
-			Hud.get().drawDebug(Drawer.getShapeRenderer());
+			// World rendering
+
+			Core.getBatch().setColor(Color.WHITE);
+			Core.getBatch().setProjectionMatrix(Core.getWorldCamera().combined);
+			Core.getBatch().begin();
+			Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+			super.render();
+			Core.getBatch().end();
+
+			// Shape rendering (includes Debug lines)
+
+			Drawer.getShapeRenderer().begin(ShapeType.Line);
+			currentScreen.renderShapes();
+
+			if (DebugFlags.debugMode)
+			{
+				Hud.get().debugAll();
+				Hud.get().drawDebug(Drawer.getShapeRenderer());
+			}
+
+			Drawer.getShapeRenderer().end();
+
+			// HUD rendering to FBO
+
+			Drawer.getHudFbo().begin();
+			Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
+			Core.getHudStage().draw();
+			Core.getBatch().begin();
+			currentScreen.renderText();
+			Core.getBatch().end();
+			Drawer.getHudFbo().end();
+
+			// FBO rendering to screen (apply hud.frag)
+
+			Core.getBatch().setShader(Gfx.HUD_SHADER);
+			Core.getBatch().begin();
+			Gfx.updateHudShader();
+			Core.getBatch().draw(Drawer.getHudFbo().getColorBufferTexture(), 0, 0);
+			Core.getBatch().end();
+			Core.getBatch().setShader(Gfx.DEFAULT_SHADER);
+
+		} catch (Exception e)
+		{
+			Log.exception("Could not render", e);
 		}
-
-		Drawer.getShapeRenderer().end();
-
-		// HUD rendering to FBO
-
-		Drawer.getHudFbo().begin();
-		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
-		Core.getHudStage().draw();
-		Core.getBatch().begin();
-		currentScreen.renderText();
-		Core.getBatch().end();
-		Drawer.getHudFbo().end();
-
-		// FBO rendering to screen (apply hud.frag)
-
-		Core.getBatch().setShader(Gfx.HUD_SHADER);
-		Core.getBatch().begin();
-		Gfx.updateHudShader();
-		Core.getBatch().draw(Drawer.getHudFbo().getColorBufferTexture(), 0, 0);
-		Core.getBatch().end();
-		Core.getBatch().setShader(Gfx.DEFAULT_SHADER);
-
-		// Text rendering
-
-		Core.getBatch().begin();
-		Core.getBatch().end();
 
 		// Updating stats
 

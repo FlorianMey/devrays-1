@@ -1,11 +1,10 @@
-package app.jaid.devrays.items.weapons;
+package app.jaid.devrays.items;
 
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.entity.Bullet;
 import app.jaid.devrays.entity.Mob;
 import app.jaid.devrays.etc.Scheduler;
 import app.jaid.devrays.geo.Angle;
-import app.jaid.devrays.items.Equipment;
 import app.jaid.devrays.mobs.Ship;
 import app.jaid.jtil.JRand;
 
@@ -132,11 +131,10 @@ public abstract class Weapon {
 			shoot(Bullet.add(this));
 
 			if (descriptor.getShootsPerMinuteVariation() != 0)
-			{
 				scheduler.changeFrequency(Weapon.shootsPerMinuteToFrequency(JRand.vary(descriptor.getShootsPerMinute(), descriptor.getShootsPerMinuteVariation())));
-				Log.debug("Changed frequency of weapon " + getName() + " of " + owner.getName() + " to vary(" + descriptor.getShootsPerMinute() + ", " + descriptor.getShootsPerMinuteVariation() + ") = "
-						+ Weapon.frequencyToShootsPerMinute(scheduler.getFrequency()) + ".");
-			}
+			// Log.debug("Changed frequency of weapon " + getName() + " of " + owner.getName() + " to vary(" +
+			// descriptor.getShootsPerMinute() + ", " + descriptor.getShootsPerMinuteVariation() + ") = "
+			// + Weapon.frequencyToShootsPerMinute(scheduler.getFrequency()) + ".");
 
 			return true;
 		}

@@ -1,12 +1,10 @@
 package app.jaid.devrays.entity;
 
 import app.jaid.devrays.Core;
-import app.jaid.devrays.debug.CommandExecutor;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
-import app.jaid.devrays.graphics.Drawer;
-import app.jaid.devrays.items.weapons.Weapon;
+import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.Environment;
 import app.jaid.jtil.JRand;
@@ -76,7 +74,7 @@ public class Bullet implements Entity {
 	@Override
 	public String getName()
 	{
-		return "Bullet from " + getOwner().getName() + " / " + weapon;
+		return "Bullet from " + getOwner().getName() + " / " + weapon.getName();
 	}
 
 	public Mob getOwner()
@@ -103,6 +101,13 @@ public class Bullet implements Entity {
 	}
 
 	@Override
+	public boolean hit(Bullet bullet, Angle hitAngle)
+	{
+		isDead = true;
+		return true;
+	}
+
+	@Override
 	public void render()
 	{
 		Core.getBatch().setColor(weapon.getBulletColor());
@@ -118,7 +123,7 @@ public class Bullet implements Entity {
 	@Override
 	public void renderText()
 	{
-		Drawer.drawTextOnWorld(getHitbox().toString(), getPosition());
+		// Drawer.drawTextOnWorld(getHitbox().toString(), getPosition());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -129,11 +134,10 @@ public class Bullet implements Entity {
 		updateCenter();
 
 		for (Entity collidingEntity : Environment.get().getCollisions(this, Environment.get().getMobs()))
-			if (getTeam().canAttack(collidingEntity.getTeam()))
+			if (this != collidingEntity && getTeam().canAttack(collidingEntity.getTeam()))
 			{
-				CommandExecutor.run("dmgeffect 1");
-				Log.debug(getName() + "(Hitbox " + getHitbox() + ") collides with " + collidingEntity.getName() + " (Hitbox " + collidingEntity.getHitbox() + ")");
-				isDead = true;
+				Log.debug(getName() + " (Hitbox " + getHitbox() + ") collides with " + collidingEntity.getName() + " (Hitbox " + collidingEntity.getHitbox() + ")");
+				isDead = collidingEntity.hit(this, getCenterPosition().angleTo(collidingEntity.getCenterPosition()));
 			}
 
 		lifetime += Core.delta;

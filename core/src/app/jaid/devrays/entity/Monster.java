@@ -1,11 +1,10 @@
-package app.jaid.devrays.entity.monsters;
+package app.jaid.devrays.entity;
 
 import app.jaid.devrays.debug.Log;
-import app.jaid.devrays.entity.*;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.geo.Rect;
 import app.jaid.devrays.graphics.Drawer;
-import app.jaid.devrays.items.weapons.Weapon;
+import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.Environment;
 

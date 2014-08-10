@@ -57,7 +57,6 @@ public class Angle {
 
 	public Angle()
 	{
-
 	}
 
 	private Angle(float radians)
@@ -95,6 +94,11 @@ public class Angle {
 	public float getRadians()
 	{
 		return radians;
+	}
+
+	public float getRadiansDifferenceNormalTo(Angle other)
+	{
+		return getRadiansDifferenceTo(other) / PI;
 	}
 
 	public float getRadiansDifferenceTo(Angle other)

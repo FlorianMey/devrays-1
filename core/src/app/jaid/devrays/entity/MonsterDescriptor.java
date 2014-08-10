@@ -1,10 +1,9 @@
-package app.jaid.devrays.entity.monsters;
+package app.jaid.devrays.entity;
 
 import app.jaid.devrays.debug.Log;
-import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.io.Media;
-import app.jaid.devrays.items.weapons.Weapon;
-import app.jaid.devrays.items.weapons.WeaponDescriptor;
+import app.jaid.devrays.items.Weapon;
+import app.jaid.devrays.items.WeaponDescriptor;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.Gdx;

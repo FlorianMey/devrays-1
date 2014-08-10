@@ -4,11 +4,13 @@ import app.jaid.devrays.Core;
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
-import app.jaid.devrays.items.weapons.Weapon;
+import app.jaid.devrays.items.Weapon;
+import app.jaid.devrays.mobs.Player;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 
 /**
  * Main living {@link Entity}. Has a weapon to shot {@link Bullet} objects and can be hit by bullets.
@@ -83,21 +85,21 @@ public abstract class Mob implements Entity {
 	public int getMaxHP()
 	{
 		return maxHealthPoints;
-	};
+	}
 
 	public Angle getMovementAngle()
 	{
 		return angle;
-	}
+	};
 
 	@Override
-	public abstract String getName();;
+	public abstract String getName();
 
 	@Override
 	public Point getPosition()
 	{
 		return position;
-	}
+	};
 
 	public abstract float getSpeed();
 
@@ -127,6 +129,14 @@ public abstract class Mob implements Entity {
 		healthPoints = Math.min(maxHealthPoints, healthPoints + amount);
 	}
 
+	@Override
+	public boolean hit(Bullet bullet, Angle hitAngle)
+	{
+		push(hitAngle, 15);
+		Log.debug("hit " + getClass().getSimpleName());
+		return true;
+	}
+
 	private void moveByVelocity()
 	{
 		position.move(angle, velocity * Core.delta);
@@ -140,8 +150,21 @@ public abstract class Mob implements Entity {
 
 	public void push(Angle direction, float power)
 	{
-		angle.set(direction);
-		velocity = Math.max(velocity, power);
+		if (velocity == 0)
+		{
+			angle.set(direction);
+			velocity = power;
+		}
+		else
+		{
+			float directionDifference = angle.getRadiansDifferenceNormalTo(direction);
+
+			if (this instanceof Player)
+				Log.debug(directionDifference);
+
+			angle.set(direction);
+			velocity = Interpolation.linear.apply(power, velocity, directionDifference);
+		}
 	}
 
 	public void push(Point target, float power)

@@ -1,4 +1,4 @@
-package app.jaid.devrays.items.weapons;
+package app.jaid.devrays.items;
 
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.io.Media;

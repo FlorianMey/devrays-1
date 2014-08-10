@@ -1,11 +1,10 @@
 package app.jaid.devrays.mobs;
 
-import app.jaid.devrays.entity.Mob;
-import app.jaid.devrays.entity.Team;
+import app.jaid.devrays.entity.*;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.geo.Rect;
 import app.jaid.devrays.items.Inventory;
-import app.jaid.devrays.items.weapons.Weapon;
+import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 
 import com.badlogic.gdx.utils.Array;
