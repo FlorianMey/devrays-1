@@ -41,7 +41,7 @@ public class CommandLib {
 		Gfx.setHudStrength(Float.valueOf(args[0]));
 
 		if (args.length > 1)
-			Gfx.setHudAngle(Angle.degreesToRadians(Float.valueOf(args[1])));
+			Gfx.setHudAngle(Angle.fromDegrees(Float.valueOf(args[1])));
 
 		return CommandExecutor.EXEC_RESULT_SUCCESS;
 	}

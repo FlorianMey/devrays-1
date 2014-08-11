@@ -26,7 +26,7 @@ public class Bullet implements Entity {
 		return bullet;
 	}
 
-	public Angle angle;
+	private Angle angle;
 	private final Point centerPosition = new Point();
 	private boolean isDead;
 	private float lifetime;
@@ -101,7 +101,7 @@ public class Bullet implements Entity {
 	}
 
 	@Override
-	public boolean hit(Bullet bullet, Angle hitAngle)
+	public boolean hit(Bullet bullet)
 	{
 		isDead = true;
 		return true;
@@ -137,7 +137,7 @@ public class Bullet implements Entity {
 			if (this != collidingEntity && getTeam().canAttack(collidingEntity.getTeam()))
 			{
 				Log.debug(getName() + " (Hitbox " + getHitbox() + ") collides with " + collidingEntity.getName() + " (Hitbox " + collidingEntity.getHitbox() + ")");
-				isDead = collidingEntity.hit(this, getCenterPosition().angleTo(collidingEntity.getCenterPosition()));
+				isDead = collidingEntity.hit(this);
 			}
 
 		lifetime += Core.delta;

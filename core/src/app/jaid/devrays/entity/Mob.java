@@ -5,12 +5,10 @@ import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.items.Weapon;
-import app.jaid.devrays.mobs.Player;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.jtil.JTil;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Interpolation;
 
 /**
  * Main living {@link Entity}. Has a weapon to shot {@link Bullet} objects and can be hit by bullets.
@@ -130,10 +128,9 @@ public abstract class Mob implements Entity {
 	}
 
 	@Override
-	public boolean hit(Bullet bullet, Angle hitAngle)
+	public boolean hit(Bullet bullet)
 	{
-		push(hitAngle, 15);
-		Log.debug("hit " + getClass().getSimpleName());
+		push(bullet.getAngle(), 150);
 		return true;
 	}
 
@@ -150,7 +147,8 @@ public abstract class Mob implements Entity {
 
 	public void push(Angle direction, float power)
 	{
-		if (velocity == 0)
+
+		if (power > velocity * 1.5f)
 		{
 			angle.set(direction);
 			velocity = power;
@@ -158,12 +156,7 @@ public abstract class Mob implements Entity {
 		else
 		{
 			float directionDifference = angle.getRadiansDifferenceNormalTo(direction);
-
-			if (this instanceof Player)
-				Log.debug(directionDifference);
-
-			angle.set(direction);
-			velocity = Interpolation.linear.apply(power, velocity, directionDifference);
+			velocity -= power * directionDifference;
 		}
 	}
 

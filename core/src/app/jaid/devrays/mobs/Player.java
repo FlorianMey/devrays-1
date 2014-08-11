@@ -1,8 +1,6 @@
 package app.jaid.devrays.mobs;
 
-import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.entity.*;
-import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.graphics.Gfx;
 import app.jaid.devrays.input.Movement;
@@ -36,14 +34,12 @@ public class Player extends Ship {
 	}
 
 	@Override
-	public boolean hit(Bullet bullet, Angle hitAngle)
+	public boolean hit(Bullet bullet)
 	{
 		Gfx.setHudStrength(1);
-		Gfx.setHudAngle(hitAngle.getRadians());
+		Gfx.setHudAngle(bullet.getAngle().invert());
 
-		Log.debug(hitAngle);
-
-		return super.hit(bullet, hitAngle);
+		return super.hit(bullet);
 	}
 
 	@Override

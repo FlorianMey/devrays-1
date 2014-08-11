@@ -3,6 +3,7 @@ package app.jaid.devrays.graphics;
 import app.jaid.devrays.Core;
 import app.jaid.devrays.debug.DebugFlags;
 import app.jaid.devrays.debug.Log;
+import app.jaid.devrays.geo.Angle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -51,9 +52,9 @@ public class Gfx {
 
 	}
 
-	public static void setHudAngle(float hudDamageAngle)
+	public static void setHudAngle(Angle angle)
 	{
-		Gfx.hudDamageAngle = hudDamageAngle;
+		Gfx.hudDamageAngle = angle.getRadians();
 	}
 
 	public static void setHudStrength(float hudInitialDamageStrength)

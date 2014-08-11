@@ -1,6 +1,7 @@
 package app.jaid.devrays.items.weapons;
 
-import app.jaid.devrays.entity.*;
+import app.jaid.devrays.entity.Bullet;
+import app.jaid.devrays.entity.Mob;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.items.WeaponDescriptor;
@@ -15,7 +16,7 @@ public class Basemonster extends Weapon {
 	@Override
 	public Angle getShootAngle()
 	{
-		return owner.getPosition().angleTo(owner.getTarget().getCenterPosition());
+		return owner.getCenterPosition().angleTo(owner.getTarget().getCenterPosition());
 	}
 
 	@Override

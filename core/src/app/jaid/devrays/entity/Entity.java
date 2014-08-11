@@ -1,6 +1,5 @@
 package app.jaid.devrays.entity;
 
-import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.physics.Colliding;
 
@@ -27,7 +26,7 @@ public interface Entity {
 
 	public abstract float getWidth();
 
-	public abstract boolean hit(Bullet bullet, Angle hitAngle);
+	public abstract boolean hit(Bullet bullet);
 
 	public abstract void render();
 
