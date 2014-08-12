@@ -1,11 +1,14 @@
 package app.jaid.devrays.mobs;
 
-import app.jaid.devrays.entity.*;
+import app.jaid.devrays.entity.Mob;
+import app.jaid.devrays.entity.Team;
 import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.geo.Rect;
 import app.jaid.devrays.items.Inventory;
 import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
+import app.jaid.devrays.ui.ArsenalBox;
+import app.jaid.devrays.ui.Hud;
 
 import com.badlogic.gdx.utils.Array;
 
@@ -67,18 +70,12 @@ public abstract class Ship extends Mob {
 
 	public void lastWeapon()
 	{
-		if (selectedWeapon == 0)
-			selectedWeapon = inventory.equipment.arsenal.size - 1;
-		else
-			selectedWeapon = selectedWeapon - 1;
+		switchWeapon((selectedWeapon == 0 ? getArsenal().size : selectedWeapon) - 1);
 	}
 
 	public void nextWeapon()
 	{
-		if (selectedWeapon + 1 == inventory.equipment.arsenal.size)
-			selectedWeapon = 0;
-		else
-			selectedWeapon = selectedWeapon + 1;
+		switchWeapon((selectedWeapon + 1) % getArsenal().size);
 	}
 
 	@Override
@@ -90,6 +87,15 @@ public abstract class Ship extends Mob {
 	public void renderText()
 	{
 		// Drawer.drawTextOnWorld(getName(), position);
+	}
+
+	public void switchWeapon(int selectedWeapon)
+	{
+		if (selectedWeapon < 0 || selectedWeapon >= getArsenal().size)
+			throw new IllegalArgumentException(getName() + " can't switch its selected weapon from " + this.selectedWeapon + " to unknown index " + selectedWeapon + ".");
+
+		this.selectedWeapon = selectedWeapon;
+		((ArsenalBox) Hud.get().getArsenalBoxCell().getActor()).switchWeapon(selectedWeapon);
 	}
 
 }

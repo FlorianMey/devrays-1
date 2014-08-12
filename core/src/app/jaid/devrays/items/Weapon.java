@@ -53,7 +53,7 @@ public abstract class Weapon {
 		this.descriptor = descriptor;
 		this.owner = owner;
 		sprite = descriptor.getBulletSprite();
-		scheduler = new VariationScheduler(descriptor.getShootFrequency(), descriptor.getShootFrequencyVariation());
+		scheduler = descriptor.getShootsPerMinuteVariation() == 0 ? new Scheduler(descriptor.getShootFrequency()) : new VariationScheduler(descriptor.getShootFrequency(), descriptor.getShootFrequencyVariation());
 	}
 
 	public WeaponDescriptor getDescriptor()

@@ -25,6 +25,7 @@ public class Player extends Ship {
 		texture = new Sprite(Media.getSprite("ship"));
 		healthPoints = 100;
 		inventory.equipment.arsenal.add(Weapon.create(WeaponDescriptor.getAll().first(), this));
+		inventory.equipment.arsenal.add(Weapon.create(WeaponDescriptor.getAll().get(1), this));
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class IngameScreen implements DevraysScreen {
 		environment.addPlayer(new Player(new Point()));
 		environment.getMobs().add(environment.getPlayer());
 
-		Hud.get().getArsenalBoxCell().setActor(new ArsenalBox(environment.getPlayer()));
+		Hud.get().getArsenalBoxCell().setActor(new ArsenalBox(environment.getPlayer().getArsenal(), 0));
 
 		environment.getMobs().add(Monster.create(environment.getPlayer().getPosition().add(JRand.vary(20, 10), JRand.vary(20, 10)), MonsterDescriptor.getById("varock")));
 		// for (int i = 0; i != 5; i++)
