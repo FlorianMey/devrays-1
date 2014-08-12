@@ -12,14 +12,17 @@ public class Scheduler {
 		this.frequency = frequency;
 	}
 
-	public void changeFrequency(float newFrequency)
-	{
-		frequency = newFrequency;
-	}
-
 	public float getFrequency()
 	{
 		return frequency;
+	}
+
+	/**
+	 * @return A progress value between 0 and 1
+	 */
+	public float getProgress()
+	{
+		return Math.min(charge / getFrequency(), 1);
 	}
 
 	public boolean isReady()
@@ -41,6 +44,11 @@ public class Scheduler {
 	public void reset()
 	{
 		charge = 0;
+	}
+
+	public void setFrequency(float frequency)
+	{
+		this.frequency = frequency;
 	}
 
 	public void update()

@@ -8,7 +8,7 @@ public class JDebug {
 	private static final boolean SHOW_METHOD_NAME = true;
 	private static final String STACK_ELEMENTS_SEPERATOR = " \u2190 ";
 	private static final String STACK_PREFIX = " @ ";
-	private static final String STACKS_SEPERATOR = " \n<caused by> ";
+	private static final String STACKS_SEPERATOR = " <caused by> ";
 
 	public static String formatException(Throwable exception)
 	{

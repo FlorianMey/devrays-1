@@ -4,9 +4,9 @@ import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.entity.Bullet;
 import app.jaid.devrays.entity.Mob;
 import app.jaid.devrays.etc.Scheduler;
+import app.jaid.devrays.etc.VariationScheduler;
 import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.mobs.Ship;
-import app.jaid.jtil.JRand;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -53,7 +53,7 @@ public abstract class Weapon {
 		this.descriptor = descriptor;
 		this.owner = owner;
 		sprite = descriptor.getBulletSprite();
-		scheduler = new Scheduler(descriptor.getShootFrequency());
+		scheduler = new VariationScheduler(descriptor.getShootFrequency(), descriptor.getShootFrequencyVariation());
 	}
 
 	public WeaponDescriptor getDescriptor()
@@ -88,10 +88,6 @@ public abstract class Weapon {
 		if (scheduler.request())
 		{
 			shoot(Bullet.add(this));
-
-			if (descriptor.getShootsPerMinuteVariation() != 0)
-				scheduler.changeFrequency(Weapon.shootsPerMinuteToFrequency(JRand.vary(descriptor.getShootsPerMinute(), descriptor.getShootsPerMinuteVariation())));
-
 			return true;
 		}
 

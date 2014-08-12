@@ -34,9 +34,7 @@ public class WeaponDescriptor {
 	}
 
 	private Color bulletColor;
-
 	private String bulletColorHex;
-
 	private float bulletSpeed, bulletSpeedVariation;
 	private String bulletSprite;
 	private float bulletWidth, bulletHeight;
@@ -115,7 +113,7 @@ public class WeaponDescriptor {
 
 	public float getShootFrequencyVariation()
 	{
-		return Weapon.shootsPerMinuteToFrequency(shootsPerMinuteVariation);
+		return shootsPerMinuteVariation / shootsPerMinute * Weapon.shootsPerMinuteToFrequency(shootsPerMinute);
 	}
 
 	public float getShootsPerMinute()

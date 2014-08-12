@@ -35,9 +35,10 @@ public class Bullet implements Entity {
 
 	public Bullet(Weapon weapon)
 	{
+		this.weapon = weapon;
+
 		angle = weapon.getShootAngle();
 		position = new Point(weapon.getOwner().getBulletSpawnLocation());
-		this.weapon = weapon;
 		speed = weapon.getDescriptor().rollSpeed();
 	}
 
