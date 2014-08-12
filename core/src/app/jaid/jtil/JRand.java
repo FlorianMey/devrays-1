@@ -77,6 +77,11 @@ public class JRand {
 		return random(-radius, radius);
 	}
 
+	public static int randomRadius(int radius)
+	{
+		return random(-radius, radius);
+	}
+
 	public static String randomString(int length)
 	{
 		return randomString(length, "0123456789ABCDEF");
@@ -105,6 +110,14 @@ public class JRand {
 	}
 
 	public static float vary(float base, float radius)
+	{
+		if (radius == 0)
+			return base;
+
+		return base + randomRadius(radius);
+	}
+
+	public static int vary(int base, int radius)
 	{
 		if (radius == 0)
 			return base;

@@ -7,7 +7,9 @@
         bulletSpeed:12,
         bulletSprite:"bullet",
         bulletWidth:0.8,
-        bulletHeight:0.8
+        bulletHeight:0.8,
+        knockback:5,
+        knockbackVariation:2
     },
     {
         id:"rapid",
@@ -42,6 +44,8 @@
         bulletSpeed:9,
         bulletSprite:"bullet",
         bulletWidth:0.4,
-        bulletHeight:0.4
+        bulletHeight:0.4,
+        knockback:10,
+        knockbackVariation:3
     }
 ]

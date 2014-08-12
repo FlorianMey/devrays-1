@@ -8,7 +8,6 @@ import app.jaid.devrays.geo.Angle;
 import app.jaid.devrays.mobs.Ship;
 import app.jaid.jtil.JRand;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -57,39 +56,14 @@ public abstract class Weapon {
 		scheduler = new Scheduler(descriptor.getShootFrequency());
 	}
 
-	public boolean canShoot()
+	public WeaponDescriptor getDescriptor()
 	{
-		return charge >= getShootFrequency();
-	}
-
-	public Color getBulletColor()
-	{
-		return descriptor.getBulletColor();
-	}
-
-	public float getBulletHeight()
-	{
-		return descriptor.getBulletHeight();
-	}
-
-	public float getBulletSpeed()
-	{
-		return descriptor.getBulletSpeed();
-	}
-
-	public float getBulletSpeedVariation()
-	{
-		return descriptor.getBulletSpeedVariation();
-	}
-
-	public float getBulletWidth()
-	{
-		return descriptor.getBulletWidth();
+		return descriptor;
 	}
 
 	public String getName()
 	{
-		return getSimpleName() + " LV.1";
+		return descriptor.getName() + " LV.1";
 	}
 
 	public Mob getOwner()
@@ -100,21 +74,6 @@ public abstract class Weapon {
 	public Angle getShootAngle()
 	{
 		return owner.getTeam().isGood() ? Angle.ANGLE_EAST : Angle.ANGLE_WEST;
-	}
-
-	public float getShootFrequency()
-	{
-		return descriptor.getShootFrequency();
-	}
-
-	public float getShootsPerMinute()
-	{
-		return frequencyToShootsPerMinute(getShootFrequency());
-	}
-
-	public String getSimpleName()
-	{
-		return descriptor.getName();
 	}
 
 	public TextureRegion getSprite()
@@ -132,9 +91,6 @@ public abstract class Weapon {
 
 			if (descriptor.getShootsPerMinuteVariation() != 0)
 				scheduler.changeFrequency(Weapon.shootsPerMinuteToFrequency(JRand.vary(descriptor.getShootsPerMinute(), descriptor.getShootsPerMinuteVariation())));
-			// Log.debug("Changed frequency of weapon " + getName() + " of " + owner.getName() + " to vary(" +
-			// descriptor.getShootsPerMinute() + ", " + descriptor.getShootsPerMinuteVariation() + ") = "
-			// + Weapon.frequencyToShootsPerMinute(scheduler.getFrequency()) + ".");
 
 			return true;
 		}

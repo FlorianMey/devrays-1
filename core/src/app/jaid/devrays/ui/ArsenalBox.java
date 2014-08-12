@@ -25,7 +25,7 @@ public class ArsenalBox extends Table {
 	public void act(float delta)
 	{
 		super.act(delta);
-		weaponName.setText(ship.getWeapon().getSimpleName());
+		weaponName.setText(ship.getWeapon().getName());
 	}
 
 }

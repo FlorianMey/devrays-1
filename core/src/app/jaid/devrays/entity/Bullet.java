@@ -7,7 +7,6 @@ import app.jaid.devrays.geo.Point;
 import app.jaid.devrays.items.Weapon;
 import app.jaid.devrays.physics.Colliding;
 import app.jaid.devrays.screen.ingame.Environment;
-import app.jaid.jtil.JRand;
 
 import com.badlogic.gdx.graphics.Color;
 
@@ -39,7 +38,7 @@ public class Bullet implements Entity {
 		angle = weapon.getShootAngle();
 		position = new Point(weapon.getOwner().getBulletSpawnLocation());
 		this.weapon = weapon;
-		speed = JRand.vary(weapon.getBulletSpeed(), weapon.getBulletSpeedVariation());
+		speed = weapon.getDescriptor().rollSpeed();
 	}
 
 	public Angle getAngle()
@@ -56,7 +55,7 @@ public class Bullet implements Entity {
 	@Override
 	public float getHeight()
 	{
-		return weapon.getBulletHeight();
+		return weapon.getDescriptor().getBulletHeight();
 	}
 
 	@Override
@@ -94,10 +93,15 @@ public class Bullet implements Entity {
 		return getOwner().getTeam();
 	}
 
+	public Weapon getWeapon()
+	{
+		return weapon;
+	}
+
 	@Override
 	public float getWidth()
 	{
-		return weapon.getBulletWidth();
+		return weapon.getDescriptor().getBulletWidth();
 	}
 
 	@Override
@@ -110,7 +114,7 @@ public class Bullet implements Entity {
 	@Override
 	public void render()
 	{
-		Core.getBatch().setColor(weapon.getBulletColor());
+		Core.getBatch().setColor(weapon.getDescriptor().getBulletColor());
 		Core.getBatch().draw(weapon.getSprite(), position.x, position.y, getWidth(), getHeight());
 		Core.getBatch().setColor(Color.WHITE);
 	}
@@ -136,7 +140,7 @@ public class Bullet implements Entity {
 		for (Entity collidingEntity : Environment.get().getCollisions(this, Environment.get().getMobs()))
 			if (this != collidingEntity && getTeam().canAttack(collidingEntity.getTeam()))
 			{
-				Log.debug(getName() + " (Hitbox " + getHitbox() + ") collides with " + collidingEntity.getName() + " (Hitbox " + collidingEntity.getHitbox() + ")");
+				Log.debug(getName() + " (Hitbox " + getHitbox() + ") collides with " + collidingEntity.getName() + " (Hitbox " + collidingEntity.getHitbox() + ").");
 				isDead = collidingEntity.hit(this);
 			}
 

@@ -12,6 +12,6 @@
         bulletColor:"00CC00",
         damage:5,
         damageVariation:1,
-        
+        knockback:10
     }
 ]

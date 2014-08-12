@@ -2,6 +2,7 @@ package app.jaid.devrays.items;
 
 import app.jaid.devrays.debug.Log;
 import app.jaid.devrays.io.Media;
+import app.jaid.jtil.JRand;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -39,8 +40,9 @@ public class WeaponDescriptor {
 	private float bulletSpeed, bulletSpeedVariation;
 	private String bulletSprite;
 	private float bulletWidth, bulletHeight;
-	private float damage, damageVariation;
+	private int damage, damageVariation;
 	private String id;
+	private float knockback, knockbackVariation;
 	private String name;
 	private float shootsPerMinute, shootsPerMinuteVariation;
 	private String type;
@@ -81,14 +83,24 @@ public class WeaponDescriptor {
 		return bulletWidth;
 	}
 
-	public float getDamage()
+	public int getDamage()
 	{
 		return damage;
 	}
 
-	public float getDamageVariation()
+	public int getDamageVariation()
 	{
 		return damageVariation;
+	}
+
+	public float getKnockback()
+	{
+		return knockback;
+	}
+
+	public float getKnockbackVariation()
+	{
+		return knockbackVariation;
 	}
 
 	public String getName()
@@ -130,6 +142,21 @@ public class WeaponDescriptor {
 		{
 			return null;
 		}
+	}
+
+	public int rollDamage()
+	{
+		return JRand.vary(damage, damageVariation);
+	}
+
+	public float rollKnockback()
+	{
+		return JRand.vary(knockback, knockbackVariation);
+	}
+
+	public float rollSpeed()
+	{
+		return JRand.vary(bulletSpeed, bulletSpeedVariation);
 	}
 
 }

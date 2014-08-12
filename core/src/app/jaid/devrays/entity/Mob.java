@@ -130,7 +130,14 @@ public abstract class Mob implements Entity {
 	@Override
 	public boolean hit(Bullet bullet)
 	{
-		push(bullet.getAngle(), 150);
+		float knockback = bullet.getWeapon().getDescriptor().rollKnockback();
+
+		if (knockback != 0)
+		{
+			Log.debug("Pushed " + getName() + " by " + knockback + " knockback.");
+			push(bullet.getAngle(), knockback);
+		}
+
 		return true;
 	}
 
@@ -147,6 +154,11 @@ public abstract class Mob implements Entity {
 
 	public void push(Angle direction, float power)
 	{
+		if (power < 0)
+		{
+			power = -power;
+			direction = direction.invert();
+		}
 
 		if (power > velocity * 1.5f)
 		{
@@ -156,7 +168,7 @@ public abstract class Mob implements Entity {
 		else
 		{
 			float directionDifference = angle.getRadiansDifferenceNormalTo(direction);
-			velocity -= power * directionDifference;
+			velocity = JTil.normalize(velocity, Core.delta * power * directionDifference);
 		}
 	}
 
