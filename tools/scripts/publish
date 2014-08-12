@@ -1,16 +1,32 @@
 #!/bin/bash
 cd ../..
 
+## Prompt for password of tools/jarsigner/devrays.keystore
+
+prompt="`tput bold && tput setaf 3`Enter password of devrays.keystore: `tput sgr0`"
+while IFS= read -p "$prompt" -r -s -n 1 char
+do
+	if [[ $char == $'\0' ]]; then
+		break
+	fi
+	prompt='*'
+	keypass+="$char"
+done
+
+echo -e "\n`tput bold && tput setaf 2`------- Publishing -------`tput sgr0`"
+
 ## Desktop
 
 ./gradlew desktop:dist
 
 # Move created jar from desktop folder to out folder
 mv `find desktop/build/libs/ -type f -iname 'desktop-*.jar'` out/devrays.jar
+jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore tools/jarsigner/devrays.keystore out/devrays.jar -storepass $keypass Devrays
 
 # Create packr folders in out
 for platform in windows mac linux32 linux64; do
-	java -jar tools/packr/packr.jar tools/packr/profile-$platform.json
+	#	Currently disabled, those standalone JREs seem to be not working
+echo 	#	java -jar tools/packr/packr.jar tools/packr/profile-$platform.json
 done
 
 # Zip all folders in out
@@ -24,4 +40,5 @@ done
 ./gradlew android:assembleRelease
 
 # Move created apk from desktop folder to out folder
-mv `find android/build/libs/ -type f -iname 'android*.ap*'` out/devrays-unsigned.apk
+mv `find android/build/libs/ -type f -iname 'android*.ap*'` out/devrays.apk
+jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore tools/jarsigner/devrays.keystore out/devrays.apk -storepass $keypass Devrays
