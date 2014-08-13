@@ -48,8 +48,7 @@ task afterEclipseImport(description: "Post processing after project generation",
 // Additional Devrays related tasks
 
 task pack(dependsOn: classes, type: JavaExec) {
-    main = "app.jaid.devrays.tools.SpritePacker"
+    main = "app.jaid.devrays.etc.SpritePacker"
     classpath = sourceSets.main.runtimeClasspath
     workingDir = project.assetsDir
-    ignoreExitValue = true
 }

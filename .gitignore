@@ -1,6 +1,9 @@
 ## Devrays
 
+# Output folder for shaders optimized with /tools/scripts/glslopt
 android/assets/glsl/opt
+# Folder for temporary resources created by scripts from /tools/scripts
+.temp
 
 ## Java
 
@@ -62,7 +65,8 @@ nb-configuration.xml
 
 .gradle
 build/
-/.settings #Ignore since only Gradle uses .settings in /
+#Ignore since only Gradle uses .settings in /
+/.settings
 
 ## OS Specific
 .DS_Store

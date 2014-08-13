@@ -1,8 +1,12 @@
 #!/bin/bash
+for script in updategradle packsprites glslopt; do
+	echo "`tput bold && tput setaf 2`Running script $script...`tput sgr0`"
+	./$script || { echo "`tput bold && tput setaf 1`Fail on running script $script.`tput sgr0`"; exit 1; }
+done
+
 cd ../..
 
-## Prompt for password of tools/jarsigner/devrays.keystore
-
+# Prompt for password of tools/jarsigner/devrays.keystore
 prompt="`tput bold && tput setaf 3`Enter password of devrays.keystore: `tput sgr0`"
 while IFS= read -p "$prompt" -r -s -n 1 char
 do
@@ -12,6 +16,14 @@ do
 	prompt='*'
 	keypass+="$char"
 done
+
+# Check password and exit if wrong
+keytool -list -keystore tools/jarsigner/devrays.keystore -storepass $keypass >/dev/null 2>&1
+
+if [ $? -ne 0 ]; then
+	echo -e "\n`tput bold && tput setaf 1`Wrong password!`tput sgr0`"
+	exit 1
+fi
 
 echo -e "\n`tput bold && tput setaf 2`------- Publishing -------`tput sgr0`"
 
@@ -25,14 +37,27 @@ jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore tools/jarsigner/devrays.
 
 # Create packr folders in out
 for platform in windows mac linux32 linux64; do
-	#	Currently disabled, those standalone JREs seem to be not working
-echo 	#	java -jar tools/packr/packr.jar tools/packr/profile-$platform.json
+	
+	if [ ! -f .temp/jre-source/$platform.zip ]; then
+
+		if [ ! -d .temp/jre-source ]; then
+			mkdir .temp/jre-source
+		fi
+
+		url=`grep $platform tools/packr/jresource | awk '{ print $2" "substr($0,16,0) }'`
+		echo "`tput bold && tput setaf 2`Downloading $url for packing $platform...`tput sgr0`"
+		wget --output-document .temp/jre-source/$platform.zip $url 
+	fi
+
+	echo "`tput bold && tput setaf 2`Packing $platform release...`tput sgr0`"
+	java -jar tools/packr/packr.jar tools/packr/profile-$platform.json
 done
 
-# Zip all folders in out
-for folder in `find out -type d -mindepth 1 -maxdepth 1`; do
-	zip -9 -r "${folder%/}.zip" "$folder"
-	rm -rf $folder
+# Zip all folders in .temp/out
+for folder in `find .temp/out -type d -mindepth 1 -maxdepth 1`; do
+	echo "`tput bold && tput setaf 2`Zipping $folder...`tput sgr0`"
+	folderName=$(basename $folder)
+	zip -9 --display-counts -r out/$folderName.zip $folder | grep ".*[0]/"
 done
 
 ## Android

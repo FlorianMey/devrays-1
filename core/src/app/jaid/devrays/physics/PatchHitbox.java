@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 
 /**
  * Hitbox that contains multiple {@link Rect} hitboxes. If the other {@link Colliding} overlaps with any of those
- * hitboxes, {@link #collidesWith} returns true.
+ * hitboxes, {@link #intersects} returns true.
  *
  * @author jaid
  */

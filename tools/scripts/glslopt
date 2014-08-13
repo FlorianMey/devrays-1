@@ -1,24 +1,21 @@
 #!/bin/bash
+cd ../..
 
 for dependency in cmake; do
 	command -v $dependency >/dev/null 2>&1 || { echo >&2 "Please install package $dependency."; exit 1; }
 done
 
-glslOptimizerDir=$HOME/.temp/glsl-optimizer
-devraysDir=$HOME/dev/devrays
-glslOptDir=$devraysDir/android/assets/glsl/opt
-
-if [ ! -d $glslOptimizerDir ]; then
-	mkdir -p $glslOptimizerDir
+if [ ! -d android/assets/glsl/opt ]; then
+	mkdir android/assets/glsl/opt
 fi
 
-if [ ! -d $glslOptDir ]; then
-	mkdir $glslOptDir
+if [ ! -d .temp/glsl-optimizer ]; then
+	mkdir -p .temp/glsl-optimizer
 fi
 
-cd $glslOptimizerDir
+if [ ! -f .temp/glsl-optimizer/glsl_compiler ]; then
 
-if [ ! -f glsl_compiler ]; then
+	cd .temp/glsl-optimizer
 
 	if [ ! -f contrib/glslopt/Makefile ]; then
 		git clone https://github.com/aras-p/glsl-optimizer.git .
@@ -26,9 +23,11 @@ if [ ! -f glsl_compiler ]; then
 
 	cmake .
 	make
+
+	cd ../..
 fi
 
-for shaderPath in $devraysDir/android/assets/glsl/*; do
+for shaderPath in android/assets/glsl/*; do
 	if [ -f $shaderPath ]; then
 		shaderDirectory=$(dirname "$shaderPath")
 		filename=$(basename "$shaderPath")
@@ -36,7 +35,7 @@ for shaderPath in $devraysDir/android/assets/glsl/*; do
 		filename="${filename%.*}"
 		firstLetter=${extension:0:1}
 		outfile=$shaderDirectory/opt/$filename.$extension
-		./glslopt -$firstLetter $shaderPath $outfile
+		.temp/glsl-optimizer/glslopt -$firstLetter $shaderPath $outfile
 		echo $shaderPath
 	fi
 done

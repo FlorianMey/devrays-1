@@ -1,6 +1,6 @@
 {
     "platform":"mac",
-    "jdk":"https://bitbucket.org/alexkasko/openjdk-unofficial-builds/downloads/openjdk-1.7.0-u60-unofficial-macosx-x86_64-image.zip",
+    "jdk":".temp/jre-source/mac.zip",
     "executable":"devrays",
     "appjar":"out/devrays.jar",
     "mainclass":"app/jaid/devrays/desktop/DesktopApplication",
@@ -11,5 +11,5 @@
         
     ],
     "minimizejre":"soft",
-    "outdir":"out/devrays-mac"
+    "outdir":".temp/out/devrays-mac"
 }
